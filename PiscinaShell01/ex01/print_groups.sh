@@ -1,1 +1,1 @@
-id -nG igarciab | tr ' ' ',' | cat -e
+id -Gn $FT_USER | tr ' ' ',' |  tr -d '\n'
