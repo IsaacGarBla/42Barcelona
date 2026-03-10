@@ -45,9 +45,8 @@ void	ft_print_comb(void)
 }
 
 /* Program test
-
+*/
 int	main(void)
 {
 	ft_print_comb();
 }
-*/
