@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 11:22:49 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:54 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/10 17:02:02 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/10 17:02:07 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
 
-void	ft_print_alphabet(void)
+void	ft_swap(int *a, int *b)
 {
-	char	c_letra;
+	int	tmp;
 
-	c_letra = 'a';
-	while (c_letra <= 'z')
-	{
-		write(1, &c_letra, 1);
-		c_letra++;
-	}
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-// Program test
+/* #include <stdio.h>
 
 int	main(void)
 {
-	ft_print_alphabet();
-}
+	int	a, b;
 
+	a = 1;
+	b = 2;
+	printf("El valor de a y b antes del SWAP es: a=%d b=%d\n", a, b);
+	ft_swap(&a, &b);
+	printf("El valor de a y b despues del SWAP es: a=%d b=%d\n", a, b);
+}
+*/

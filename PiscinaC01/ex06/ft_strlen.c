@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 11:22:49 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:54 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/10 17:28:42 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/10 17:28:46 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
 
-void	ft_print_alphabet(void)
+int	ft_strlen(char *str)
 {
-	char	c_letra;
+	int	x;
 
-	c_letra = 'a';
-	while (c_letra <= 'z')
+	x = 0;
+	while (str[x] != '\0')
 	{
-		write(1, &c_letra, 1);
-		c_letra++;
+		x++;
 	}
+	return (x);
 }
 
-// Program test
+/*#include <stdio.h>
 
 int	main(void)
 {
-	ft_print_alphabet();
-}
-
+	char cadena[] = "Texto de prueba";
+	
+	printf("La cadena '%s' tiene %d caracteres.", cadena, ft_strlen(cadena));
+}*/

@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 11:22:49 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:54 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/10 17:23:11 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/10 17:23:16 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
-void	ft_print_alphabet(void)
+void	ft_putstr(char *str)
 {
-	char	c_letra;
+	int	x;
 
-	c_letra = 'a';
-	while (c_letra <= 'z')
+	x = 0;
+	while (str[x] != '\0')
 	{
-		write(1, &c_letra, 1);
-		c_letra++;
+		write(1, &str[x], 1);
+		x++;
 	}
 }
 
-// Program test
-
+/*
 int	main(void)
 {
-	ft_print_alphabet();
+	ft_putstr("Cadena a imprimir");
+	return (0);
 }
-
+*/

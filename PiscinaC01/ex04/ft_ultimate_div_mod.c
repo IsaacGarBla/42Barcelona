@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_ultimate_div_mod.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 11:22:49 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:54 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/10 17:16:26 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/10 17:16:32 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
 
-void	ft_print_alphabet(void)
+void	ft_ultimate_div_mod(int *a, int *b)
 {
-	char	c_letra;
+	int	div;
+	int	resto;
 
-	c_letra = 'a';
-	while (c_letra <= 'z')
-	{
-		write(1, &c_letra, 1);
-		c_letra++;
-	}
+	div = *a / *b;
+	resto = *a % *b;
+	*a = div;
+	*b = resto;
 }
 
-// Program test
+/*#include <stdio.h>
 
 int	main(void)
 {
-	ft_print_alphabet();
-}
+	int	a, b;
 
+	a = 25;
+	b = 4;
+	printf("El valor de %d/%d y su resto son: ", a, b);
+	ft_ultimate_div_mod(&a, &b);
+	printf("%d y %d\n", a, b);
+}*/

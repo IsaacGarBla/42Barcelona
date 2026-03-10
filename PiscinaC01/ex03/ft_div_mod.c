@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_div_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 11:22:49 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:54 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/10 17:10:05 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/10 17:10:10 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
 
-void	ft_print_alphabet(void)
+void	ft_div_mod(int a, int b, int *div, int *mod)
 {
-	char	c_letra;
-
-	c_letra = 'a';
-	while (c_letra <= 'z')
-	{
-		write(1, &c_letra, 1);
-		c_letra++;
-	}
+	*div = a / b;
+	*mod = a % b;
 }
 
-// Program test
+/*#include <stdio.h>
 
 int	main(void)
 {
-	ft_print_alphabet();
-}
+	int	a, b, div, mod;
 
+	a = 5;
+	b = 2;
+	ft_div_mod(a, b, &div, &mod);
+	printf("El valor entero de %d/%d es: %d\n", a, b, div);
+	printf("El modulo de %d/%d es: %d\n", a, b, mod);
+}*/

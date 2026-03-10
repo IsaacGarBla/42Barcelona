@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
+/*   ft_ft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 11:22:49 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/06 11:22:54 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/10 15:42:20 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/10 15:42:27 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+#include <stdio.h>
 
-void	ft_print_alphabet(void)
+void	ft_ft(int *nbr)
 {
-	char	c_letra;
-
-	c_letra = 'a';
-	while (c_letra <= 'z')
-	{
-		write(1, &c_letra, 1);
-		c_letra++;
-	}
+	*nbr = 42;
 }
 
-// Program test
-
-int	main(void)
+/*int	main()
 {
-	ft_print_alphabet();
+	int nbr;
+	
+	nbr = 0;
+	printf("El valor de nbr antes de cambiarlo es: %d\n", nbr);
+	ft_ft(&nbr);
+	printf("El valor de nbr despues de cambiarlo es: %d\n", nbr);
 }
-
+*/
