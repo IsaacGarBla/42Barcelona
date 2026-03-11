@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 17:02:02 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/10 17:02:07 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/11 12:06:18 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/11 12:06:23 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap(int *a, int *b)
+int	ft_is_alpha(char c)
 {
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
 
+int	ft_str_is_alpha(char *str)
+{
+	int	pos;
+
+	pos = 0;
+	while (str[pos] != '\0')
+	{
+		if (!ft_is_alpha(str[pos]))
+			return (0);
+		pos++;
+	}
+	return (1);
+}
 /*
 #include <stdio.h>
 
 int	main(void)
 {
-	int	a, b;
+	char str[] = "patruzecissidoi;";
 
-	a = 1;
-	b = 2;
-	printf("El valor de a y b antes del SWAP es: a=%d b=%d\n", a, b);
-	ft_swap(&a, &b);
-	printf("El valor de a y b despues del SWAP es: a=%d b=%d\n", a, b);
-}
-*/
+	printf("%d", ft_str_is_alpha(str));
+	return (0);
+}*/

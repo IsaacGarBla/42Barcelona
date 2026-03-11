@@ -17,59 +17,28 @@ void	swap(int *a, int *b)
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
-} 
-
-int*	merge(int *tab_a, int size1, int *tab_b, int size2)
-{
-	int	pos_a;
-	int	pos_b;
-	int pos_c;
-
-	pos_a = 0;
-	pos_b = 0;
-
-	while (pos_a < size1)
-	{
-		if (tab_a[pos_a] <= tab_b[pos_b])
-			pos_a++;
-		else
-		{
-			swap(&tab_a[pos_a], &tab_b[pos_b]);
-			pos_c = pos_b;
-			while (pos_c < size2 - 1 && tab_b[pos_c] > tab_b[pos_c+1])
-			{
-				swap(&tab_b[pos_c], &tab_b[pos_c + 1]);
-				pos_c++;
-			}
-		}
-	}
-	return tab_a;
-}
-
-int*	sort_tab(int *tab, int size)
-{
-	int s_p_1;
-	int s_p_2;
-
-	if (size <= 1)
-  		return tab;
-	else 
-	{
-		s_p_1 = size / 2;
-		if (size %  2 == 0)
-			s_p_2 = s_p_1;
-		else
-			s_p_2 = s_p_1 + 1;
-		return merge(sort_tab(tab, s_p_1), s_p_1, sort_tab(&tab[s_p_1], s_p_2), s_p_2);
-	}
 }
 
 void	ft_sort_int_tab(int *tab, int size)
 {
-	sort_tab(tab, size);
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < size)
+	{
+		y = x;
+		while (y < size)
+		{
+			if (tab[x] > tab[y])
+				swap(&tab[x], &tab[y]);
+			y++;
+		}
+		x++;
+	}
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 
 void	print_array(int *tab, int size)
 {
@@ -86,13 +55,14 @@ void	print_array(int *tab, int size)
 
 int	main(void)
 {
-	int	tab[2] = {25};
+	int	tab[12] = {25, 1 , 134, 34, 26, 2, 15, 8, 9, 1, 13, 57};
 
 	printf("Array SIN ordenar: ");
-	print_array(tab, 1);
+	print_array(tab, 12);
 	printf("\n");
-	ft_sort_int_tab(tab, 1);
+	ft_sort_int_tab(tab, 12);
 	printf("Array ordenado: ");
-	print_array(tab, 1);
+	print_array(tab, 12);
 	printf("\n");
 }
+*/

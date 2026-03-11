@@ -28,7 +28,8 @@ void	ft_rev_int_tab(int *tab, int size)
 	}
 }
 
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 
 void	print_array(int *tab, int size)
 {
@@ -54,4 +55,5 @@ int	main(void)
 	printf("Array despues de invertir: ");
 	print_array(tab, 5);
 	printf("\n");
-}*/
+}
+*/

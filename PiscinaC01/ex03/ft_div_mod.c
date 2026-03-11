@@ -16,7 +16,8 @@ void	ft_div_mod(int a, int b, int *div, int *mod)
 	*mod = a % b;
 }
 
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 
 int	main(void)
 {
@@ -27,4 +28,5 @@ int	main(void)
 	ft_div_mod(a, b, &div, &mod);
 	printf("El valor entero de %d/%d es: %d\n", a, b, div);
 	printf("El modulo de %d/%d es: %d\n", a, b, mod);
-}*/
+}
+*/

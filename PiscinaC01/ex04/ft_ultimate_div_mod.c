@@ -21,7 +21,8 @@ void	ft_ultimate_div_mod(int *a, int *b)
 	*b = resto;
 }
 
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 
 int	main(void)
 {
@@ -32,4 +33,5 @@ int	main(void)
 	printf("El valor de %d/%d y su resto son: ", a, b);
 	ft_ultimate_div_mod(&a, &b);
 	printf("%d y %d\n", a, b);
-}*/
+}
+*/

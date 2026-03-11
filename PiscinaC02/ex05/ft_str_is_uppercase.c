@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 17:02:02 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/10 17:02:07 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/11 13:05:14 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/11 13:05:18 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap(int *a, int *b)
+int	ft_str_is_uppercase(char *str)
 {
-	int	tmp;
+	int	pos;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	pos = 0;
+	while (str[pos] != '\0')
+	{
+		if (str[pos] >= 'A' && str[pos] <= 'Z')
+			pos++;
+		else
+			return (0);
+	}
+	return (1);
 }
 
-/*
-#include <stdio.h>
+/*#include <stdio.h>
 
 int	main(void)
 {
-	int	a, b;
+	char str[] = "AVOASFIOUASASDFJASDF";
 
-	a = 1;
-	b = 2;
-	printf("El valor de a y b antes del SWAP es: a=%d b=%d\n", a, b);
-	ft_swap(&a, &b);
-	printf("El valor de a y b despues del SWAP es: a=%d b=%d\n", a, b);
-}
-*/
+	printf("%d", ft_str_is_uppercase(str));
+	return (0);
+}*/

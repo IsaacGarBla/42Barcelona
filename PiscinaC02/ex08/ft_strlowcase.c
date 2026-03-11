@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 17:02:02 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/10 17:02:07 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/11 13:30:16 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/11 13:30:19 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-void	ft_swap(int *a, int *b)
+char 	*tf_lowcase(char *str)
 {
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	*str = 'a' + *str - 'A';
 }
 
-/*
-#include <stdio.h>
+char	*ft_strlowcase(char *str)
+{
+	int	pos;
+
+	pos = 0;
+	while (str[pos] != '\0')
+	{
+		if (str[pos] >= 'A' && str[pos] <= 'Z')
+			str[pos] = 'a' + str[pos] - 'A';
+		pos++;
+	}
+	return (str);
+}
+
+/*#include <stdio.h>
 
 int	main(void)
 {
-	int	a, b;
+	char	str[] = "PASAR A MINUSCULAS";
 
-	a = 1;
-	b = 2;
-	printf("El valor de a y b antes del SWAP es: a=%d b=%d\n", a, b);
-	ft_swap(&a, &b);
-	printf("El valor de a y b despues del SWAP es: a=%d b=%d\n", a, b);
-}
-*/
+	printf("Antes  : '%s'\n", str);
+	printf("Despues: '%s'\n", ft_strlowcase(str));
+	return (0);
+}*/

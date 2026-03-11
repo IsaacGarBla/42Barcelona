@@ -22,11 +22,13 @@ int	ft_strlen(char *str)
 	return (x);
 }
 
-/*#include <stdio.h>
+/*
+#include <stdio.h>
 
 int	main(void)
 {
 	char cadena[] = "Texto de prueba";
 	
 	printf("La cadena '%s' tiene %d caracteres.", cadena, ft_strlen(cadena));
-}*/
+}
+*/
