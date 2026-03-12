@@ -6,13 +6,13 @@
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 13:19:44 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/12 01:03:43 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/13 00:54:47 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_char_is_printable(char c)
 {
-	if (c <= 31 || c == 127)
+	if (c < 32 || c > 126)
 		return (0);
 	else
 		return (1);
