@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char 	ft_char_to_upcase(char c)
+char	ft_char_to_upcase(char c)
 {
 	c = 'A' + c - 'a';
 	return (c);

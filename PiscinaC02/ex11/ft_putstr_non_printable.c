@@ -21,9 +21,12 @@ void	ft_print_char_hex(int valor)
 	write(1, &dig_hex[valor % 16], 1);
 }
 
-int	ft_chr_is_printable(char c)
+int	ft_char_is_printable(char c)
 {
-	return (c >= 32 && c <= 126);
+	if (c <= 31 || c == 127)
+		return (0);
+	else
+		return (1);
 }
 
 void	ft_putstr_non_printable(char *str)
@@ -33,7 +36,7 @@ void	ft_putstr_non_printable(char *str)
 	x = 0;
 	while (str[x] != '\0')
 	{
-		if (ft_chr_is_printable(str[x]))
+		if (ft_char_is_printable(str[x]))
 			write(1, &str[x], 1);
 		else
 		{
@@ -46,6 +49,6 @@ void	ft_putstr_non_printable(char *str)
 
 /*int	main(void)
 {
-	ft_putstr_non_printable("Coucou\n\ttu vas bien ?");
+	ft_putstr_non_printable("Coucou\ntu vas bien ?");
 	return (0);
 }*/

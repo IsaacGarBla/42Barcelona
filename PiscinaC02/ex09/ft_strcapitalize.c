@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char 	ft_char_to_upcase(char c)
+char	ft_char_to_upcase(char c)
 {
 	c = 'A' + c - 'a';
 	return (c);
@@ -41,9 +41,10 @@ char	*ft_strcapitalize(char *str)
 	en_word = 0;
 	while (str[pos] != '\0')
 	{
-		if (!en_word && ft_char_is_alpha(str[pos]) && !ft_char_is_uppercase(str[pos]))
+		if (!en_word && ft_char_is_alpha(str[pos]))
 		{
-			str[pos] = ft_char_to_upcase(str[pos]);
+			if (!ft_char_is_uppercase(str[pos]))
+				str[pos] = ft_char_to_upcase(str[pos]);
 			en_word = 1;
 		}
 		else if (!ft_char_is_alpha(str[pos]))
@@ -57,7 +58,7 @@ char	*ft_strcapitalize(char *str)
 
 int	main(void)
 {
-	char	str[] = "asf AAA asdflkj asdf -asd+;jasdk  asd";
+	char	str[] = "AsA aaA asdflkj asdf -asd+;jasdk  asd";
 
 	printf("Antes  : '%s'\n", str);
 	printf("Despues: '%s'\n", ft_strcapitalize(str));

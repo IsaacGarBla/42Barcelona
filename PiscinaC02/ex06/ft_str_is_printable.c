@@ -12,10 +12,10 @@
 
 int	ft_char_is_printable(char c)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
+	if (c <= 31 || c == 127)
 		return (0);
+	else
+		return (1);
 }
 
 int	ft_str_is_printable(char *str)
@@ -36,8 +36,8 @@ int	ft_str_is_printable(char *str)
 
 int	main(void)
 {
-	char str[] = "AVOASFIOUA~'`SASDFJASDF\n";
+	char str[] = "AVOASFIOUSASDFJASDF";
 
-	printf("Es printable la cadena '%s'? -> %d.\n", str, ft_str_is_printable(str));
+	printf("Es printable '%s'? -> %d.\n", str, ft_str_is_printable(str));
 	return (0);
 }*/

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char 	ft_char_to_lowcase(char c)
+char	ft_char_to_lowcase(char c)
 {
 	c = 'a' + c - 'A';
 	return (c);

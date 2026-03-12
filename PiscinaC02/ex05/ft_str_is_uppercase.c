@@ -38,6 +38,6 @@ int	main(void)
 {
 	char str[] = "HeLLO";
 
-	printf("¿Contiene solo mayúsculas la cadena '%s'? -> %d?\n", str, ft_str_is_uppercase(str));
+	printf("¿Contiene mayúsculas '%s'? -> %d?\n", str, ft_str_is_uppercase(str));
 	return (0);
 }*/

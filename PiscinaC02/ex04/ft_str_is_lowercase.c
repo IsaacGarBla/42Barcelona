@@ -38,6 +38,6 @@ int	main(void)
 {
 	char str[] = "patrAuzeciidoi";
 
-	printf("¿Contiene solo minúsculas la cadena '%s'? -> %d?\n", str, ft_str_is_lowercase(str));
+	printf("¿Contiene minúsculas '%s'? -> %d?\n", str, ft_str_is_lowercase(str));
 	return (0);
 }*/
