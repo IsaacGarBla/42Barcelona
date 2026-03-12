@@ -3,20 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 13:46:00 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 13:46:04 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:21:29 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-char	*ft_upcase(char *str)
+
+char 	ft_char_to_upcase(char c)
 {
-	if (*str >= 'a' && *str <= 'z')
-		*str = 'A' + *str - 'a';
-	return (str);
+	c = 'A' + c - 'a';
+	return (c);
 }
 
-int	ft_is_alpha(char c)
+int	ft_char_is_uppercase(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_char_is_alpha(char c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
@@ -26,27 +34,26 @@ int	ft_is_alpha(char c)
 
 char	*ft_strcapitalize(char *str)
 {
-	int		ini_word;
+	int		en_word;
 	int		pos;
 
 	pos = 0;
-	ini_word = 0;
+	en_word = 0;
 	while (str[pos] != '\0')
 	{
-		if (!ini_word && ft_is_alpha(str[pos]))
+		if (!en_word && ft_char_is_alpha(str[pos]) && !ft_char_is_uppercase(str[pos]))
 		{
-			ft_upcase(&str[pos]);
-			ini_word = 1;
+			str[pos] = ft_char_to_upcase(str[pos]);
+			en_word = 1;
 		}
-		else if (!ft_is_alpha(str[pos]))
-			ini_word = 0;
+		else if (!ft_char_is_alpha(str[pos]))
+			en_word = 0;
 		pos++;
 	}
 	return (str);
 }
 
-/*
-#include <stdio.h>
+/*#include <stdio.h>
 
 int	main(void)
 {

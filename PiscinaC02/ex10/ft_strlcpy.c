@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 14:02:24 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 14:02:27 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:25:38 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ int	ft_strlen(char *str)
 
 	x = 0;
 	while (str[x] != '\0')
-	{
 		x++;
-	}
 	return (x);
 }
 
@@ -45,7 +43,7 @@ int	main(void)
 {
 	char				src[] = "Cadena de prueba.";
 	char				dest[10];
-	unsigned int		tam = 1;
+	unsigned int		tam = 10;
 	unsigned int		len;
 	
 	len = ft_strlcpy(dest, src, tam);

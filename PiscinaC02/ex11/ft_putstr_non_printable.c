@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 17:42:56 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 17:42:59 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:29:07 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <unistd.h>
 
 void	ft_print_char_hex(int valor)
@@ -45,5 +46,6 @@ void	ft_putstr_non_printable(char *str)
 
 /*int	main(void)
 {
-	ft_putstr_non_printable("Coucou\ntu vas bien ?");
+	ft_putstr_non_printable("Coucou\n\ttu vas bien ?");
+	return (0);
 }*/

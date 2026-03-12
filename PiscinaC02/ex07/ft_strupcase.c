@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strupcase.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 13:23:51 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 13:24:00 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:14:05 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char 	*tf_upcase(char *str)
+char 	ft_char_to_upcase(char c)
 {
-	*str = 'A' + *str - 'a';
+	c = 'A' + c - 'a';
+	return (c);
+}
+
+int	ft_char_is_lowercase(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	else
+		return (0);
 }
 
 char	*ft_strupcase(char *str)
@@ -22,8 +31,8 @@ char	*ft_strupcase(char *str)
 	pos = 0;
 	while (str[pos] != '\0')
 	{
-		if (str[pos] >= 'a' && str[pos] <= 'z')
-			
+		if (ft_char_is_lowercase(str[pos]))
+			str[pos] = ft_char_to_upcase(str[pos]);
 		pos++;
 	}
 	return (str);

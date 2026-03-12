@@ -3,12 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_printable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 13:19:44 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 13:19:48 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:03:43 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_char_is_printable(char c)
+{
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
+}
 
 int	ft_str_is_printable(char *str)
 {
@@ -17,10 +25,9 @@ int	ft_str_is_printable(char *str)
 	pos = 0;
 	while (str[pos] != '\0')
 	{
-		if (str[pos] >= 32 && str[pos] <= 126)
-			pos++;
-		else
+		if (!ft_char_is_printable(str[pos]))
 			return (0);
+		pos++;
 	}
 	return (1);
 }
@@ -29,8 +36,8 @@ int	ft_str_is_printable(char *str)
 
 int	main(void)
 {
-	char str[] = "AVOASFIOUA~'`SASDFJASDF";
+	char str[] = "AVOASFIOUA~'`SASDFJASDF\n";
 
-	printf("%d", ft_str_is_printable(str));
+	printf("Es printable la cadena '%s'? -> %d.\n", str, ft_str_is_printable(str));
 	return (0);
 }*/

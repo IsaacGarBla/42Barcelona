@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 12:06:18 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 12:06:23 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 00:37:38 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_alpha(char c)
+int	ft_char_is_alpha(char c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
@@ -25,19 +25,19 @@ int	ft_str_is_alpha(char *str)
 	pos = 0;
 	while (str[pos] != '\0')
 	{
-		if (!ft_is_alpha(str[pos]))
+		if (!ft_char_is_alpha(str[pos]))
 			return (0);
 		pos++;
 	}
 	return (1);
 }
-/*
-#include <stdio.h>
+
+/*#include <stdio.h>
 
 int	main(void)
 {
-	char str[] = "patruzecissidoi;";
+	char str[] = "patruzecissidoi";
 
-	printf("%d", ft_str_is_alpha(str));
+	printf("%d\n", ft_str_is_alpha(str));
 	return (0);
 }*/

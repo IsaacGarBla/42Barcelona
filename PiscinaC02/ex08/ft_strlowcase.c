@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlowcase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 13:30:16 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 13:30:19 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:15:34 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-char 	*tf_lowcase(char *str)
+
+char 	ft_char_to_lowcase(char c)
 {
-	*str = 'a' + *str - 'A';
+	c = 'a' + c - 'A';
+	return (c);
+}
+
+int	ft_char_is_uppercase(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	else
+		return (0);
 }
 
 char	*ft_strlowcase(char *str)
@@ -21,8 +31,8 @@ char	*ft_strlowcase(char *str)
 	pos = 0;
 	while (str[pos] != '\0')
 	{
-		if (str[pos] >= 'A' && str[pos] <= 'Z')
-			str[pos] = 'a' + str[pos] - 'A';
+		if (ft_char_is_uppercase(str[pos]))
+			str[pos] = ft_char_to_lowcase(str[pos]);
 		pos++;
 	}
 	return (str);

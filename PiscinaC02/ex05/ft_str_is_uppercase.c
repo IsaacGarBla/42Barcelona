@@ -3,12 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 13:05:14 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/11 13:05:18 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/12 01:30:38 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_char_is_uppercase(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	else
+		return (0);
+}
 
 int	ft_str_is_uppercase(char *str)
 {
@@ -17,10 +25,9 @@ int	ft_str_is_uppercase(char *str)
 	pos = 0;
 	while (str[pos] != '\0')
 	{
-		if (str[pos] >= 'A' && str[pos] <= 'Z')
-			pos++;
-		else
+		if (!ft_char_is_uppercase(str[pos]))
 			return (0);
+		pos++;
 	}
 	return (1);
 }
@@ -29,8 +36,8 @@ int	ft_str_is_uppercase(char *str)
 
 int	main(void)
 {
-	char str[] = "AVOASFIOUASASDFJASDF";
+	char str[] = "HeLLO";
 
-	printf("%d", ft_str_is_uppercase(str));
+	printf("¿Contiene solo mayúsculas la cadena '%s'? -> %d?\n", str, ft_str_is_uppercase(str));
 	return (0);
 }*/
