@@ -12,157 +12,106 @@
 
 #include <unistd.h>
 
-int	ft_char_is_printable(char c)
+void	ft_putchar(char c, int size)
 {
-	if (c < 32 || c > 126)
-		return (0);
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		write(1, &c, 1);
+		i++;
+	}
+}
+
+void	ft_get_hex(unsigned long long nb, int prev)
+{
+	char	*base;
+
+	base = "0123456789abcdef";
+	if (nb < 16 && prev == 1)
+		ft_putchar('0', 1);
+	if (nb >= 16)
+	{
+		ft_get_hex(nb / 16, 0);
+		ft_get_hex(nb % 16, 0);
+	}
 	else
-		return (1);
-}
-
-void	ft_putstr(char *str)
-{
-	int	x;
-
-	x = 0;
-	while (str[x] != '\0')
 	{
-		write(1, &str[x], 1);
-		x++;
+		ft_putchar(base[nb], 1);
 	}
 }
 
-void	ft_putchr(char c)
+void	ft_print_addr(unsigned long long addr)
 {
-	write(1, &c, 1);
-}
+	unsigned long long	tmp;
+	int					i;
 
-void	ft_init_str(char *str, char c, unsigned int size)
-{
-	unsigned int x;
-
-	x = 0;
-	while (x < size)
+	tmp = addr;
+	i = 1;
+	while (i++ < 15)
 	{
-		str[x] = c;
-		x++;
+		if (tmp < 16)
+			ft_putchar('0', 1);
+		tmp /= 16;
 	}
-	str[x] = '\0';
-
+	ft_get_hex(addr, 0);
 }
 
-void	ft_long_to_char_baseX_r(char *str, unsigned long num, unsigned int base, int digits)
+void	ft_print_data(unsigned char *c, int size)
 {
-	char	*dig_hex;
+	int		i;
 
-	dig_hex = "0123456789abcdef";
-	if (num < base)
+	i = -1;
+	while (i++ < 16)
 	{
-		str[digits - 1] = dig_hex[num];
-		return ;
-	}
-	str[digits - 1] = dig_hex[num % base];
-	digits--;
-	ft_long_to_char_baseX_r(str, num / base, base, digits);
-	return ;
-}
-
-void	ft_long_to_char_baseX(char *str, unsigned long num, unsigned int base, int digits)
-{
-	ft_init_str(str, '0', digits);
-	ft_long_to_char_baseX_r(str, num , base, digits);
-	return ;
-}
-
-void	ft_read_block_memory(char *addr, char *dest, int size)
-{
-	while (size > 0)
-	{
-		*dest = *addr;
-		dest++;
-		addr++;
-		size--;
-	}
-}
-
-void	ft_print_addr_hex(long addr)
-{
-	char buffer[17];
-
-	ft_long_to_char_baseX(buffer, addr, 16, 16);
-	ft_putstr(buffer);
-	ft_putstr(": ");
-}
-
-void	ft_print_char_hex(char *src, int size)
-{
-	char buffer[3];
-	int x;
-
-	x = 0;
-	while (x < 16)
-	{
-		if (x < size)
+		if (i % 2 == 0)
+			ft_putchar(' ', 1);
+		if (i < size)
 		{
-			ft_long_to_char_baseX(buffer,(unsigned char) src[x], 16, 2);
-			ft_putstr(buffer);	
+			ft_get_hex((unsigned long long)*(c + i), 1);
 		}
-		else
-			ft_putstr("  ");	
-		if (x && x % 2) 
-			ft_putstr(" ");
-		x++;
+		else if (i != 16)
+		{
+			ft_putchar(' ', 2);
+		}
 	}
-}
-
-void	ft_print_char_char(char *src, int size)
-{
-	int x;
-
-	x = 0;
-	while (x < size)
+	i = -1;
+	while (i++ < size - 1)
 	{
-		if (ft_char_is_printable(src[x]))
-			ft_putchr(src[x]);
-		else	
-			ft_putchr('.');
-		x++;
+		if (*(c + i) <= 31 || *(c + i) >= 127)
+			ft_putchar('.', 1);
+		else
+			ft_putchar(*(c + i), 1);
 	}
-}
-
-void	ft_print_line(long addr, char *src, int size)
-{
-	ft_print_addr_hex(addr);
-	ft_print_char_hex(src, size);
-	ft_print_char_char(src, size);
-	ft_putstr("\n");
 }
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	char	block[16];
-	char	*pointer;
+	unsigned int	i;
+	unsigned char	*c;
+	unsigned int	sendsize;
 
-	pointer = addr;
-	while (size > 16)
+	i = 0;
+	c = addr;
+	while (i * 16 < size)
 	{
-		ft_read_block_memory(pointer, block, 16);
-		ft_print_line((long) pointer, block, 16);
-		size = size -16;
-		pointer = pointer + 16;
+		if (i < size / 16)
+			sendsize = 16;
+		else
+			sendsize = size % 16;
+		ft_print_addr((unsigned long long)c + (i * 16));
+		ft_putchar(':', 1);
+		ft_print_data(c + (i * 16), sendsize);
+		ft_putchar('\n', 1);
+		i++;
 	}
-	if (size != 0)
-	{
-		ft_read_block_memory(pointer, block, size);	
-		ft_print_line((long) pointer, block, size);
-	}
-	return addr;
+	return (addr);
 }
 
-int	main(void)
+/*int	main(void)
 {
-	char *c="asdasfv asv a\tsga\n\n\nsdf asgas \n";
+	char *c = "";
 
 	ft_print_memory((void*) c, 250);
-}
-
+}*/
