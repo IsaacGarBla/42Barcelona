@@ -15,6 +15,7 @@
 #include "free_grid.h"
 
 int	solve_grid(int **grid, int dim, int *pos, int *input);
+void optimize_grid(int **grid, int dim, int *input);
 
 int	validate_input(char *str, int dim)
 {
@@ -95,8 +96,8 @@ int	main(int argc, char **argv)
 	int	dim;
 	int	**grid;
 
-	dim = 4;
-	if (argc != 2 || !validate_input(argv[1], dim))
+	dim = argv[2][0] - '0';
+	if (argc != 3 || !validate_input(argv[1], dim))
 		return (write(1, "Error: Input not in correct format\n", 35), 1);
 	pos[0] = 0;
 	pos[1] = 0;
@@ -109,6 +110,7 @@ int	main(int argc, char **argv)
 	grid = init_grid(dim);
 	pos[0] = 1;
 	pos[1] = 1;
+	//optimize_grid(grid, dim, input);
 	if (!solve_grid(grid, dim, pos, input))
 		return (write(1, "Error: Unsolvable with given input\n", 35), 1);
 	print_grid(grid, dim);
