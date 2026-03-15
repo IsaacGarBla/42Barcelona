@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aimmel <aimmel@student.42bcn.com>          +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 19:29:06 by aimmel            #+#    #+#             */
-/*   Updated: 2026/03/15 03:05:24 by aimmel           ###   ########.fr       */
+/*   Updated: 2026/03/15 23:11:29 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <stdlib.h>
 #include "free_grid.h"
 
-int	solve_grid(int **grid, int dim, int *pos, int *input);
-void optimize_grid(int **grid, int dim, int *input);
+int		solve_grid(int **grid, int dim, int *pos, int *input);
+void	optimize_grid(int **grid, int dim, int *input);
 
 int	validate_input(char *str, int dim)
 {
@@ -108,9 +108,9 @@ int	main(int argc, char **argv)
 		pos[0]++;
 	}
 	grid = init_grid(dim);
+	optimize_grid(grid, dim, input);
 	pos[0] = 1;
 	pos[1] = 1;
-	//optimize_grid(grid, dim, input);
 	if (!solve_grid(grid, dim, pos, input))
 		return (write(1, "Error: Unsolvable with given input\n", 35), 1);
 	print_grid(grid, dim);
