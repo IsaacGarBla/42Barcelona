@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 11:26:57 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/13 11:27:01 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/16 13:22:02 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/16 13:22:05 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strcat(char *dest, char *src)
 {
-	int		x;
+	int	x;
+	int	i;
 
 	x = 0;
-	while (s1[x] != '\0' && s2[x] != '\0' && s1[x] == s2[x])
+	while (dest[x])
 		x++;
-	return (s1[x] - s2[x]);
+	i = 0;
+	while (src[i])
+	{
+		dest[x] = src[i];
+		x++;
+		i++;
+	}
+	dest[x] = '\0';
+	return (dest);
 }
 
 /*#include <stdio.h>
@@ -25,8 +34,16 @@ int	ft_strcmp(char *s1, char *s2)
 
 int main(int argc, char **argv)
 {
-	argc += 0; 
-	printf("%d\n", ft_strcmp(argv[1], argv[2]));
-	printf("%d\n", strcmp(argv[1], argv[2]));	
+	char dest1[255];
+	char dest2[255];
+	
+	argc += 0;
+	
+	strcpy(dest1,  argv[1]);
+	strcpy(dest2,  argv[1]);
+	printf("Cadena S1: %s\n", argv[1]);
+	printf("Cadena a anadir: %s\n", argv[2]);
+	printf("%s\n", ft_strcat(dest1, argv[2]));
+	printf("%s\n",strcat(dest2, argv[2]));
 	return (0);
 }*/
