@@ -6,16 +6,17 @@
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 19:29:06 by aimmel            #+#    #+#             */
-/*   Updated: 2026/03/15 23:11:29 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/17 01:42:22 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "free_grid.h"
 
 int		solve_grid(int **grid, int dim, int *pos, int *input);
 void	optimize_grid(int **grid, int dim, int *input);
+void	free_grid_on_error(int **grid, int rows_allocated);
+void	free_grid(int **grid, int dim);
 
 int	validate_input(char *str, int dim)
 {
@@ -69,8 +70,9 @@ int	**init_grid(int dim)
 
 void	print_grid(int **grid, int dim)
 {
-	int	row;
-	int	col;
+	int		row;
+	int		col;
+	char	c;
 
 	row = 1;
 	while (row <= dim)
@@ -78,7 +80,8 @@ void	print_grid(int **grid, int dim)
 		col = 1;
 		while (col <= dim)
 		{
-			write(1, &(char){grid[row - 1][col - 1] + '0'}, 1);
+			c = grid[row - 1][col - 1] + '0';
+			write(1, &c, 1);
 			if (col != dim)
 				write(1, " ", 1);
 			col++;
