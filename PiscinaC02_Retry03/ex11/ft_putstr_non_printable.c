@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 17:42:56 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/12 01:29:07 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/18 00:30:32 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,22 @@ void	ft_putstr_non_printable(char *str)
 	}
 }
 
-/*int	main(void)
+/*#include <stdio.h>
+
+int	main(void)
 {
-	ft_putstr_non_printable("Coucou\n\t\btu vas bien ?");
+	ft_putstr_non_printable("Coucou\n\t\btu vas bien?");
+	printf("\n");
+	ft_putstr_non_printable("Caracteres normales?");
+	printf("\n");
+	ft_putstr_non_printable("Caracteres más allá del 127.");
+	printf("\n");
+	ft_putstr_non_printable("¿Los imprime bien?");
+	printf("\n");
+	ft_putstr_non_printable("\n\t\b Ahora sí parece que está correcto.");
+	printf("\n");
+	ft_putstr_non_printable("Última prueba.");
+	printf("\n");
 	return (0);
-}*/
+}
+*/

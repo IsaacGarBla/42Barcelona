@@ -3,16 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 10:16:22 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/17 10:16:25 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/18 01:54:12 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include <unistd.h>
 
-int	ft_char_base_ok(char c)
+int	ft_check_base(char *base)
+{
+	int	x;
+	int	j;
+
+	x = 0;
+	while (base[x])
+	{
+		if (!(base[x] > 32 && base[x] < 127 && base[x]
+				!= '+' && base[x] != '-'))
+			return (0);
+		j = 0;
+		while (j < x)
+		{
+			if (base[j] == base[x])
+				return (0);
+			j++;
+		}
+		x++;
+	}
+	return (x);
+}
+
+void	ft_putnbr_base(int nbr, char *base)
+{
+	int		b;
+
+	b = ft_check_base(base);
+	if (b < 2)
+		return ;
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr *= -1;
+	}
+	if (nbr < b)
+		write(1, &base[nbr], 1);
+	else
+	{
+		ft_putnbr_base(nbr / b, base);
+		write(1, &base[nbr % b], 1);
+	}
+}
+
+/*#include <stdio.h>
+
+int	main(int narg, char **argv)
+{
+	int		v = -125683;
+
+	if (narg != 2)
+		return (0);
+	printf("El valor %d en base '%s':", v, argv[1]);
+	printf("\n");
+	printf("\n");
+	ft_putnbr_base(v, argv[1]);
+	printf("\n");
+	return (0);
+}
+
+/*int	ft_char_base_ok(char c)
 {
 	if ((c > 32 && c < 127 && c != '+' && c != '-'))
 		return (1);
@@ -63,38 +123,4 @@ int	base_ok(char *base)
 	else
 		return (b);
 }
-
-void	ft_putnbr_base(int nbr, char *base)
-{
-	int		b;
-
-	b = base_ok(base);
-	if (b == 0)
-		return ;
-	if (nbr < 0)
-	{
-		write(1, "-", 1);
-		nbr *= -1;
-	}
-	if (nbr < b)
-		write(1, &base[nbr], 1);
-	else
-	{
-		ft_putnbr_base(nbr / b, base);
-		write(1, &base[nbr % b], 1);
-	}
-}
-
-int	main(int narg, char **argv)
-{
-	int		v = -125683;
-
-	if (narg != 2)
-		return (0);
-	printf("El valor %d en base '%s':", v, argv[1]);
-	printf("\n");
-	printf("\n");
-	ft_putnbr_base(v, argv[1]);
-	printf("\n");
-	return (0);
-}
+*/

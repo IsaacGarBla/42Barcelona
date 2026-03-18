@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 17:57:40 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/16 17:57:42 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/18 01:32:39 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ int	ft_atoi(char *str)
 }
 
 /*#include <stdio.h>
+#include <stdlib.h>
 
-int	main(void)
+int	main(int argvs, char **argv)
 {
-	char	*str = "  ---+--+1234ab567";
+	argvs = 0;
 
-	printf("El valor entero de '%s' es: %d.\n", str, ft_atoi(str));
+	printf("FT_ATOI: El valor entero de '%s' es: %d.\n", argv[1],
+		ft_atoi(argv[1]));
+	printf("ATOI: El valor entero de '%s' es: %d.\n", argv[1], atoi(argv[1]));
 	return (0);
-}*/
+}
+*/
