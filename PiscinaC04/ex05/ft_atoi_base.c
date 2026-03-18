@@ -20,7 +20,7 @@ int	ft_strlen(char *str)
 	return (x);
 }
 
-int	ft_find_char(char *str, unsigned char to_find)
+int	ft_find_digit(char *str, unsigned char to_find)
 {
 	int	i;
 
@@ -68,7 +68,7 @@ int	ft_parse_number(char *str, char *base, int *ini, int *fin)
 		if (str[i++] == '-')
 			signo *= -1;
 	j = i;
-	while (str[j] && ft_find_char(base, (unsigned char) str[j]))
+	while (str[j] && ft_find_digit(base, (unsigned char) str[j]))
 		j++;
 	if (j > i)
 	{
@@ -81,35 +81,42 @@ int	ft_parse_number(char *str, char *base, int *ini, int *fin)
 
 int	ft_atoi_base(char *str, char *base)
 {
-	int	ini;
-	int	fin;
-	int	valor;
-	int	ini_base;
+	int		ini;
+	int		fin;
+	long	valor;
+	int		b;
+	int		signo;
 
 	if (!ft_check_base(base))
 		return (0);
-	if (!ft_parse_number(str, base, &ini, &fin))
+	signo = ft_parse_number(str, base, &ini, &fin);
+	if (!signo)
 		return (0);
-	ini_base = 1;
-	while (fin >= ini)
+	b = ft_strlen(base);
+	valor = 0;
+	while (ini <= fin)
 	{
-		valor = valor
-			+ ini_base * (ft_find_char(base, (unsigned char) str[fin]) - 1);
-		ini_base = ini_base * ft_strlen(base);
-		fin--;
+		valor = valor * b
+			+ ft_find_digit(base, (unsigned char) str[ini]) - 1;
+		ini++;
 	}
-	return (valor * ft_parse_number(str, base, &ini, &fin));
+	valor = valor * signo;
+	if (valor < -2147483648 || valor > 2147483647)
+		return (0);
+	return ((int) valor);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 
-int	main(void)
+int	main(int nargs, char **args)
 {
-	char	*str = "  ---+--+1524";
-	char	*base = "0123456789";
 
-	printf("El valor entero de '%s' en base '%s' es: %d.\n", str,
-		base, ft_atoi_base(str, base));
-	return (0);
-}
-
+	if (nargs != 3)
+	{
+		printf("Numero de argumentos erroneso.\n");
+		return (0);
+	}		
+	printf("El valor entero de '%s' en base '%s' es: %d.\n", args[1],
+		args[2], ft_atoi_base(args[1], args[2]));
+	return (1);
+}*/

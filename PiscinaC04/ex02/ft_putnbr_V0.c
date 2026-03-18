@@ -14,21 +14,27 @@
 
 void	ft_putnbr(int nb)
 {
-	int		c;
-	long	nbl;
+	int	c;
 
-	nbl = nb;
 	if (nb < 0)
 	{
-		write(1, "-", 1);
-		nbl = -nbl;
+		if (nb > -10)
+		{
+			write(1, "-", 1);
+			c = (nb * -1) + '0';
+		}
+		else
+		{
+			ft_putnbr(nb / 10);
+			c = (nb % 10) * -1 + '0';
+		}
 	}
-	if (nbl < 10)
-		c = nbl + '0';
+	else if (nb < 10)
+		c = nb + '0';
 	else
 	{
-		ft_putnbr(nbl / 10);
-		c = (nbl % 10) + '0';
+		ft_putnbr(nb / 10);
+		c = (nb % 10) + '0';
 	}
 	write(1, &c, 1);
 }
@@ -42,20 +48,18 @@ int	main(void)
 	n = +2147483647;
 	ft_putnbr(n);
 	printf("\n");
+	printf("\n");
 	n = -2147483647;
 	ft_putnbr(n);
 	printf("\n");
-	n = 0;
-	ft_putnbr(n);
-	printf("\n");
-	n = -256;
-	ft_putnbr(n);
 	printf("\n");
 	n = 134;
 	ft_putnbr(n);
 	printf("\n");
+	printf("\n");
 	n = -2147483648;
 	ft_putnbr(n);
+	printf("\n");
 	printf("\n");
 	return (0);
 }*/

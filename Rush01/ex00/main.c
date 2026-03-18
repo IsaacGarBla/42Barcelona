@@ -103,7 +103,7 @@ int	main(int argc, char **argv)
 	int	pos[2];
 	int	**grid;
 
-	dim = 4;
+	dim = 5;
 	pos[0] = 1;
 	pos[1] = 1;
 	if (argc != 2 || !validate_input(argv[1], dim))
