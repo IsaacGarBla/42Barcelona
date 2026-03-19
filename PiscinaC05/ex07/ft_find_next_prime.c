@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
+/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/19 00:58:36 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/19 01:08:07 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/19 11:01:24 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/19 11:01:29 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,25 @@ int	ft_is_prime(int nb)
 	return (1);
 }
 
+int	ft_find_next_prime(int nb)
+{
+	int	x;
+
+	if (nb == 0)
+		return (2);
+	x = nb + 1;
+	while (!ft_is_prime(x))
+		x++;
+	return (x);
+}
+
 /*#include <stdio.h>
 #include <stdlib.h>
 
 int	main(int nargs, char **args)
 {
 	nargs = nargs + 0;
-	printf("¿El número %s  es primo? -> %d\n", args[1],
-		ft_is_prime(atoi(args[1])));
+	printf("El número primo después de %s es -> %d\n", args[1],
+		ft_find_next_prime(atoi(args[1])));
 }
 */
