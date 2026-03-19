@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
+/*   ft_recursive_power.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/18 15:57:19 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/19 00:16:06 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/19 00:34:03 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/19 00:42:28 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_iterative_factorial(int nb)
+int	ft_recursive_power(int nb, int power)
 {
-	int	res;
-
-	if (nb < 0)
+	if (power < 0)
 		return (0);
-	res = 1;
-	while (nb > 1)
-		res = res * nb--;
-	return (res);
+	if (power == 0)
+		return (1);
+	return (nb * ft_recursive_power(nb, power - 1));
 }
 
 /*#include <stdio.h>
@@ -28,6 +25,7 @@ int	ft_iterative_factorial(int nb)
 int	main(int nargs, char **args)
 {
 	nargs = nargs + 0;
-	printf("El factorial de %s es %d.\n", args[1],
-		ft_iterative_factorial(atoi(args[1])));
-}*/
+	printf("%s elevado a %s es %d.\n", args[1], args[2],
+		ft_recursive_power(atoi(args[1]), atoi(args[2])));
+}
+*/

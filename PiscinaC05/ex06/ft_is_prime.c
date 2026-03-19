@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/18 15:57:19 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/19 00:16:06 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/19 00:58:36 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/19 01:08:07 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_iterative_factorial(int nb)
+int	ft_is_prime(int nb)
 {
-	int	res;
+	int	x;
 
-	if (nb < 0)
+	if (nb < 2)
 		return (0);
-	res = 1;
-	while (nb > 1)
-		res = res * nb--;
-	return (res);
+	if (nb < 4)
+		return (1);
+	if (nb % 2 == 0)
+		return (0);
+	x = 3;
+	while (x * x < nb)
+	{
+		if (nb % x == 0)
+			return (0);
+		x += 2;
+	}
+	return (1);
 }
 
 /*#include <stdio.h>
@@ -28,6 +36,7 @@ int	ft_iterative_factorial(int nb)
 int	main(int nargs, char **args)
 {
 	nargs = nargs + 0;
-	printf("El factorial de %s es %d.\n", args[1],
-		ft_iterative_factorial(atoi(args[1])));
-}*/
+	printf("¿El número %s  es primo? -> %d\n", args[1],
+		ft_is_prime(atoi(args[1])));
+}
+*/

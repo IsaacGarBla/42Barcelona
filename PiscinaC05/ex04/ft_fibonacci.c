@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/18 15:57:19 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/19 00:16:06 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/03/19 00:43:37 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/03/19 00:48:23 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_iterative_factorial(int nb)
+int	ft_fibonacci(int index)
 {
-	int	res;
-
-	if (nb < 0)
-		return (0);
-	res = 1;
-	while (nb > 1)
-		res = res * nb--;
-	return (res);
+	if (index < 2)
+		return (index);
+	return (ft_fibonacci(index -1) + ft_fibonacci(index -2));
 }
 
 /*#include <stdio.h>
@@ -28,6 +23,7 @@ int	ft_iterative_factorial(int nb)
 int	main(int nargs, char **args)
 {
 	nargs = nargs + 0;
-	printf("El factorial de %s es %d.\n", args[1],
-		ft_iterative_factorial(atoi(args[1])));
-}*/
+	printf("El elemento %s de la serie Fibonacci es %d.\n", args[1],
+		ft_fibonacci(atoi(args[1])));
+}
+*/
