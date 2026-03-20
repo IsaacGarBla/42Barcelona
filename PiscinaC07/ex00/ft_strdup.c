@@ -38,8 +38,9 @@ char	*ft_strdup(char *src)
 {
 	char	*dst;
 
-	dst = (char *) malloc(ft_strlen(src) + 1);
-	ft_strcpy(src, dst);
+	dst = (char *) malloc((ft_strlen(src) + 1) * sizeof(char));
+	if (dst != NULL)
+		ft_strcpy(src, dst);
 	return (dst);
 }
 
