@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dictionary.h                                       :+:      :+:    :+:   */
+/*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DICTIONARY_H
-# define DICTIONARY_H
+#ifndef STRING_H
+# define STRING_H
 
-# define MAX_ENTRIES 256
-# define MAX_LONG_KEY 256
-# define MAX_LONG_VALUE 256
-
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-
-typedef struct s_dict
-{
-	char	**keys;
-	char	**values;
-	int		size;
-}	t_dict;
-
-int		create_dict(t_dict *dict);
-void	destroy_dict(t_dict *dict);
-int		get_dictionary(t_dict *dict, char *f_name);
-char	*find_value(t_dict *dict, char *key, char *value);
+int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strcpy(char *dest, char *src);
+void	ft_strncpy(char *destino, const char *origen, int n);
+void	ft_rev_str(char *str);
 
 #endif
