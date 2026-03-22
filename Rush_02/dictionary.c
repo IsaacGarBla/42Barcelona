@@ -6,63 +6,86 @@
 /*   By: igarcia- <igarcia- <marvin@42.fr>  >       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 11:50:09 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/21 12:43:32 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/22 11:18:41 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAX_ENTRIES
-# define MAX_ENTRIES 128
-#endif
-
-#ifndef MAX_LONG_KEY
-# define MAX_LONG_KEY 128
-#endif
-
-#ifndef MAX_LONG_VALUE
-# define MAX_LONG_VALUE 128
-#endif
-
 #include <stdlib.h>
+#include "dictionary.h"
+#include <stdio.h>
 
-typedef struct s_dict
+int	add_space_for_entries(t_dict *dictionary)
 {
-	char	**keys;
-	char	**values;
-	int		size;
-}	t_dict;
+	int i;
+	i = 0;
+
+	while (i < MAX_ENTRIES)
+	{
+		(*dictionary).keys[i] = 
+			malloc (sizeof(char) * MAX_LONG_KEY);
+		if ((*dictionary).keys[i] == NULL)
+			return (0);
+		(*dictionary).values[i] = 
+			malloc (sizeof(char) * MAX_LONG_VALUE);
+		if ((*dictionary).values[i] == NULL)
+			return (0);
+		i++;
+	}
+	return (1);
+
+}
 
 // Reserves memory to store the dictionary.
-// If there isany error, returns 0.
+// If there is any error, returns 0.
 // Otherwise, returns 1.
-
-int	create_dict(t_dict *dictionary)
+int	create_dict(t_dict *dict)
 {
-	(*dictionary).keys = malloc (sizeof(char *) * MAX_ENTRIES);
-	if ((*dictionary).keys == NULL)
+	int	i;
+
+	(*dict).keys = malloc (sizeof(char *) * MAX_ENTRIES);
+	if ((*dict).keys == NULL)
 		return (0);
-	(*dictionary).values = malloc (sizeof(char *) * MAX_ENTRIES);
-	if ((*dictionary).values == NULL)
+	(*dict).values = malloc (sizeof(char *) * MAX_ENTRIES);
+	if ((*dict).values == NULL)
 	{
-		free((*dictionary).keys);
+		free((*dict).keys);
 		return (0);
 	}
+	i = 0;
+	while (i < MAX_ENTRIES)
+	{
+		(*dict).keys[i] = NULL;
+		(*dict).values[i] = NULL;
+		i++;
+	}
+	if (!add_space_for_entries(dict))
+	{
+		destroy_dict(dict);
+		return (0);
+	}
+	(*dict).size = 0;
 	return (1);
 }
 
-void	destroy_dict(t_dict *dictionary)
+// Release memory of the dicctionary
+void	destroy_dict(t_dict *dict)
 {
 	int	x;
 
-	if ((*dictionary).keys != NULL)
+	if ((*dict).keys != NULL && (*dict).values != NULL)
 	{
 		x = 0;
 		while (x < MAX_ENTRIES)
 		{
-			free((*dictionary).keys[x]);
-			free((*dictionary).values[x]);
+			if ((*dict).keys[x] == NULL)
+				free((*dict).keys[x]);
+			if ((*dict).values[x] == NULL)
+				free((*dict).values[x]);
 			x++;
-		}
-		free((*dictionary).keys);
-		free((*dictionary).values);
+		}		
 	}
+	if ((*dict).keys != NULL)
+		free((*dict).keys);
+	if ((*dict).values != NULL)
+		free((*dict).values);
 }
