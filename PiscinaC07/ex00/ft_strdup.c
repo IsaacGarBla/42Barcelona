@@ -49,6 +49,6 @@ char	*ft_strdup(char *src)
 int	main(int nargs, char **args)
 {
 	nargs = nargs + 1;
-	printf("String a copiar: '%s'\n\n", args[1]);
-	printf("String copiado '%s'\n\n", ft_strdup(args[1]));
+	printf("String a copiar: '%s'.\n", args[1]);
+	printf("String copiado '%s'.\n", ft_strdup(args[1]));
 }*/
