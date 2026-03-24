@@ -21,6 +21,8 @@ int	ft_check_number_base(char *nbr, char *base)
 	int	x;
 
 	x = 0;
+	while (nbr[x] == '+' || nbr[x] == '-')
+		x++;
 	while (nbr[x])
 	{
 		if (!ft_find_digit(base, nbr[x]))
@@ -30,18 +32,18 @@ int	ft_check_number_base(char *nbr, char *base)
 	return (1);
 }
 
-int ft_n_char(int nbr, int b)
+int	ft_n_dig(int nbr, int b)
 {
-	int	d;
-	long n;
+	int		d;
+	long	n;
 
 	d = 0;
 	if (nbr < 0)
-	{	
+	{
 		d = 1;
-		nbr =  nbr * -1;
+		nbr = nbr * -1;
 	}
-	while (nbr > b )
+	while (nbr > b)
 	{
 		d++;
 		nbr = nbr / b;
@@ -49,34 +51,51 @@ int ft_n_char(int nbr, int b)
 	return (++d);
 }
 
-/*char *ft_itoa(int nbr, char *base)
+char	*ft_itoa(int nbr, char *base)
 {
-	int b;
-	
-	b = ft_strlen(base); // con esto obtenemos la base.
+	int		b;
+	char	*res;
+	int		x;
+	long	nbr_l;
+
+	b = ft_strlen(base);
+	x = ft_n_dig(nbr, b);
+	nbr_l = nbr;
+	res = malloc(sizeof(char) * x + 1);
+	if (res == NULL)
+		return (NULL);
+	res[x] = '\0';
+	if (nbr_l < 0)
+	{
+		res[0] = '-';
+		nbr_l = nbr_l * -1;
+	}
+	while (nbr_l > b)
+	{
+		res[x - 1] = base[nbr_l % b];
+		nbr_l = nbr_l / b;
+		x--;
+	}
+	res[x - 1] = base[nbr_l % b];
+	return (res);
 }
 
-char *ft_convert_base(char *nbr, char *base_from, char *base_to)
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	int		n;
-	char *dst;
-	
+
 	if (!ft_check_base(base_from) || !ft_check_base(base_to)
-		|| !ft_check_number_base(nbr, base_from))
+		|| (!ft_check_number_base(nbr, base_from)))
 		return (NULL);
 	n = ft_atoi_base(nbr, base_from);
-	// Ahora hay que convertir el numero a la nueva base.
-}*/
-
-#include <stdio.h>
-
-int	main(void)
-{
-	int n = -123123;
-	int b = 10;
-	
-	printf("El numero %d en base %d tiene %d caracteres.\n", n,
-		b, ft_n_char(n, b));
+	return (ft_itoa(n, base_to));
 }
 
+/*#include <stdio.h>
 
+int	main(int narg, char **argv)
+{
+	narg = 0;
+	printf("El numero %s en base %s pasado a base %s es -> %s.\n",
+		argv[1], argv[2], argv[3], ft_convert_base(argv[1], argv[2], argv[3]));
+}*/

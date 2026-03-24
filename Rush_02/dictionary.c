@@ -90,9 +90,9 @@ void	destroy_dict(t_dict *dict)
 		x = 0;
 		while (x < MAX_ENTRIES)
 		{
-			if ((*dict).keys[x] == NULL)
+			if ((*dict).keys[x] != NULL)
 				free((*dict).keys[x]);
-			if ((*dict).values[x] == NULL)
+			if ((*dict).values[x] != NULL)
 				free((*dict).values[x]);
 			x++;
 		}
