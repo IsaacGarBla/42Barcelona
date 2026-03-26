@@ -6,7 +6,7 @@
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 16:47:15 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/03/25 16:47:19 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/03/26 13:07:58 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_stock_str	*ft_strs_to_tab(int ac, char **av)
 	return (tabs);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int	main(void)
 {
@@ -104,4 +104,4 @@ int	main(void)
 	printf("El numero de elementos es: %d.\n", n);
 	ft_free_tabs(tabs);
 	return (1);
-}*/
+}
