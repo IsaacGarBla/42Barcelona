@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include "ft_stock_str.h"
 
+void	ft_show_tab(struct s_stock_str *par);
+
 int	ft_strlen(char *str)
 {
 	int	x;
@@ -84,24 +86,16 @@ t_stock_str	*ft_strs_to_tab(int ac, char **av)
 	return (tabs);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int	main(void)
 {
 	char			*str[]
 		= {"Cadena 1", "Cadena 21", "Cadena 321", "Cadena 4321"};
 	t_stock_str		*tabs;
-	int				n = 0;
 
 	tabs = ft_strs_to_tab(4, str);
-	while (tabs[n].str != NULL)
-	{
-		printf("El tamaño de la cadena es: %d.\n", tabs[n].size);
-		printf("La cadena origen es: %s.\n", tabs[n].str);
-		printf("La copia de la cadena es: %s.\n", tabs[n].copy);
-		n++;
-	}
-	printf("El numero de elementos es: %d.\n", n);
+	ft_show_tab(tabs);
 	ft_free_tabs(tabs);
 	return (1);
-}*/
+}
