@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchr(char c);
+void	ft_putchar(char c);
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -56,15 +56,8 @@ void	ft_putstr(char *str)
 
 	x = 0;
 	while (str[x])
-		ft_putchr(str[x++]);
-}
-
-/*#include <unistd.h>
-
-void	ft_putchr(char c)
-{
-	write(1, &c, 1);
-}			
+		ft_putchar(str[x++]);
+}		
 
 int	main(int narg, char **args)
 {
@@ -75,8 +68,9 @@ int	main(int narg, char **args)
 	while (x < narg)
 	{
 		ft_putstr(args[x]);
-		ft_putchr('\n');
+		ft_putchar('\n');
 		x++;
 	}
 	return (0);
-}*/
+}
+

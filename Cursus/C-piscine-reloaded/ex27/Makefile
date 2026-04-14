@@ -2,7 +2,6 @@ NAME = ft_display_file
 
 # Directories
 SRC_DIR = $(shell pwd)
-INC_DIR = includes
 OBJ_DIR = objs
 
 # File sources to compile
@@ -10,11 +9,9 @@ MY_SOURCES = 	ft_display_file.c
 
 #Compiler and flags
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I$(INC_DIR)
+CFLAGS	= -Wall -Werror -Wextra
 
-all: $(NAME)
-
-$(NAME): 
+all:
 		$(CC) $(CFLAGS) $(MY_SOURCES) -o $(NAME)
 		
 clean:
@@ -22,6 +19,4 @@ clean:
 
 fclean: clean
 		rm -f $(NAME)
-
-re:	clean all
 

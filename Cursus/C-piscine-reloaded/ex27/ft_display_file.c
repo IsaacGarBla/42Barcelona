@@ -28,7 +28,7 @@ void	ft_putstr(char *str)
 int	ft_show_file(char *f_name)
 {
 	int		fd;
-	char	buffer[1025];
+	char	buffer[1024];
 	int		n_char;
 
 	fd = open(f_name, O_RDONLY);
@@ -37,12 +37,11 @@ int	ft_show_file(char *f_name)
 	n_char = read(fd, buffer, 1024);
 	while (n_char > 0)
 	{
-		buffer[n_char] = '\0';
-		ft_putstr(buffer);
+		write(1, buffer, n_char);
 		n_char = read(fd, buffer, 1024);
 	}
 	close(fd);
-	return (1);
+	return (n_char != -1);
 }
 
 int	main(int narg, char **argv)
