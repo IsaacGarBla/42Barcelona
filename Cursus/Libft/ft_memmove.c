@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
-/*   By: igarcia- <igarcia-@student.42barcelona.com> #+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 12:55:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/15 12:55:55 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/17 01:27:53 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

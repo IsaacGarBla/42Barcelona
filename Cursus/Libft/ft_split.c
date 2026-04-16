@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:03:58 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/16 16:04:00 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/17 01:27:59 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static size_t	ft_count_words(char const *s, char c)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != c && (s[i + 1] == '\0' || s[i + 1] == c )
+		if (s[i] != c && (s[i + 1] == '\0' || s[i + 1] == c))
 			count++;
+		i++;
+	}
 	return (count);
 }
 
@@ -35,8 +37,8 @@ static char	**ft_initarray(size_t size)
 	if (dst != NULL)
 	{
 		i = 0;
-		while (i < n_substr + 1)
-			dst[i] = NULL;
+		while (i < size)
+			dst[i++] = NULL;
 	}
 	return (dst);
 }
@@ -53,44 +55,42 @@ static char	**ft_free_array(char **dst, size_t size)
 	return (dst);
 }
 
-static char *ft_strdup_word(char const *s, size_t start, size_t end)
-{	
-	char	*dst;
-	size_t	len;
+static int	ft_add_words(char **dst, char const *s, char c)
+{
+	size_t	j;
+	size_t	i;
+	int		start;
 
-	len = end - start + 1;
-	dst = (char *) malloc((len + 1) * sizeof(char));
-	if (dst != NULL)
-		ft_strlcpy(dst, &src[start], len + 1);
-	return (dst);
+	i = 0;
+	start = -1;
+	j = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c && start == -1)
+			start = i;
+		else if (s[i] == c && start != -1)
+		{
+			dst[j] = ft_substr(s, (size_t) start, (size_t)(i - start));
+			if (dst[j++] == NULL)
+				return (0);
+			start = -1;
+		}
+		i++;
+	}
+	if (start != -1)
+		dst[j] = ft_substr(s, (size_t) start, (size_t)(i - start));
+	return (start == -1 || dst[j] != NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	l_array;
 	char	**dst;
-	char	*start;
-	char	*end;
-	size_t	i;
+	size_t	n_words;
 
-	l_array = ft_count_words(s, c);
-	dst = ft_initarray(l_array + 1);
-	if (dst == NULL)
-		return (NULL);
-	start = s;
-	while (*start == c)
-		start++;
-	i = 0;
-	while (i < l_array - 1)
-	{
-		end = ft_strchr(start, int c)
-		dst[i] = ft_strdup_word(s,
-			(size_t) start - s, (size_t) end - s - 1);
-		if (dst[i] == NULL)
-		else
-		{
-			i++;
-			start = end + 1;
-		}
-	}
+	n_words = ft_count_words(s, c);
+	dst = ft_initarray(n_words + 1);
+	if (dst != NULL && n_words > 0)
+		if (!ft_add_words(dst, s, c))
+			dst = ft_free_array(dst, n_words + 1);
+	return (dst);
 }

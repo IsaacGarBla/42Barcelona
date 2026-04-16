@@ -1,10 +1,8 @@
 NAME = libft.a
 
-CUR_DIR = $(shell pwd)
-
 # Directories
-SRC_DIR = $(CUR_DIR)
-INC_DIR = $(CUR_DIR)
+SRC_DIR = .
+INC_DIR = .
 OBJ_DIR = objs
 
 # File sources to compile
@@ -48,6 +46,7 @@ all: $(NAME)
 
 #Create the library
 $(NAME): $(OBJS)
+		# $(CC) $(CFLAGS) $(OBJS) 
 		ar rcs $(NAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -62,3 +61,4 @@ fclean: clean
 
 re:	clean all
 
+.PHONY: all clean fclean re
