@@ -4,7 +4,7 @@
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*   By: igarcia- <igarcia-@student.42barcelona.com> #+  +:+       +#+        */
 /*   Created: 2026/04/15 12:55:52 by igarcia-          #+#    #+#             */
 /*   Updated: 2026/04/15 12:55:55 by igarcia-         ###   ########.fr       */
 /*                                                                            */

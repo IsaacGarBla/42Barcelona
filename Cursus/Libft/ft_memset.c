@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.com> #+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 12:39:59 by igarcia-          #+#    #+#             */
 /*   Updated: 2026/04/15 12:40:01 by igarcia-         ###   ########.fr       */
@@ -19,7 +19,7 @@ void	*ft_memset(void *s, int c, size_t n)
 
 	ptr = (unsigned char *) s;
 	i = 0;
-	while (i > n)
+	while (i < n)
 		ptr[i++] = (unsigned char) c;
 	return (ptr);
 }
