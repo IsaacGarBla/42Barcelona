@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:59:11 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 01:28:41 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/19 21:36:43 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (len > s_len - start)
 		len = s_len - start;
 	dst = malloc((len * sizeof(char)) + 1);
-	ft_strlcpy(dst, &s[start], len + 1);
+	if (dst != NULL)
+		ft_strlcpy(dst, &s[start], len + 1);
 	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 12:53:48 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 01:27:45 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/19 21:35:52 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	src1 = (const char *) s1;
 	src2 = (const char *) s2;
-	while (src1[i] == src2[i] && i < n)
+	while (i < n && src1[i] == src2[i])
 		i++;
 	if (i == n)
 		return (0);

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 12:27:09 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/19 21:37:19 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 21:44:30 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 23:36:30 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	long	ln;
-	char	c;
+	t_list	*elem;
 
-	ln = n;
-	if (ln < 0)
+	if ((*lst) == NULL)
 	{
-		write(fd, "-", 1);
-		ln = -ln;
+		*lst = new;
+		(*lst)->next = NULL;
 	}
-	if (ln < 10)
-		c = ln + '0';
 	else
 	{
-		ft_putnbr_fd(ln / 10, fd);
-		c = (ln % 10) + '0';
+		elem = (*lst);
+		while (elem->next != NULL)
+			elem = elem->next;
+		elem->next = new;
 	}
-	write(fd, &c, 1);
 }
