@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include "libftprintf_aux.h"
+#include "ft_printf.h"
+#include "ft_printf_aux.h"
 
 void	ft_check_format(char spc, va_list args, int *len)
 {
@@ -45,6 +45,7 @@ int	ft_printf(char const *format, ...)
 
 	va_start(args, format);
 	i = 0;
+	total_len = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%' && format[i + 1] != '\0'
@@ -53,6 +54,8 @@ int	ft_printf(char const *format, ...)
 			i++;
 			ft_check_format(format[i], args, &total_len);
 		}
+		else if (format[i] == '%' && format[i + 1] == '\0')
+			return (-1);
 		else
 			ft_putchar_pf(format[i], 1, &total_len);
 		i++;

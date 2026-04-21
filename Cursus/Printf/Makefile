@@ -9,8 +9,8 @@ LIBFT   = ./libft/libft.a
 LIBFT_DIR = ./libft
 
 # File sources to compile
-MY_SOURCES =	libftprintf.c \
-				libftprintf_aux.c
+MY_SOURCES =	ft_printf.c \
+				ft_printf_aux.c
 
 # Add directory prefix to the sources and objects
 SRCS	= $(addprefix $(SRC_DIR)/, $(MY_SOURCES))
@@ -18,7 +18,7 @@ OBJS	= $(addprefix $(OBJ_DIR)/, $(MY_SOURCES:.c=.o))
 
 #Compiler and flags
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I$(INC_DIR)
+CFLAGS	= -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
 
 all: $(NAME)
 
@@ -32,7 +32,7 @@ $(LIBFT):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 		@mkdir -p $(OBJ_DIR)
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 clean:
 		rm -rf $(OBJ_DIR)
