@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_test_pf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 12:20:34 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/21 12:20:36 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/22 05:32:55 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,21 @@ int	main(void)
 	int		le_pf;
 	int		le_ft_pf;
 	
-
 	// Un char (c)
 	ft_printf("## A char (c).\n\n");
+	le_ft_pf = printf("FT -> [%c]\n", 'A');
 	le_pf = printf("PF -> [%c]\n", 'A');
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
-
+	
 	// Un string (s)
 	ft_printf("## A string (s).\n\n");
 	le_ft_pf = ft_printf("FT -> [%s]\n", s);
 	le_pf = printf("PF -> [%s]\n", s);
-	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
-	ft_printf("/-----------------------------------------/\n\n");
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT -> [%s]\n", (char *) NULL);
+	le_pf = printf("PF -> [%s]\n",(char *) NULL);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);ft_printf("/-----------------------------------------/\n\n");
 
 	// Un puntero (p)
 	ft_printf("## A pointer (p) format HEX.\n\n");
@@ -110,11 +112,45 @@ int	main(void)
 	ft_printf("/-----------------------------------------/\n\n");
 
 	// El caracter % (%)
-	ft_printf("The '%' character (%).\n\n");
+	ft_printf("The '%%' character (%%).\n\n");
 	le_ft_pf = ft_printf("FT -> [%%]\n");
 	le_pf = printf("PF -> [%%]\n");
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 
+	// Bonus, flags -0.
+	ft_printf("Uso de bonus.\n\n");
+
+	// Un char
+	ft_printf("## A char (c).\n\n");
+	le_ft_pf = printf("FT -> [%5c]\n", 'A');
+	le_pf = printf("PF -> [%5c]\n", 'A');
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	ft_printf("/-----------------------------------------/\n\n");
+	
+	// Un string (s)
+	ft_printf("## A string (s).\n\n");
+	le_ft_pf = ft_printf("FT -> [%30s]\n", s);
+	le_pf = printf("PF -> [%30s]\n", s);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	ft_printf("/-----------------------------------------/\n\n");
+	
+	ft_printf("## A string (s).\n\n");
+	le_ft_pf = ft_printf("FT -> [%-30s]\n", s);
+	le_pf = printf("PF -> [%-30s]\n", s);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	ft_printf("/-----------------------------------------/\n\n");
+
+	ft_printf("## A decimal number (d).\n\n");
+	le_ft_pf = ft_printf("FT -> [%-20d]\n", INT_MAX);
+	le_pf = printf("PF -> [%-20d]\n",  INT_MAX);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT -> [%20d]\n", INT_MIN);
+	le_pf = printf("PF -> [%20d]\n",  INT_MIN);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT -> [%-10d]\n", 0);
+	le_pf = printf("PF -> [%-10d]\n",  0);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	ft_printf("/-----------------------------------------/\n\n");
 }
 

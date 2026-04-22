@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_flags.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/20 12:36:03 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/22 03:48:15 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/22 01:14:31 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/22 05:13:11 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_FLAGS_H
+# define FT_FLAGS_H
 
-# include <stdarg.h>
-# include "libft.h"
-# include "ft_flags.h"
-# include "ft_putchar_pf.h"
-# include "ft_putstr_pf.h"
-# include "ft_putnbr_pf.h"
-# include "ft_putptr_pf.h"
-
-int	ft_printf(char const *format, ...);
+typedef struct s_flags
+{
+	int	minus;
+	int	zero;
+	int	dot;
+	int	width;
+	int	precision;
+	int	hash;
+	int	space;
+	int	plus;
+}	t_flags;
 
 #endif

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_pf.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/20 12:36:03 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/22 03:48:15 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/22 01:31:13 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/22 04:42:13 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PUTNBR_PF_H
+# define FT_PUTNBR_PF_H
 
-# include <stdarg.h>
-# include "libft.h"
+# include <unistd.h>
 # include "ft_flags.h"
-# include "ft_putchar_pf.h"
-# include "ft_putstr_pf.h"
-# include "ft_putnbr_pf.h"
-# include "ft_putptr_pf.h"
+# include "ft_putnchar.h"
+# include "libft.h"
 
-int	ft_printf(char const *format, ...);
+int				ft_ndigits_signed(long long n, int base);
+int				ft_ndigits_unsigned(unsigned long n, int base);
+unsigned int	ft_putnbr_pf(int n, t_flags flags);
+unsigned int	ft_putnbr_base_pf(unsigned long long n,
+					char *base, t_flags flags);
 
 #endif

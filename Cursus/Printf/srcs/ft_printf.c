@@ -6,63 +6,80 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/21 02:01:14 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/22 05:19:58 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_printf_aux.h"
 
-unsigned int	ft_check_format(char spc, va_list args)
+unsigned int	ft_check_format(char spc, t_flags flags, va_list args)
 {
 	if (spc == 'c')
-		return (ft_putchar_pf(va_arg(args, int)));
+		return (ft_putchar_pf(va_arg(args, int), flags));
 	else if (spc == 's')
-		return (ft_putstr_pf(va_arg(args, char *)));
+		return (ft_putstr_pf(va_arg(args, char *), flags));
 	else if (spc == 'p')
-		return (ft_putptr_pf(va_arg(args, void *)));
+		return (ft_putptr_pf(va_arg(args, void *), flags));
 	else if (spc == 'd')
-		return (ft_putnbr_pf(va_arg(args, int)));
+		return (ft_putnbr_pf(va_arg(args, int), flags));
 	else if (spc == 'i')
-		return (ft_putnbr_pf(va_arg(args, int)));
+		return (ft_putnbr_pf(va_arg(args, int), flags));
 	else if (spc == 'u')
-		return (ft_putnbr_base_pf(va_arg(args, unsigned int), "0123456789"));
+		return (ft_putnbr_base_pf(va_arg(args, unsigned int),
+				"0123456789", flags));
 	else if (spc == 'x')
 		return (ft_putnbr_base_pf(va_arg(args, unsigned int),
-				"0123456789abcdef"));
+				"0123456789abcdef", flags));
 	else if (spc == 'X')
 		return (ft_putnbr_base_pf(va_arg(args, unsigned int),
-				"0123456789ABCDEF"));
+				"0123456789ABCDEF", flags));
 	else if (spc == '%')
-		return (ft_putchar_pf('%'));
+		return (ft_putchar_pf('%', flags));
 	return (0);
 }
 
-char	*ft_find_char(const char *src, const char *set)
+t_flags	ft_init_flags(void)
 {
-	int	i;
+	t_flags	f;
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		if (ft_strchr(set, src[i]) != NULL)
-			return ((char *) &src[i]);
-		i++;
-	}
-	return (NULL);
+	f.minus = 0;
+	f.zero = 0;
+	f.dot = 0;
+	f.width = 0;
+	f.precision = 0;
+	f.hash = 0;
+	f.space = 0;
+	f.plus = 0;
+	return (f);
 }
 
-int	ft_process_flags(int n)
+int	ft_process_flags(const char *format, unsigned int pos, t_flags *flags)
 {
-	return (n == 1);
+	while (format[pos] == '-' || format[pos] == '0' || format[pos] == '+'
+		|| format[pos] == '#' || format[pos] == ' ' )
+	{
+		flags->minus = format[pos] == '-';
+		flags->zero = format[pos] == '0';
+		flags->hash = format[pos] == '#';
+		flags->space = format[pos] == ' ';
+		flags->plus = format[pos] == '+';
+		pos++;
+	}
+	while (format[pos] >= '0' && format[pos] <= '9')
+		flags->width = (flags->width * 10) + (format[pos++] - '0');
+	if (format[pos] == '.')
+		flags->dot = (format[pos++] == '.');
+	while (format[pos] >= '0' && format[pos] <= '9')
+		flags->precision = (flags->precision * 10) + (format[pos++] - '0');
+	return (pos);
 }
 
 int	ft_printf(char const *format, ...)
 {
 	va_list			args;
-	int				i;
+	unsigned int	i;
 	unsigned int	total_len;
-	char			*p;
+	t_flags			flags;
 
 	va_start(args, format);
 	i = 0;
@@ -71,21 +88,15 @@ int	ft_printf(char const *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '\0')
-				return (-1);
-			p = ft_find_char(&format[i + 1], "cspdiuxX%");
-			if (p != NULL)
-			{
-				/*if (p != &format[i + 1])
-					ft_process_flags(1);
-				i = i + (int)(p - &format[i]);*/
-				total_len += ft_check_format(format[i], args);
-			}
-			else
-				total_len += ft_putchar_pf(format[i]);
+			flags = ft_init_flags();
+			i = ft_process_flags(format, i + 1, &flags);
+			total_len += ft_check_format(format[i], flags, args);
 		}
 		else
-			total_len += ft_putchar_pf(format[i]);
+		{
+			ft_putchar_fd(format[i], 1);
+			total_len++;
+		}
 		i++;
 	}
 	va_end(args);

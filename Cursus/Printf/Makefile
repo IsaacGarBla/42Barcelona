@@ -10,7 +10,11 @@ LIBFT_DIR = ./libft
 
 # File sources to compile
 MY_SOURCES =	ft_printf.c \
-				ft_printf_aux.c
+				ft_putchar_pf.c \
+				ft_putnchar.c \
+				ft_putstr_pf.c \
+				ft_putnbr_pf.c \
+				ft_putptr_pf.c 
 
 # Add directory prefix to the sources and objects
 SRCS	= $(addprefix $(SRC_DIR)/, $(MY_SOURCES))
