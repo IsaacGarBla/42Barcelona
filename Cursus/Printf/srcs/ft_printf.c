@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/22 05:19:58 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/23 02:00:52 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ unsigned int	ft_check_format(char spc, t_flags flags, va_list args)
 		return (ft_putstr_pf(va_arg(args, char *), flags));
 	else if (spc == 'p')
 		return (ft_putptr_pf(va_arg(args, void *), flags));
-	else if (spc == 'd')
-		return (ft_putnbr_pf(va_arg(args, int), flags));
-	else if (spc == 'i')
-		return (ft_putnbr_pf(va_arg(args, int), flags));
+	else if (spc == 'd' || spc == 'i' )
+		return (ft_put_signed_nbr_pf(va_arg(args, int), flags));
 	else if (spc == 'u')
-		return (ft_putnbr_base_pf(va_arg(args, unsigned int),
+		return (ft_put_unsigned_nbr_base_pf(va_arg(args, unsigned int),
 				"0123456789", flags));
 	else if (spc == 'x')
-		return (ft_putnbr_base_pf(va_arg(args, unsigned int),
+		return (ft_put_unsigned_nbr_base_pf(va_arg(args, unsigned int),
 				"0123456789abcdef", flags));
 	else if (spc == 'X')
-		return (ft_putnbr_base_pf(va_arg(args, unsigned int),
+		return (ft_put_unsigned_nbr_base_pf(va_arg(args, unsigned int),
 				"0123456789ABCDEF", flags));
 	else if (spc == '%')
 		return (ft_putchar_pf('%', flags));
@@ -58,11 +56,11 @@ int	ft_process_flags(const char *format, unsigned int pos, t_flags *flags)
 	while (format[pos] == '-' || format[pos] == '0' || format[pos] == '+'
 		|| format[pos] == '#' || format[pos] == ' ' )
 	{
-		flags->minus = format[pos] == '-';
-		flags->zero = format[pos] == '0';
-		flags->hash = format[pos] == '#';
-		flags->space = format[pos] == ' ';
-		flags->plus = format[pos] == '+';
+		flags->minus = flags->minus || format[pos] == '-';
+		flags->zero = flags->zero || format[pos] == '0';
+		flags->hash = flags->hash || format[pos] == '#';
+		flags->space = flags->space || format[pos] == ' ';
+		flags->plus = flags->plus || format[pos] == '+';
 		pos++;
 	}
 	while (format[pos] >= '0' && format[pos] <= '9')
