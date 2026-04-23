@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 22:58:03 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 23:17:09 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned int	i;
+	t_list	*elem;
+	t_list	*dst;
 
-	i = 0;
-	while (i < n)
+	dst = NULL;
+	while (lst != NULL)
 	{
-		write(1, &c, 1);
-		i++;
+		elem = malloc(sizeof(t_list));
+		if (elem != NULL)
+		{
+			elem->content = (*f)(lst->content);
+			elem->next = NULL;
+			ft_lstadd_back(&dst, elem);
+		}
+		else
+		{
+			ft_lstclear(&dst, del);
+			return (NULL);
+		}
+		lst = lst->next;
 	}
-	return (i);
+	return (dst);
 }

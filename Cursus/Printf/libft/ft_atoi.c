@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/16 13:40:12 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:27:08 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+int	ft_atoi(const char *nptr)
 {
-	unsigned int	i;
+	int	i;
+	int	signo;
+	int	valor;
 
 	i = 0;
-	while (i < n)
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
+		i++;
+	signo = 1;
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		write(1, &c, 1);
+		if (nptr[i] == '-')
+			signo *= -1;
 		i++;
 	}
-	return (i);
+	valor = 0;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		valor = valor * 10 + nptr[i] - '0';
+		i++;
+	}
+	return (valor * signo);
 }

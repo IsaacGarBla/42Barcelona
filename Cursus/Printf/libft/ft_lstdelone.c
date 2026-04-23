@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 22:31:55 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 23:13:27 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		write(1, &c, 1);
-		i++;
-	}
-	return (i);
+	(*del)(lst->content);
+	free(lst);
 }

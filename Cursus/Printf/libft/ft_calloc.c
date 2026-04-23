@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/16 13:51:55 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:27:23 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned int	i;
+	size_t	total;
+	void	*p;
 
-	i = 0;
-	while (i < n)
-	{
-		write(1, &c, 1);
-		i++;
-	}
-	return (i);
+	if (nmemb != 0 && size > (size_t) -1 / nmemb)
+		return (NULL);
+	total = nmemb * size;
+	p = malloc(total);
+	if (p != NULL)
+		ft_memset(p, 0, total);
+	return (p);
 }

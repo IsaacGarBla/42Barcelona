@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 12:20:34 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 02:54:39 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/24 00:44:37 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int	main(void)
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 
-/*
-
 	// Un puntero (p)
 	ft_printf("## Pointer (p).\n\n");
 	le_ft_pf = ft_printf("FT -> [%p]\n", &s);
@@ -123,7 +121,6 @@ int	main(void)
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 
-*/
 	// Bonus, flags -0.
 	ft_printf("BONUS FLAGS.\n\n");
 
@@ -132,7 +129,9 @@ int	main(void)
 	le_ft_pf = printf("FT (5c) -> [%5c]\n", 'A');
 	le_pf = printf("PF (5c) -> [%5c]\n", 'A');
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
-	ft_printf("/-----------------------------------------/\n\n");
+	le_ft_pf = printf("FT (5c) -> [%5c]\n", NULL);
+	le_pf = printf("PF (5c) -> [%5c]\n", NULL);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);	ft_printf("/-----------------------------------------/\n\n");
 	
 	// String
 	ft_printf("## String.\n\n");
@@ -141,13 +140,16 @@ int	main(void)
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 	
-	ft_printf("## String.\n\n");
+	le_ft_pf = ft_printf("FT (10s) -> [%10s]\n", NULL);
+	le_pf = printf("PF (10s) -> [%10s]\n", NULL);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	ft_printf("/-----------------------------------------/\n\n");
+
 	le_ft_pf = ft_printf("FT (-30s) -> [%-30s]\n", s);
 	le_pf = printf("PF (-30s) -> [%-30s]\n", s);
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 
-	ft_printf("## String.\n\n");
 	le_ft_pf = ft_printf("FT (-10.5s) -> [%-10.5s]\n", s);
 	le_pf = printf("PF (-10.5s) -> [%-10.5s]\n", s);
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
@@ -157,6 +159,9 @@ int	main(void)
 	ft_printf("## Decimal.\n\n");
 	le_ft_pf = ft_printf("FT (-20d) -> [%-20d]\n", INT_MAX);
 	le_pf = printf("PF (-20d) -> [%-20d]\n",  INT_MAX);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT (-20d) -> [%-20d]\n", NULL);
+	le_pf = printf("PF (-20d) -> [%-20d]\n",  NULL);
 	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
 	le_ft_pf = ft_printf("FT (20d) -> [%20d]\n", INT_MIN);
 	le_pf = printf("PF (20d) -> [%20d]\n",  INT_MIN);
@@ -210,6 +215,9 @@ int	main(void)
 	le_ft_pf = ft_printf("FT (+030.20x) -> [%+030.20x]\n", 42);
 	le_pf = printf("PF (+030.20x) -> [%+030.20x]\n",  42);
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT (-+5.0x) -> [%-5.0d]\n", 0);
+	le_pf = printf("PF (-+5.0x) -> [%-5.0d]\n",  0);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 
 	// Un numero hexadecimal en mayusculas (x)
@@ -246,5 +254,13 @@ int	main(void)
 	le_pf = printf("PF -> [%p]\n", NULL);
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
+
+	// Errores
+	le_ft_pf = ft_printf("FT (#x) -> [%#x]\n", 0);
+	le_pf = printf("PF (#x) -> [%#x]\n", 0);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT (#x) -> [%#x]\n", -1);
+	le_pf = printf("PF (#x) -> [%#x]\n", -1);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
 }
 

@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/15 13:14:35 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:26:25 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	unsigned int	i;
+	size_t	l_src;
+	size_t	i;
 
+	l_src = ft_strlen(src);
+	if (siz == 0)
+		return (l_src);
 	i = 0;
-	while (i < n)
+	while (src[i] != '\0' && i < siz -1)
 	{
-		write(1, &c, 1);
+		dst[i] = src[i];
 		i++;
 	}
-	return (i);
+	dst[i] = '\0';
+	return (l_src);
 }

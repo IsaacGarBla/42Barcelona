@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/15 12:55:52 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:27:53 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned int	i;
+	unsigned char	*ptr_s;
+	unsigned char	*ptr_d;
+	size_t			i;
 
-	i = 0;
-	while (i < n)
+	ptr_s = (unsigned char *) src;
+	ptr_d = (unsigned char *) dest;
+	if (ptr_d < ptr_s)
 	{
-		write(1, &c, 1);
-		i++;
+		i = 0;
+		while (i < n)
+		{
+			ptr_d[i] = ptr_s[i];
+			i++;
+		}
 	}
-	return (i);
+	else if (ptr_d > ptr_s)
+	{
+		i = n;
+		while (i > 0)
+		{
+			ptr_d[i - 1] = ptr_s[i - 1];
+			i--;
+		}
+	}
+	return (ptr_d);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 21:50:58 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 22:06:20 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+int	ft_lstsize(t_list *lst)
 {
-	unsigned int	i;
+	int		i;
+	t_list	*l;
 
 	i = 0;
-	while (i < n)
+	l = lst;
+	while (l != NULL)
 	{
-		write(1, &c, 1);
 		i++;
+		l = l->next;
 	}
 	return (i);
 }

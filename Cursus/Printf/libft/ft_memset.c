@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/15 12:39:59 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:27:56 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned int	i;
+	unsigned char	*ptr;
+	size_t			i;
 
+	ptr = (unsigned char *) s;
 	i = 0;
 	while (i < n)
-	{
-		write(1, &c, 1);
-		i++;
-	}
-	return (i);
+		ptr[i++] = (unsigned char) c;
+	return (ptr);
 }

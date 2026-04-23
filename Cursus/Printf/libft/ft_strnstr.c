@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/16 13:09:17 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:28:30 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	unsigned int	i;
+	size_t	i;
+	size_t	l_little;
 
+	if (*little == '\0')
+		return ((char *) big);
 	i = 0;
-	while (i < n)
+	l_little = ft_strlen(little);
+	while (big[i] != 0 && i < len && len - i >= l_little)
 	{
-		write(1, &c, 1);
-		i++;
+		if (ft_strncmp(&big[i], little, l_little) == 0)
+			return ((char *) &big[i]);
+		else
+			i++;
 	}
-	return (i);
+	return (NULL);
 }

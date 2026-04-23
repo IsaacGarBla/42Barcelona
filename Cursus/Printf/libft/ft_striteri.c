@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/17 10:53:52 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 10:53:55 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	int		i;
 
 	i = 0;
-	while (i < n)
+	while (s[i] != '\0')
 	{
-		write(1, &c, 1);
+		(*f)(i, &s[i]);
 		i++;
 	}
-	return (i);
 }

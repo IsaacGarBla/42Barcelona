@@ -18,23 +18,10 @@ MY_SOURCES =	ft_printf.c \
 				ft_printf_x.c \
 				ft_printnbr_f.c \
 				ft_putnchar.c
-
-MY_SOURCES_BONUS = 	ft_printf.c \
-					ft_printf_c.c \
-					ft_printf_s.c \
-					ft_printf_di.c \
-					ft_printf_p.c \
-					ft_printf_u.c \
-					ft_printf_x.c \
-					ft_printnbr_f.c \
-					ft_putnchar.c
-
+				
 # Add directory prefix to the sources and objects
 SRCS	= $(addprefix $(SRC_DIR)/, $(MY_SOURCES))
 OBJS	= $(addprefix $(OBJ_DIR)/, $(MY_SOURCES:.c=.o))
-
-SRCS_BONUS	= $(addprefix $(SRC_DIR)/, $(MY_SOURCES_BONUS))
-OBJS_BONUS	= $(addprefix $(OBJ_DIR)/, $(MY_SOURCES_BONUS:.c=.o))
 
 #Compiler and flags
 CC		= cc
@@ -47,13 +34,9 @@ $(NAME): $(LIBFT) $(OBJS)
 		cp $(LIBFT) $(NAME)
 		ar rcs $(NAME) $(OBJS)
 
-bonus:	$(LIBFT) $(OBJS_BONUS)
-		cp $(LIBFT) $(NAME)
-		ar rcs $(NAME) $(OBJS_BONUS)
-
 $(LIBFT):
 		make -C $(LIBFT_DIR)
-	
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 		@mkdir -p $(OBJ_DIR)
 		$(CC) $(CFLAGS) -fPIC -c $< -o $@

@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/16 12:53:48 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 21:35:52 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned int	i;
+	size_t		i;
+	const char	*src1;
+	const char	*src2;
 
 	i = 0;
-	while (i < n)
-	{
-		write(1, &c, 1);
+	src1 = (const char *) s1;
+	src2 = (const char *) s2;
+	while (i < n && src1[i] == src2[i])
 		i++;
-	}
-	return (i);
+	if (i == n)
+		return (0);
+	return ((unsigned char) src1[i] - (unsigned char) src2[i]);
 }

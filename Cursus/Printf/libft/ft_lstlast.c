@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 21:58:56 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 22:30:02 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+t_list	*ft_lstlast(t_list *lst)
 {
-	unsigned int	i;
+	t_list	*l;
 
-	i = 0;
-	while (i < n)
-	{
-		write(1, &c, 1);
-		i++;
-	}
-	return (i);
+	l = lst;
+	while (l != NULL && l->next != NULL)
+		l = l->next;
+	return (l);
 }

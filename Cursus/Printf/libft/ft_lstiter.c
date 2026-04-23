@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 22:54:54 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 22:57:47 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	unsigned int	i;
+	t_list	*elem;
 
-	i = 0;
-	while (i < n)
+	elem = lst;
+	while (elem != NULL)
 	{
-		write(1, &c, 1);
-		i++;
+		(*f)(elem->content);
+		elem = elem->next;
 	}
-	return (i);
 }

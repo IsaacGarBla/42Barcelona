@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/19 21:44:30 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 23:36:30 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	unsigned int	i;
+	t_list	*elem;
 
-	i = 0;
-	while (i < n)
+	if ((*lst) == NULL)
 	{
-		write(1, &c, 1);
-		i++;
+		*lst = new;
+		(*lst)->next = NULL;
 	}
-	return (i);
+	else
+	{
+		elem = (*lst);
+		while (elem->next != NULL)
+			elem = elem->next;
+		elem->next = new;
+	}
 }

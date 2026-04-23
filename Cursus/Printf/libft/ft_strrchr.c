@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/16 12:15:14 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:28:34 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+char	*ft_strrchr(const char *s, int c)
 {
-	unsigned int	i;
+	char	*last;
 
-	i = 0;
-	while (i < n)
+	last = NULL;
+	while (*s != '\0')
 	{
-		write(1, &c, 1);
-		i++;
+		if (*s == (char) c)
+			last = (char *) s;
+		s++;
 	}
-	return (i);
+	if ((char) c == '\0')
+		return ((char *) s);
+	return (last);
 }

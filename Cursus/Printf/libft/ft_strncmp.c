@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/16 12:23:18 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/17 01:28:27 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include <string.h>
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
-	while (i < n)
-	{
-		write(1, &c, 1);
+	while (s1[i] != '\0' && s2[i] != '\0'
+		&& (unsigned char) s1[i] == (unsigned char) s2[i] && i < n)
 		i++;
-	}
-	return (i);
+	if (i == n)
+		return (0);
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }

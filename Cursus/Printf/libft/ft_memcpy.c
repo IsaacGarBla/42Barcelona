@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 21:39:27 by igarcia-         ###   ########.fr       */
+/*   Created: 2026/04/15 14:42:46 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/04/19 23:28:43 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putnchar.h"
+#include "libft.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned int	i;
+	unsigned char	*d;
+	unsigned char	*s;
+	size_t			i;
 
+	if (src == NULL && dest == NULL)
+		return (NULL);
+	d = (unsigned char *) dest;
+	s = (unsigned char *) src;
 	i = 0;
 	while (i < n)
 	{
-		write(1, &c, 1);
+		d[i] = s[i];
 		i++;
 	}
-	return (i);
+	return (dest);
 }
