@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	read_buffer(t_file *f)
 {
@@ -51,24 +51,24 @@ int	get_line(t_file *f, t_line *l)
 
 char	*get_next_line(int fd)
 {
-	static t_file	file = {{0}, 0, 0, 0, 0};
+	static t_file	file[MAX_OPEN_FD];
 	char			*dst;
 	t_line			line;
 
-	file.fd = fd;
-	if (BUFFER_SIZE <= 0 || file.eof || file.fd < 0)
+	file[fd].fd = fd;
+	if (BUFFER_SIZE <= 0 || file[fd].eof || file[fd].fd < 0)
 		return (NULL);
 	dst = NULL;
 	if (create_line(&line))
 	{
-		if (get_line(&file, &line))
+		if (get_line(&file[fd], &line))
 			dst = ft_duplicate(&line);
 		destroy_line(&line);
 	}
 	return (dst);
 }
 
-#include <fcntl.h>
+/*#include <fcntl.h>
 #include <stdio.h>
 
 int	main(int narg, char **argv)
@@ -82,7 +82,6 @@ int	main(int narg, char **argv)
 	while (line != NULL)
 	{
 		printf("%s", line);
-		free (line);
 		line = get_next_line(fd);
 	}
-}
+}*/

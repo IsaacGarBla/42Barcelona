@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_UTILS_H
+# define GET_NEXT_LINE_UTILS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE		256
@@ -44,6 +44,5 @@ int		add_to_line(t_line *l, char c);
 int		create_line(t_line *l);
 void	destroy_line(t_line *l);
 char	*ft_duplicate(t_line *l);
-char	*get_next_line(int fd);
 
 #endif

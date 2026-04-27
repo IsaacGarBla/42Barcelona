@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	read_buffer(t_file *f)
 {
@@ -51,17 +51,17 @@ int	get_line(t_file *f, t_line *l)
 
 char	*get_next_line(int fd)
 {
-	static t_file	file = {{0}, 0, 0, 0, 0};
+	static t_file	file[MAX_OPEN_FD];
 	char			*dst;
 	t_line			line;
 
-	file.fd = fd;
-	if (BUFFER_SIZE <= 0 || file.eof || file.fd < 0)
+	file[fd].fd = fd;
+	if (BUFFER_SIZE <= 0 || file[fd].eof || file[fd].fd < 0)
 		return (NULL);
 	dst = NULL;
 	if (create_line(&line))
 	{
-		if (get_line(&file, &line))
+		if (get_line(&file[fd], &line))
 			dst = ft_duplicate(&line);
 		destroy_line(&line);
 	}
@@ -73,16 +73,24 @@ char	*get_next_line(int fd)
 
 int	main(int narg, char **argv)
 {
-	int		fd;
+	int		fd[2];
 	char	*line;
 
 	narg += 0;
-	fd = open(argv[1], O_RDONLY);
-	line = get_next_line(fd);
+	fd[0] = open(argv[1], O_RDONLY);
+	fd[1] = open(argv[2], O_RDONLY);
+	line = get_next_line(fd[0]);
 	while (line != NULL)
 	{
 		printf("%s", line);
-		free (line);
-		line = get_next_line(fd);
+		free(line);
+		line = get_next_line(fd[0]);
+	}
+	line = get_next_line(fd[1]);
+	while (line != NULL)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd[1]);
 	}
 }
