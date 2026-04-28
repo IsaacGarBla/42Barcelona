@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/24 15:03:40 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/29 00:35:51 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_next_line(int fd)
 	return (dst);
 }
 
-#include <fcntl.h>
+/*#include <fcntl.h>
 #include <stdio.h>
 
 int	main(int narg, char **argv)
@@ -94,3 +94,4 @@ int	main(int narg, char **argv)
 		line = get_next_line(fd[1]);
 	}
 }
+*/

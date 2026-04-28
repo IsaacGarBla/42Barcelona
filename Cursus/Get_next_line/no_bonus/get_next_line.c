@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/24 15:03:40 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/29 00:31:58 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	get_line(t_file *f, t_line *l)
 
 char	*get_next_line(int fd)
 {
-	static t_file	file = {{0}, 0, 0, 0, 0};
+	static t_file	file;
 	char			*dst;
 	t_line			line;
 
@@ -67,7 +67,7 @@ char	*get_next_line(int fd)
 	}
 	return (dst);
 }
-
+/*
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -75,14 +75,19 @@ int	main(int narg, char **argv)
 {
 	int		fd;
 	char	*line;
+	int		n_lines;
 
 	narg += 0;
+	n_lines = 0;
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("%s", line);
+		n_lines++;
+		printf("Linea %d: <%s>", n_lines, line);
 		free (line);
 		line = get_next_line(fd);
 	}
+	printf("Número de líneas impresas: %d\n", n_lines);
 }
+*/

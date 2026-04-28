@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/23 23:21:26 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/29 00:07:36 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	ft_printf(char const *format, ...)
 		}
 		else
 		{
-			ft_putchar_fd(format[i], 1);
+			write(1, &format[i], 1);
 			total_len++;
 		}
 		i++;

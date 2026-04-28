@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/24 15:03:40 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/29 00:31:58 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 int	read_buffer(t_file *f)
 {
@@ -51,37 +51,43 @@ int	get_line(t_file *f, t_line *l)
 
 char	*get_next_line(int fd)
 {
-	static t_file	file[MAX_OPEN_FD];
+	static t_file	file;
 	char			*dst;
 	t_line			line;
 
-	file[fd].fd = fd;
-	if (BUFFER_SIZE <= 0 || file[fd].eof || file[fd].fd < 0)
+	file.fd = fd;
+	if (BUFFER_SIZE <= 0 || file.eof || file.fd < 0)
 		return (NULL);
 	dst = NULL;
 	if (create_line(&line))
 	{
-		if (get_line(&file[fd], &line))
+		if (get_line(&file, &line))
 			dst = ft_duplicate(&line);
 		destroy_line(&line);
 	}
 	return (dst);
 }
-
-/*#include <fcntl.h>
+/*
+#include <fcntl.h>
 #include <stdio.h>
 
 int	main(int narg, char **argv)
 {
 	int		fd;
 	char	*line;
+	int		n_lines;
 
 	narg += 0;
+	n_lines = 0;
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("%s", line);
+		n_lines++;
+		printf("Linea %d: <%s>", n_lines, line);
+		free (line);
 		line = get_next_line(fd);
 	}
-}*/
+	printf("Número de líneas impresas: %d\n", n_lines);
+}
+*/

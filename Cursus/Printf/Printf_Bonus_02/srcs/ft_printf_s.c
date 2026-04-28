@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 01:32:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/24 00:06:56 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/04/29 00:07:48 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int	ft_printf_s(char *s, t_flags flags)
 	{
 		i = 0;
 		while (i < len)
-			ft_putchar_fd(s[i++], 1);
+			write(1, &s[i++], 1);
 	}
 	else if (!flags.dot || flags.precision >= 6)
 		ft_putstr_fd("(null)", 1);
