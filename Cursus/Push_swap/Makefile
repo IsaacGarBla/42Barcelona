@@ -4,6 +4,7 @@ NAME = PushSwap
 SRC_DIR = ./srcs
 INC_DIR = ./includes
 OBJ_DIR = ./objs
+LIB_DIR = ./lib
 
 # File sources to compile
 MY_SOURCES =	ft_stack_1.c \

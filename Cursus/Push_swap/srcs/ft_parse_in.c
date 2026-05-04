@@ -24,8 +24,14 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
-int	ps_parse_arg(t_push_swap *ps, int arg, char **argv)
+int	ps_parse_arg(t_push_swap *ps, int args, char **argv)
 {
+	int	i;
+
+	if (args < 2)
+		return (0);
+	i = 1;
+	
 	if (IsInteger() && ps->stack == NULL)
 	{
 		return (1);
@@ -45,21 +51,3 @@ int	ps_parse_arg(t_push_swap *ps, int arg, char **argv)
 	}
 }
 
-int	main(int narg, char **argv)
-{
-	int			i;
-	t_push_swap	ps;
-
-	if (narg < 2)
-		return (0);
-	i = 1;
-	while (i < narg)
-	{
-		i = ps_parse_arg(ps, i, argv);
-		if (i == 0)
-		{
-			write(1, "Error\n", 6);
-			return (0);
-		}
-	}
-}
