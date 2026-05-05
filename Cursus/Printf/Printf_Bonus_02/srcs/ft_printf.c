@@ -6,10 +6,18 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/29 00:07:36 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:40:41 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdarg.h>
+#include "ft_flags.h"
+#include "ft_printf_c.h"
+#include "ft_printf_s.h"
+#include "ft_printf_di.h"
+#include "ft_printf_u.h"
+#include "ft_printf_p.h"
+#include "ft_printf_x.h"
 #include "ft_printf.h"
 
 unsigned int	ft_check_format(char spc, t_flags flags, va_list args)
