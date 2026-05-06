@@ -18,7 +18,7 @@ OBJS	= $(addprefix $(OBJ_DIR)/, $(MY_SOURCES:.c=.o))
 
 #Compiler and flags
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS	= -Wall -Werror -Wextra -g -I$(INC_DIR) -I$(LIBFT_DIR)
 
 all: $(NAME)
 

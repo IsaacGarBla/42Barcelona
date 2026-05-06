@@ -6,38 +6,50 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:24:02 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/04 19:40:52 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/06 18:17:12 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_input.h"
 
-t_status parse_numbers(t_data *ps, char *str)
+static bool	add_number(t_stack *stack, int value)
 {
-	char 			**numbers;
-	int 			i = 0;
-	int 			value;
-	t_status		status;
+	t_stack_node	*node;
+
+	node = stack_node_create(value);
+	if (node == NULL)
+		return (false);
+	else
+		stack_push(stack, node);
+	return (true);
+}
+
+static void	parse_numbers(t_data *ps, char *str)
+{
+	char		**numbers;
+	int			i;
+	int			value;
 
 	i = 0;
-	status = OK;
-	numbers = ft_split_full(str, " ");
-	while (numbers[i] && status == OK)
+	numbers = ft_split_full(str, " \t\n\r\f\v");
+	while (numbers[i])
 	{
 		if (!is_valid_int(numbers[i], &value))
-			status = UNRECOGNIZED_ARGUMENT;
+			set_error(&ps->error, ERROR_UNRECOGNIZED_ARGUMENT);
 		else if (stack_locate(ps->stack_a, value) != -1)
-			status = DUPLICATE_NUMBER;
-		else if (!stack_add_value_first(ps->stack_a, value))
-			status = MEMORY_ERROR;
+			set_error(&ps->error, ERROR_DUPLICATE_NUMBER);
+		else if (!add_number(ps->stack_a, value))
+			set_error(&ps->error, ERROR_MEMORY);
+		if (has_error(&ps->error))
+			break ;
 		i++;
 	}
 	free_split(numbers);
-	return (status);
 }
-t_status parse_strategy(t_data *ps, char *str)
+
+static bool	parse_strategy(t_data *ps, char *str)
 {
-	t_strategy strategy;
+	t_strategy	strategy;
 
 	strategy = STG_NONE;
 	if (ft_strcmp(str, STR_STG_SIMPLE) == 0)
@@ -51,45 +63,51 @@ t_status parse_strategy(t_data *ps, char *str)
 	if (strategy != STG_NONE)
 	{
 		if (ps->strategy != STG_NONE)
-			return (DUPLICATE_STRATEGY);
-		ps->strategy = strategy;
-		return (OK);
+			set_error(&ps->error, ERROR_DUPLICATE_STRATEGY);
+		else
+			ps->strategy = strategy;
 	}
-	return (NO_STRATEGY);
+	return (strategy != STG_NONE);
 }
-t_status parse_benchmark(t_data *ps, char *str)
-{
 
+static bool	parse_benchmark(t_data *ps, char *str)
+{
 	if (ft_strcmp(str, STR_BENCHMARK) == 0)
 	{
 		if (ps->bench == true)
-			return (DUBLICATE_BENCHMARK);
+			set_error(&ps->error, ERROR_DUPLICATE_BENCHMARK);
 		ps->bench = true;
-		return (OK);
+		return (true);
 	}
-	return (NO_BENCHMARK);
+	return (false);
 }
 
-int	parse_input(t_data *ps, int argc, char **argv)
+void	parse_input(t_data *ps, int argc, char **argv)
 {
-	int			i;
-	t_status	status;
+	bool	arg_parsed;
+	int		i;
 
 	i = 1;
-	status = OK;
-	while (i < argc && status == OK)
+	while (i < argc)
 	{
-		status = parse_strategy(ps, argv[i]);
-		if (status == NO_STRATEGY)
+		arg_parsed = parse_strategy(ps, argv[i]);
+		if (has_error(&ps->error))
+			return ;
+		if (arg_parsed == false)
 		{
-			status = parse_benchmark(ps, argv[i]);
-			if (status == NO_BENCHMARK)
-				status = parse_numbers(ps, argv[i]);
+			arg_parsed = parse_benchmark(ps, argv[i]);
+			if (has_error(&ps->error))
+				return;
+			if (arg_parsed == false)
+			{
+				parse_numbers(ps, argv[i]);
+				if (has_error(&ps->error))
+					return ;
+			}
 		}
-		if (status != OK)
-			return (status);
 		i++;
 	}
 	ps->disorder = stack_compute_disorder(ps->stack_a);
-	return (status && ps->stack_a->len > 0) + STACK_EMPTY * (ps->stack_a->len == 0);
+	if (ps->stack_a->len == 0)
+		set_error(&ps->error, ERROR_STACK_EMPTY);
 }

@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 11:50:19 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/04 18:36:41 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/06 01:34:54 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,13 @@ void	stack_swap(t_stack *stack)
 	{
 		tmp = stack->first;
 		stack->first = tmp->next;
+		stack->first->prev = NULL;
 		tmp->next = stack->first->next;
 		tmp->prev = stack->first;
 		stack->first->next = tmp;
-		stack->first->prev = NULL;
-		if (tmp->next != NULL)
-			tmp->next->prev = tmp;
-		else
-			stack->last = tmp;
 	}
-}
-
-void	stack_push(t_stack *stack_src, t_stack *stack_dst)
-{
-	t_stack_node	*tmp;
-
-	if (stack_src->len == 0)
-		return ;
-	tmp = stack_src->first;
-	if (stack_src->len > 1)
-	{
-		stack_src->first = stack_src->first->next;
-		stack_src->first->prev = NULL;
-	}
-	else
-	{
-		stack_src->first = NULL;
-		stack_src->last = NULL;
-	}
-	stack_src->len--;
-	stack_add_first(stack_dst, tmp);
+	if (stack->len == 2)
+		stack->last = stack->first->next;
 }
 
 void	stack_rotate_up(t_stack *stack)
@@ -62,9 +39,9 @@ void	stack_rotate_up(t_stack *stack)
 	stack->first = stack->first->next;
 	stack->first->prev = NULL;
 	stack->last->next = tmp;
-	stack->last->next->next = NULL;
-	stack->last->next->prev = stack->last;
+	tmp->prev = stack->last;
 	stack->last = tmp;
+	stack->last->next = NULL;
 }
 
 void	stack_rotate_down(t_stack *stack)

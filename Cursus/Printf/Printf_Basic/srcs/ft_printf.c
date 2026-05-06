@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/21 02:01:14 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:26:04 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	ft_printf(char const *format, ...)
 	va_list			args;
 	int				i;
 	unsigned int	total_len;
-	char			*p;
 
 	va_start(args, format);
 	i = 0;
@@ -73,14 +72,8 @@ int	ft_printf(char const *format, ...)
 		{
 			if (format[i + 1] == '\0')
 				return (-1);
-			p = ft_find_char(&format[i + 1], "cspdiuxX%");
-			if (p != NULL)
-			{
-				/*if (p != &format[i + 1])
-					ft_process_flags(1);
-				i = i + (int)(p - &format[i]);*/
+			if (ft_find_char(&format[i + 1], "cspdiuxX%") != NULL)
 				total_len += ft_check_format(format[i], args);
-			}
 			else
 				total_len += ft_putchar_pf(format[i]);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: didaguil <didaguil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 11:50:19 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/04 15:15:13 by didaguil         ###   ########.fr       */
+/*   Updated: 2026/05/06 01:34:18 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,34 @@ void	stack_destroy(t_stack *stack)
 	free(stack);
 }
 
-void	stack_add_first(t_stack *stack, t_stack_node *node)
+void	stack_push(t_stack *stack, t_stack_node *node)
 {
+	if (node == NULL)
+		return ;
 	node->next = stack->first;
 	node->prev = NULL;
+	if (stack->first != NULL)
+		stack->first->prev = node;
 	stack->first = node;
-	stack->len++;
-	if (node->next != NULL)
-		node->next->prev = node;
-	else
+	if (stack->last == NULL)
 		stack->last = node;
+	stack->len++;
 	return ;
 }
 
-void	stack_add_last(t_stack *stack, t_stack_node *node)
+t_stack_node	*stack_pop(t_stack *stack)
 {
+	t_stack_node	*node;
+
+	if (stack->len == 0)
+		return (NULL);
+	node = stack->first;
+	stack->first = stack->first->next;
+	if (stack->first != NULL)
+		stack->first->prev = NULL;
 	node->next = NULL;
-	node->prev = stack->last;
-	stack->last = node;
-	stack->len++;
-	if (node->prev != NULL)
-		node->prev->next = node;
-	else
-		stack->first = node;
-	return ;
+	stack->len--;
+	if (stack->len == 0)
+		stack->last = NULL;
+	return (node);
 }

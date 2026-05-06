@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: didaguil <didaguil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 10:24:02 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/04 19:34:23 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:37:08 by didaguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+#include "error.h"
 #include "init_data.h"
 #include "parse_input.h"
 #include "dispatch_strategy.h"
@@ -19,24 +20,18 @@
 int	main(int argc, char **argv)
 {
 	t_data	ps;
-	t_status status;
 
 	if (argc < 2)
 		return (OK);
-	status = init_data(&ps);
-	if (status == OK)
-	{
-		status = parse_input(&ps, argc, argv);
-		if (status == OK)
-			status = dispatch_strategy(&ps);
-	}
-	if (status != OK)
-	{
-		free_data(&ps);
-		error_exit(status);
-	}
-	ft_printf("Imprimir pilas.\n");
-	print_stacks(&ps);
+	init_data(&ps);
+	if (has_error(&ps.error))
+		error_exit(&ps.error);
+	parse_input(&ps, argc, argv);
+	if (has_error(&ps.error))
+		error_exit(&ps.error);
+	print_stats(&ps);
+	dispatch_strategy(&ps);
+	print_stats(&ps);
 	free_data(&ps);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: didaguil <didaguil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 14:52:49 by didaguil          #+#    #+#             */
-/*   Updated: 2026/05/04 14:53:03 by didaguil         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:37:25 by didaguil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "data.h"
 
-t_status	init_data(t_data *ps);
+void	init_data(t_data *ps);
 
 #endif /* INIT_DATA_H */
