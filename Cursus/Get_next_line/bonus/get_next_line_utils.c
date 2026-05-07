@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:25 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/24 15:03:28 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/07 01:12:03 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char	*ft_duplicate(t_line *l)
 			dst[i] = l->data[i];
 			i++;
 		}
+		dst[i] = '\0';
 	}
 	return (dst);
 }

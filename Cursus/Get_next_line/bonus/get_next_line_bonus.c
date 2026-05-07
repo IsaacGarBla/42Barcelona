@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/29 00:35:51 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/07 01:51:45 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	read_buffer(t_file *f)
 	return (bytes_read != -1);
 }
 
-int	get_line(t_file *f, t_line *l)
+int	get_one_line(t_file *f, t_line *l)
 {
 	int	eol;
 	int	read_char;
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 	dst = NULL;
 	if (create_line(&line))
 	{
-		if (get_line(&file[fd], &line))
+		if (get_one_line(&file[fd], &line))
 			dst = ft_duplicate(&line);
 		destroy_line(&line);
 	}
@@ -75,23 +75,29 @@ int	main(int narg, char **argv)
 {
 	int		fd[2];
 	char	*line;
+	int		n_lines;
 
 	narg += 0;
+	n_lines = 0;
 	fd[0] = open(argv[1], O_RDONLY);
 	fd[1] = open(argv[2], O_RDONLY);
 	line = get_next_line(fd[0]);
 	while (line != NULL)
 	{
+		n_lines++;
 		printf("%s", line);
 		free(line);
 		line = get_next_line(fd[0]);
 	}
+	n_lines = 0;
 	line = get_next_line(fd[1]);
 	while (line != NULL)
 	{
+		n_lines++;
 		printf("%s", line);
 		free(line);
 		line = get_next_line(fd[1]);
 	}
-}
-*/
+	close(fd[0]);
+	close(fd[1]);
+}*/

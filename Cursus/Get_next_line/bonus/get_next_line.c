@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/29 00:31:58 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/07 01:51:58 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	read_buffer(t_file *f)
 	return (bytes_read != -1);
 }
 
-int	get_line(t_file *f, t_line *l)
+int	get_one_line(t_file *f, t_line *l)
 {
 	int	eol;
 	int	read_char;
@@ -61,14 +61,14 @@ char	*get_next_line(int fd)
 	dst = NULL;
 	if (create_line(&line))
 	{
-		if (get_line(&file, &line))
+		if (get_one_line(&file, &line))
 			dst = ft_duplicate(&line);
 		destroy_line(&line);
 	}
 	return (dst);
 }
-/*
-#include <fcntl.h>
+
+/*#include <fcntl.h>
 #include <stdio.h>
 
 int	main(int narg, char **argv)
@@ -84,10 +84,9 @@ int	main(int narg, char **argv)
 	while (line != NULL)
 	{
 		n_lines++;
-		printf("Linea %d: <%s>", n_lines, line);
+		printf("%s", line);
 		free (line);
 		line = get_next_line(fd);
 	}
-	printf("Número de líneas impresas: %d\n", n_lines);
-}
-*/
+	close(fd);
+}*/

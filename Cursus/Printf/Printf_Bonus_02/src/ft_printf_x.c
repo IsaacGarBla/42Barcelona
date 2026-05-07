@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 01:34:42 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 17:35:29 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/07 00:17:08 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@ int	ft_printf_x(unsigned long long n, int upper)
 		ft_put_unsigned_nbr_base(n, "0123456789ABCDEF", ln);
 	else
 		ft_put_unsigned_nbr_base(n, "0123456789abcdef", ln);
-
 	return (ln);
 }
-1
