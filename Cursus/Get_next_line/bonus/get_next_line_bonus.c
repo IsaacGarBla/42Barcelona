@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:03:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/07 01:51:45 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/08 08:53:36 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*get_next_line(int fd)
 	char			*dst;
 	t_line			line;
 
+	if (fd >= MAX_OPEN_FD)
+		return (NULL);
 	file[fd].fd = fd;
 	if (BUFFER_SIZE <= 0 || file[fd].eof || file[fd].fd < 0)
 		return (NULL);
