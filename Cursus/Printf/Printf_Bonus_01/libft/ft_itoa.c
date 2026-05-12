@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igarcia- <igarcia-@student.42barcelon      +#+  +:+       +#+        */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 10:08:06 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 10:08:08 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:42:30 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Count the digits in an integer.
+ *
+ * This function counts the number of digits in the integer n, 
+ * including the sign if n is negative.
+ *
+ * @param n The integer to count digits for.
+ * @return The number of digits in the integer.
+ */
 static int	ft_ndigits(int n)
 {
 	int	digits;
@@ -28,6 +37,14 @@ static int	ft_ndigits(int n)
 	return (digits);
 }
 
+/**
+ * @brief Converts an integer to a string.
+ *
+ * This function converts the integer n to a string representation.
+ *
+ * @param n The integer to convert.
+ * @return A pointer to the resulting string, or NULL if memory allocation fails.
+ */
 char	*ft_itoa(int n)
 {
 	char	*dst;

@@ -6,12 +6,20 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:13:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 01:28:06 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:40:07 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Duplicates a string.
+ *
+ * This function creates a copy of the string src.
+ *
+ * @param src The string to duplicate.
+ * @return A pointer to the duplicated string, or NULL if allocation fails.
+ */
 char	*ft_strdup(const char *src)
 {
 	char	*dst;

@@ -51,44 +51,79 @@ No todos los flag afectan a todos los tipos de datos. La siguiente matriz muestr
 ## Instrucciones
 
 ### Automatización con Makefile
-El proyecto incluye un `Makefile` que gestiona la compilación de la librería y su dependencia con `libft`. A continuación se detalla su contenido principal:
+El proyecto incluye un `Makefile` que gestiona la compilación de la librería y su dependencia con `libft`. A continuación se detalla su contenido principal, incluyendo las reglas `name` y `bonus`.
 
 ```makefile
 NAME = libftprintf.a
 
 # Directories
-SRC_DIR = ./srcs
-INC_DIR = ./includes
+SRC_DIR = ./src
+INC_DIR = ./include
+SRC_DIR_BONUS = ./src_bonus
+INC_DIR_BONUS = ./include_bonus
 OBJ_DIR = ./objs
+OBJ_DIR_BONUS = ./objs_bonus
+LIB_DIR = ./lib
+LIBFT   = ./libft/libft.a 
 LIBFT_DIR = ./libft
-LIBFT   = $(LIBFT_DIR)/libft.a 
 
-# File sources
-MY_SOURCES = ft_printf.c ft_printf_c.c ft_printf_s.c ft_printf_di.c \
-             ft_printf_p.c ft_printf_u.c ft_printf_x.c ft_printnbr_f.c \
-             ft_putnchar.c
-				
+# File sources to compile
+MY_SOURCES =	ft_printf.c \
+				ft_printf_c.c \
+				ft_printf_s.c \
+				ft_printf_di.c \
+				ft_printf_p.c \
+				ft_printf_u.c \
+				ft_printf_x.c \
+				ft_printnbr_f.c \
+				ft_putnchar.c
+
+MY_SOURCES_BONUS = 	ft_printf_bonus.c \
+					ft_printf_c_bonus.c \
+					ft_printf_s_bonus.c \
+					ft_printf_di_bonus.c \
+					ft_printf_p_bonus.c \
+					ft_printf_u_bonus.c \
+					ft_printf_x_bonus.c \
+					ft_printnbr_f_bonus.c \
+					ft_putnchar_bonus.c
+
+# Add directory prefix to the sources and objects
 SRCS	= $(addprefix $(SRC_DIR)/, $(MY_SOURCES))
 OBJS	= $(addprefix $(OBJ_DIR)/, $(MY_SOURCES:.c=.o))
 
+SRCS_BONUS	= $(addprefix $(SRC_DIR_BONUS)/, $(MY_SOURCES_BONUS))
+OBJS_BONUS	= $(addprefix $(OBJ_DIR_BONUS)/, $(MY_SOURCES_BONUS:.c=.o))
+
+#Compiler and flags
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS	= -Wall -Werror -Wextra  -gdwarf-4 -I$(LIBFT_DIR)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+#Create the library
+$(NAME): $(LIBFT) $(OBJS) Makefile
 		cp $(LIBFT) $(NAME)
 		ar rcs $(NAME) $(OBJS)
 
+bonus:	$(LIBFT) $(OBJS_BONUS)
+		cp $(LIBFT) $(NAME)
+		ar rcs $(NAME) $(OBJS_BONUS)
+
 $(LIBFT):
 		make -C $(LIBFT_DIR)
-
+	
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 		@mkdir -p $(OBJ_DIR)
-		$(CC) $(CFLAGS) -fPIC -c $< -o $@
+		$(CC) $(CFLAGS) -I$(INC_DIR) -fPIC -c $< -o $@
+
+$(OBJ_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c
+		@mkdir -p $(OBJ_DIR_BONUS)
+		$(CC) $(CFLAGS) -I$(INC_DIR_BONUS) -fPIC -c $< -o $@
 
 clean:
 		rm -rf $(OBJ_DIR)
+		rm -rf $(OBJ_DIR_BONUS)
 		@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
@@ -109,18 +144,11 @@ Para generar la biblioteca `libftprintf.a` (que incluye la biblioteca `libft`) b
    ```
 2. Para usarla en tu código:
    ```c
-   #include "includes/ft_printf.h"
+   #include "ft_printf.h"
    ```
 3. Para compilar tu programa principal vinculando la librería:
    ```bash
-   cc main.c libftprintf.a -o mi_programa
-   ```
-4. Incluye el encabezado en tu archivo fuente y enlaza la librería al compilar:
-   ```c
-   #include "ft_printf.h"
-   ```
-   ```bash
-   cc main.c libftprintf.a -o mi_programa
+   cc -I$(libdir) main.c libftprintf.a -o mi_programa
    ```
 ## Elección de Algoritmo y Estructura de Datos
 Se ha implementado un **parsing secuencial** de la cadena. Al detectar un `%`, un motor de búsqueda identifica flags, ancho de campo y el especificador final.

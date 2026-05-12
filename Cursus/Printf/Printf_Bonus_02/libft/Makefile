@@ -40,15 +40,16 @@ MY_SOURCES = 	ft_bzero.c \
 				ft_putstr_fd.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
-				ft_lstadd_front.c \
-				ft_lstnew.c \
-				ft_lstsize.c \
-				ft_lstlast.c \
-				ft_lstadd_back.c \
-				ft_lstdelone.c \
-				ft_lstclear.c \
-				ft_lstiter.c \
-				ft_lstmap.c
+				ft_lstadd_front_bonus.c \
+				ft_lstnew_bonus.c \
+				ft_lstsize_bonus.c \
+				ft_lstlast_bonus.c \
+				ft_lstadd_back_bonus.c \
+				ft_lstdelone_bonus.c \
+				ft_lstclear_bonus.c \
+				ft_lstiter_bonus.c \
+				ft_lstmap_bonus.c
+					
 
 # Add directory prefix to the sources and objects
 SRCS	= $(addprefix $(SRC_DIR)/, $(MY_SOURCES))
@@ -74,6 +75,6 @@ clean:
 fclean: clean
 		rm -f $(NAME)
 
-re:	fclean all
+re:	clean all
 
 .PHONY: all clean fclean re

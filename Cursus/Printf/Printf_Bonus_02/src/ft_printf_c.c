@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 01:27:52 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 17:24:44 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 13:42:11 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 unsigned int	ft_printf_c(char c)
 {
-	ft_putchar_fd(c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }

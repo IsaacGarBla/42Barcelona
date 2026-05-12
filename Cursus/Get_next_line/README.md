@@ -32,7 +32,7 @@ gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line
 I recommend you using the tool `valgrind` to check if you have memory leaks in your code.
 
 ```bash
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./gn
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./gnl
 ```
 
 ## Functionality

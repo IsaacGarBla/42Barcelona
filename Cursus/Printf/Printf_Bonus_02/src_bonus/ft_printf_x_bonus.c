@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 01:34:42 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 13:24:38 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:12:36 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_printf_x(unsigned long long n, t_flags f, int upper)
 	if (!f.minus && f.zero && !f.dot && f.width > ln + lp)
 		ln = ln + (f.width - ln);
 	if (!f.minus && f.width - ln - lp > 0)
-		ft_putnchar(' ', f.width - ln - lp);
+		ft_putnchar(' ', f.width - ln - lp, 1);
 	if (lp && !upper)
 		ft_putstr_fd("0x", 1);
 	if (lp && upper)
@@ -34,7 +34,7 @@ int	ft_printf_x(unsigned long long n, t_flags f, int upper)
 	if (!upper && !(n == 0 && f.dot && f.precision == 0))
 		ft_put_unsigned_nbr_base(n, "0123456789abcdef", ln);
 	if (f.minus && f.width - ln - lp > 0)
-		ft_putnchar(' ', f.width - ln - lp);
+		ft_putnchar(' ', f.width - ln - lp, 1);
 	if (ln + lp >= f.width)
 		return (ln + lp);
 	return (f.width);

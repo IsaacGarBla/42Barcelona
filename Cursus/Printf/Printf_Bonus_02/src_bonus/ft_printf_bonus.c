@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 13:21:42 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:12:36 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "ft_printf_x_bonus.h"
 #include "ft_printf_bonus.h"
 
-unsigned int	ft_check_format(char spc, t_flags flags, va_list args)
+static int	ft_check_format(char spc, t_flags flags, va_list args)
 {
 	if (spc == 'c')
 		return (ft_printf_c(va_arg(args, int), flags));
@@ -32,16 +32,16 @@ unsigned int	ft_check_format(char spc, t_flags flags, va_list args)
 		return (ft_printf_u(va_arg(args, unsigned int), flags));
 	else if (spc == 'p')
 		return (ft_printf_p(va_arg(args, void *), flags));
-	else if (spc == 'x' || spc == 'p')
+	else if (spc == 'x')
 		return (ft_printf_x(va_arg(args, unsigned int), flags, 0));
 	else if (spc == 'X')
 		return (ft_printf_x(va_arg(args, unsigned int), flags, 1));
 	else if (spc == '%')
-		return (ft_putnchar('%', 1));
+		return (write(1, "%", 1));
 	return (0);
 }
 
-t_flags	ft_init_flags(void)
+static t_flags	ft_init_flags(void)
 {
 	t_flags	f;
 
@@ -56,8 +56,10 @@ t_flags	ft_init_flags(void)
 	return (f);
 }
 
-int	ft_process_flags(const char *format, unsigned int pos, t_flags *flags)
+static int	ft_process_flags(const char *format,
+		unsigned int pos, t_flags *flags)
 {
+	*flags = ft_init_flags();
 	while (format[pos] == '-' || format[pos] == '0' || format[pos] == '+'
 		|| format[pos] == '#' || format[pos] == ' ' )
 	{
@@ -77,31 +79,40 @@ int	ft_process_flags(const char *format, unsigned int pos, t_flags *flags)
 	return (pos);
 }
 
-int	ft_printf(char const *format, ...)
+static int	loop_pf(char const *format, va_list args)
 {
-	va_list			args;
 	unsigned int	i;
 	unsigned int	total_len;
 	t_flags			flags;
 
-	va_start(args, format);
 	i = 0;
 	total_len = 0;
 	while (format[i] != '\0')
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1] != '\0'
+			&& ft_strchr("cspdiuxX-#+ .0123456789%", format[i + 1]) != NULL)
 		{
-			flags = ft_init_flags();
 			i = ft_process_flags(format, i + 1, &flags);
-			total_len += ft_check_format(format[i], flags, args);
+			total_len += ft_check_format(format[i++], flags, args);
 		}
 		else
 		{
-			write(1, &format[i], 1);
-			total_len++;
+			total_len += write(1, &format[i], 1);
+			i++;
 		}
-		i++;
 	}
+	return (total_len);
+}
+
+int	ft_printf(char const *format, ...)
+{
+	va_list			args;
+	unsigned int	total_len;
+
+	if (!format)
+		return (-1);
+	va_start(args, format);
+	total_len = loop_pf(format, args);
 	va_end(args);
 	return (total_len);
 }

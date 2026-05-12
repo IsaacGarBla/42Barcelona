@@ -24,7 +24,7 @@ unsigned int	ft_printf_p(void *ptr, t_flags f)
 	if (!f.minus && f.zero && !f.dot && f.width > ln + lp)
 		ln = ln + (f.width - ln);
 	if (!f.minus && f.width - ln - lp > 0)
-		ft_putnchar(' ', f.width - ln - lp);
+		ft_putnchar(' ', f.width - ln - lp, 1);
 	if (lp)
 		ft_putstr_fd("0x", 1);
 	if (ptr)
@@ -33,7 +33,7 @@ unsigned int	ft_printf_p(void *ptr, t_flags f)
 	if (!ptr)
 		ft_putstr_fd("(nil)", 1);
 	if (f.minus && f.width - ln - lp > 0)
-		ft_putnchar(' ', f.width - ln - lp);
+		ft_putnchar(' ', f.width - ln - lp, 1);
 	if (ln + lp >= f.width)
 		return (ln + lp);
 	return (f.width);

@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 12:35:47 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 17:27:55 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 13:48:41 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,43 @@ unsigned int	ft_check_format(char spc, va_list args)
 		return (ft_printf_u(va_arg(args, unsigned int)));
 	else if (spc == 'p')
 		return (ft_printf_p(va_arg(args, void *)));
-	else if (spc == 'x' || spc == 'p')
+	else if (spc == 'x')
 		return (ft_printf_x(va_arg(args, unsigned int), 0));
 	else if (spc == 'X')
 		return (ft_printf_x(va_arg(args, unsigned int), 1));
 	else if (spc == '%')
-		return (ft_putnchar('%', 1));
+		return (write(1, "%", 1));
 	return (0);
+}
+
+static int	loop_pf(char const *format, va_list args)
+{
+	unsigned int	i;
+	unsigned int	total_len;
+
+	i = 0;
+	total_len = 0;
+	while (format && format[i] != '\0')
+	{
+		if (format[i] == '%' && format[i + 1] != '\0'
+			&& ft_strchr("cspdiuxX%", format[i + 1]) != NULL )
+			total_len += ft_check_format(format[i++ + 1], args);
+		else
+			total_len += write(1, &format[i], 1);
+		i++;
+	}
+	return (total_len);
 }
 
 int	ft_printf(char const *format, ...)
 {
 	va_list			args;
-	unsigned int	i;
 	unsigned int	total_len;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
-	i = 0;
-	total_len = 0;
-	while (format[i] != '\0')
-	{
-		if (format[i] == '%' && ft_strchr("cspdiuxX%", format[i + 1]) != NULL)
-		{
-			total_len += ft_check_format(format[i + 1], args);
-			i++;
-		}
-		else
-		{
-			write(1, &format[i], 1);
-			total_len++;
-		}
-		i++;
-	}
+	total_len = loop_pf(format, args);
 	va_end(args);
 	return (total_len);
 }

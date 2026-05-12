@@ -1,0 +1,3 @@
+diff <(./gnl ./files/variable_nls.txt) <(cat ./files/variable_nls.txt ) > /dev/null && echo "Iguales" || echo "Diferentes"
+
+diff <(./gnl ./files/variable_nls.txt ./files/read_error.txt) <(cat ./files/variable_nls.txt ./files/read_error.txt) > /dev/null && echo "Iguales" || echo "Diferentes"

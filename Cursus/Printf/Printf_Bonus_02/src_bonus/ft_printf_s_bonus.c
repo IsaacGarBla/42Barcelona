@@ -6,7 +6,7 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 01:32:38 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 13:24:25 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:12:36 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ unsigned int	ft_printf_s(char *s, t_flags flags)
 	if (flags.dot && flags.precision < len)
 		len = flags.precision;
 	if (!flags.minus && flags.width > len)
-		ft_putnchar(' ', flags.width - len);
+		ft_putnchar(' ', flags.width - len, 1);
 	if (s)
 	{
 		i = 0;
@@ -34,6 +34,6 @@ unsigned int	ft_printf_s(char *s, t_flags flags)
 	else if (!flags.dot || flags.precision >= 6)
 		ft_putstr_fd("(null)", 1);
 	if (flags.minus && flags.width > len)
-		ft_putnchar(' ', flags.width - len);
+		ft_putnchar(' ', flags.width - len, 1);
 	return ((flags.width >= len) * flags.width + (len > flags.width) * len);
 }

@@ -6,11 +6,11 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 12:20:34 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/05/06 16:58:31 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/09 05:01:17 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -123,6 +123,9 @@ int	main(void)
 	ft_printf("The '%%' character (%%).\n\n");
 	le_ft_pf = ft_printf("FT -> [%%]\n");
 	le_pf = printf("PF -> [%%]\n");
+	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
+	le_ft_pf = ft_printf("FT -> %%%%%%%\n");
+	le_pf = printf("PF -> %%%%%%%\n");
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
 
@@ -243,5 +246,11 @@ int	main(void)
 	le_pf = printf("PF -> [%p]\n", NULL);
 	ft_printf("Long FT -> %d\nLong PF -> %d\n", le_ft_pf, le_pf);
 	ft_printf("/-----------------------------------------/\n\n");
+
+	// Cadena nula
+	ft_printf("## Cadena nula.\n\n");
+	le_ft_pf = ft_printf(NULL);
+	le_pf = printf(NULL);
+	ft_printf("Long FT -> %d\nLong PF -> %d\n\n", le_ft_pf, le_pf);
 }
 

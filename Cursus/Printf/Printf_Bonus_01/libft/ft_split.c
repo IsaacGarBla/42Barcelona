@@ -6,12 +6,22 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:03:58 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 01:27:59 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:54:22 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief	Count the number of words in the string s, using c as a delimiter.
+ *
+ * This function counts the number of words in the string s, where each word
+ * is separated by the character c.
+ *
+ * @param s	The string to count words in.
+ * @param c	The delimiter character.
+ * @return	The number of words in the string.
+ */
 static size_t	ft_count_words(char const *s, char c)
 {
 	size_t	i;
@@ -28,6 +38,16 @@ static size_t	ft_count_words(char const *s, char c)
 	return (count);
 }
 
+/**
+ * @brief	Creates an array of strings of the specified size, initialized to
+ * 			NULL.
+ * 
+ * This function creates an array of strings of the specified size,
+ * initialized to NULL.
+ *
+ * @param size	The size of the array to create.
+ * @return		A pointer to the created array, or NULL if allocation fails.
+ */
 static char	**ft_initarray(size_t size)
 {
 	size_t	i;
@@ -43,6 +63,15 @@ static char	**ft_initarray(size_t size)
 	return (dst);
 }
 
+/**
+ * @brief	Frees an array of strings and its contents.
+ *
+ * This function frees each string in the array and then frees the array itself.
+ *
+ * @param dst	The array of strings to free.
+ * @param size	The size of the array.
+ * @return		NULL.
+ */
 static char	**ft_free_array(char **dst, size_t size)
 {
 	size_t		i;
@@ -55,6 +84,17 @@ static char	**ft_free_array(char **dst, size_t size)
 	return (dst);
 }
 
+/**
+ * @brief	Add words to the array.
+ *
+ * This function adds words from the string s to the array dst, using c as a
+ * delimiter.
+ *
+ * @param dst	The array to add words to.
+ * @param s		The string to extract words from.
+ * @param c		The delimiter character.
+ * @return		The converted integer value.
+ */
 static int	ft_add_words(char **dst, char const *s, char c)
 {
 	size_t	j;
@@ -82,6 +122,18 @@ static int	ft_add_words(char **dst, char const *s, char c)
 	return (start == -1 || dst[j] != NULL);
 }
 
+/**
+ * @brief	Split a string into an array of strings using a specified
+ * 			delimiter.
+ *
+ * This function splits the string s into an array of strings, using the
+ * character c as a delimiter.
+ *
+ * @param s	The string to split.
+ * @param c	The delimiter character.
+ * @return	A pointer to the array of strings, or NULL if allocation
+ * 			fails.
+ */
 char	**ft_split(char const *s, char c)
 {
 	char	**dst;

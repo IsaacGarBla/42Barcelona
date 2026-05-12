@@ -46,7 +46,7 @@ CFLAGS	= -Wall -Werror -Wextra  -gdwarf-4 -I$(LIBFT_DIR)
 all: $(NAME)
 
 #Create the library
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS) Makefile
 		cp $(LIBFT) $(NAME)
 		ar rcs $(NAME) $(OBJS)
 

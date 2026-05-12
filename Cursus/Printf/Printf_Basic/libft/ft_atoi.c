@@ -6,12 +6,22 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 13:40:12 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 01:27:08 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:20:37 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Converts a string to an integer.
+ *
+ * This function converts the initial portion of the string nptr
+ * to an integer. It handles optional whitespace, an optional sign,
+ * and numeric characters.
+ *
+ * @param nptr Input string to convert.
+ * @return The converted integer value.
+ */
 int	ft_atoi(const char *nptr)
 {
 	int	i;

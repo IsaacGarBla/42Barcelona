@@ -13,8 +13,8 @@
 #ifndef FT_PUTNCHAR_H
 # define FT_PUTNCHAR_H
 
-# include <unistd.h>
+# include "ft_printf.h"
 
-unsigned int	ft_putnchar(char c, unsigned int n);
+unsigned int	ft_putnchar(char c, unsigned int n, int fd);
 
 #endif

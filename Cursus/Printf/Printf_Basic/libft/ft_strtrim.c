@@ -6,12 +6,23 @@
 /*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:34:40 by igarcia-          #+#    #+#             */
-/*   Updated: 2026/04/17 01:28:37 by igarcia-         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:45:44 by igarcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @brief Removes leading and trailing characters from a string.
+ *
+ * This function removes any character from the set from the beginning and end
+ *  of the string s1.
+ *
+ * @param s1	The string to trim.
+ * @param set	The set of characters to remove.
+ * @return		A pointer to the trimmed string, or NULL if memory allocation
+ * 		fails.
+ */
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	start;
