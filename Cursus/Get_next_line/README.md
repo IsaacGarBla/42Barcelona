@@ -35,6 +35,43 @@ I recommend you using the tool `valgrind` to check if you have memory leaks in y
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./gnl
 ```
 
+## Bonus Part
+The bonus version of the project extends the functionality to handle multiple file descriptors and optimize file structure.
+
+### Requirements
+- Manage multiple file descriptors simultaneously. For example, if you read from `fd 3`, then `fd 4`, and then `fd 5`, you can alternate between them without losing the reading thread or the data of any specific `fd`.
+
+- The code must be contained within three specific files:
+  - `get_next_line_bonus.c`
+  - `get_next_line_bonus.h`
+  - `get_next_line_utils_bonus.c`
+
+### Implementation
+To achieve this, the static variable is converted into an array of pointers, where the index corresponds to the file descriptor number:
+
+```c
+static char *remainder_buffer[MAX_OPEN_FD];
+```
+*Note: `MAX_OPEN_FD` (typically 1024) or a similar macro ensures that the array can accommodate the maximum number of open files allowed by the system.*
+
+### Bonus Usage
+To compile the project using the bonus files, include the bonus header and run the compilation command:
+
+1. Include the bonus header in your code:
+```c
+#include "get_next_line_bonus.h"
+```
+
+2. Compile with the bonus source files:
+```bash
+gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line_bonus.c get_next_line_utils_bonus.c -o gnl_bonus
+```
+
+3. Run with `valgrind` to ensure multiple file switches do not cause leaks:
+```bash
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./gnl_bonus
+```
+
 ## Functionality
 - **Static Variables**: Uses a static variable to maintain the remainder of the buffer between successive calls.
 - **Memory Management**: Carefully handles `malloc` and `free` to prevent memory leaks.

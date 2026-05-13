@@ -3,13 +3,15 @@
 # ft_printf
 
 ## Descripción
-El proyecto **ft_printf** consiste en reprogramar la función `printf` de la biblioteca estándar de C (`libc`). El objetivo principal es crear una función versátil capaz de gestionar argumentos variables mediante el uso de **funciones variádicas** (`va_list`). A través de este reto, se profundiza en el análisis de cadenas de formato y la conversión de diferentes tipos de datos a texto plano de salida.
+El proyecto ft_printf consiste en reprogramar la función printf de la biblioteca estándar de C (libc). El objetivo principal es crear una función versátil capaz de gestionar argumentos variables mediante el uso de funciones variádicas (`va_list`). A través de este reto, se profundiza en el análisis de cadenas de formato y la conversión de diferentes tipos de datos a texto plano de salida.
+
+---
 
 ## Especificaciones Técnicas
 
-### 1. Tipos de Datos (Especificadores)
-
+### 1. Parte Obligatoria: Tipos de Datos (Especificadores)
 En el proyecto base, se gestionan los siguientes tipos de datos:
+
 
 | Especificador | Descripción |
 | :--- | :--- |
@@ -22,37 +24,39 @@ En el proyecto base, se gestionan los siguientes tipos de datos:
 | `%X` | Imprime un número hexadecimal (base 16) en mayúsculas. |
 | `%%` | Imprime el símbolo del porcentaje literal. |
 
-### 2. Flags (Modificadores)
+### 2. Parte Bonus: Flags (Modificadores)
+La versión bonus gestiona cualquier combinación de los siguientes flags, los cuales modifican drásticamente el formato de la salida en pantalla:
 
-Como bonus, se gestionan los siguientes flags que modifican como se muestran los datos en la pantalla.
 
 | Flag | Descripción |
-| :---: | :--- |
+| :--- | :--- |
 | `-` | Justifica a la izquierda el resultado dentro del ancho de campo dado. |
 | `0` | Rellena con ceros a la izquierda en lugar de espacios. |
-| `.` | Define la precisión (dígitos mínimos en números o max. caracteres en strings). |
-| `#` | Formato alternativo: antepone `0x`/`0X` a hexadecimales no nulos. |
-| `+` | Fuerza la impresión del signo (+ o -) para valores numéricos. |
-| ` ` (espacio) | Si no hay signo, inserta un espacio en blanco antes de valores positivos. |
+| `.` | Define la precisión (dígitos mínimos en números o máx. caracteres en strings). |
+| `#` | Formato alternativo: antepone `0x` / `0X` a hexadecimales no nulos. |
+| `+` | Fuerza la impresión del signo (`+` o `-`) para valores numéricos. |
+| ` ` *(espacio)* | Si no hay signo, inserta un espacio en blanco antes de valores positivos. |
 
 #### 2.1 Matriz de Compatibilidad (Flags vs Tipos)
+No todos los flags afectan a todos los tipos de datos. La siguiente matriz detalla el comportamiento exacto implementado:
 
-No todos los flag afectan a todos los tipos de datos. La siguiente matriz muestra qué flags afectan a cada uno de ellos:
 
-| Flag | %c | %s | %p | %d / %i | %u | %x / %X |
+| Flag | `%c` | `%s` | `%p` | `%d` / `%i` | `%u` | `%x` / `%X` |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `-` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `0` | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
-| `.` | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ |
-| `#` | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| `+` | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
-| ` ` | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **-** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **0** | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| **.** | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ |
+| **#** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **+** | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| *(espacio)* | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
 
-## Instrucciones
+---
 
-### Automatización con Makefile
-El proyecto incluye un `Makefile` que gestiona la compilación de la librería y su dependencia con `libft`. A continuación se detalla su contenido principal, incluyendo las reglas `name` y `bonus`.
+## Instrucciones y Automatización
 
+El proyecto incluye un `Makefile` preparado para compilar tanto la versión obligatoria como la versión bonus de forma independiente y automatizada.
+
+### Makefile
 ```makefile
 NAME = libftprintf.a
 
@@ -134,39 +138,55 @@ re:	fclean all
 
 .PHONY: all clean fclean re
 ```
+
 ### Compilación y Uso
 
-Para generar la biblioteca `libftprintf.a` (que incluye la biblioteca `libft`) basta que una vez clonado el repositorio que contiene los fuentes ejecutes el comando make.
+#### 1. Versión Estándar (Obligatoria)
+Para generar la biblioteca base sin flags adicionales:
+```bash
+make
+```
+Incluye la cabecera correspondiente en tu código:
+```c
+#include "ft_printf.h"
+```
 
-1. Para compilar la librería:
-   ```bash
-   make
-   ```
-2. Para usarla en tu código:
-   ```c
-   #include "ft_printf.h"
-   ```
-3. Para compilar tu programa principal vinculando la librería:
-   ```bash
-   cc -I$(libdir) main.c libftprintf.a -o mi_programa
-   ```
+#### 2. Versión con Bonus (Flags avanzados)
+Para incluir la lógica completa de gestión de flags y modificadores avanzados:
+```bash
+make bonus
+```
+Incluye la cabecera específica del bonus en tu código:
+```c
+#include "ft_printf_bonus.h"
+```
+
+#### Vinculación del ejecutable
+Para compilar tu programa principal enlazando la librería generada:
+```bash
+cc -Wall -Wextra -Werror main.c libftprintf.a -o mi_programa
+```
+
+---
+
 ## Elección de Algoritmo y Estructura de Datos
-Se ha implementado un **parsing secuencial** de la cadena. Al detectar un `%`, un motor de búsqueda identifica flags, ancho de campo y el especificador final.
+Se ha implementado un parsing secuencial de la cadena. Al detectar un `%`, un motor de búsqueda identifica secuencialmente los flags repetidos, el ancho de campo mínimo, la precisión (`.`) y, finalmente, el especificador de tipo de dato.
 
-Se utiliza **recursividad** para las conversiones numéricas de bases (10 y 16), lo que permite imprimir los dígitos en el orden correcto sin necesidad de buffers temporales adicionales, optimizando el uso de la memoria al aprovechar la pila de llamadas.
+Se utiliza recursividad para las conversiones numéricas de bases (10 y 16). Esto permite imprimir los dígitos en el orden correcto sin necesidad de recurrir a buffers temporales dinámicos adicionales de almacenamiento, optimizando estrictamente el uso de la memoria al aprovechar la pila de llamadas del sistema.
+
+---
 
 ## Recursos
 
 ### Referencias
-- Comando ```man``` del sistema operativo.
-- [Documentación oficial de printf(3)](https://man7.org/linux/man-pages/man3/printf.3.html)
-- [Guía de funciones variádicas en C (va_start, va_arg)](https://en.cppreference.com/w/c/variadic)
+- Comando `man` del sistema operativo.
+- Documentación oficial de `printf(3)`.
+- Guía de funciones variádicas en C (`va_start`, `va_arg`, `va_copy`, `va_end`).
 
 ### Uso de IA
 Se ha utilizado IA para las siguientes tareas:
-- **Consulta funcionamiento de los flags:** Explicación en detalle de como afecta cada uno de los flag a los diferentes tipos de datos.
-- **Evaluación del comportamiento de los flags:** Uso de ejemplos para ver, de forma rápida y sin programar código, el resultado de aplicar uno o varios flag a los diferentes tipos de datos.
-- **Maquetación del README:** Organización de tablas y estructura de Markdown según las normas específicas del currículo de 42.
-
+- **Consulta de funcionamiento de los flags:** Explicación en detalle de cómo afecta cada uno de los flags a los diferentes tipos de datos según el estándar POSIX.
+- **Evaluación del comportamiento:** Uso de ejemplos y casos límite (*edge cases*) de combinaciones conflictivas de flags para predecir el resultado en la salida.
+- **Maquetación del README:** Organización estructural del Markdown y diseño de las tablas funcionales.
 
 
