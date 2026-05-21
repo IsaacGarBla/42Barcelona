@@ -1,114 +1,181 @@
-﻿This project was created as a part of 42 resume by igarcia-@student.42barcelona.com.
+﻿# Libft
 
-DESCRIPTION
+This project was created as a part of the 42 curriculum by [igarcia-](mailto:igarcia-@student.42barcelona.com).
 
-This project is the implementation of ‘libft’ library, which is the firs project of de Common Core.
-It contains a set of functions that can be useful for future projects. Specifically, it includes three group of functions:
+## Description
 
-1. A set of functions that reply the behavior of the original C functions (see ‘man’ to understand its behavior).
+This project is the implementation of the `libft` library, which is the first project of the Common Core at 42. It contains a set of general-purpose functions that are highly useful for future projects in the curriculum. 
 
-isalpha
-isdigit
-isalnum
-isascii
-isprint
-strlen
-memset
-bzero
+Specifically, the library includes three main groups of functions:
 
-memcpy
-memmove
-strlcpy
-strlcat
-toupper
-tolower
-strchr 
+### 1. Standard C Library Functions
+A set of functions that replicate the behavior of the original C standard library functions (use `man` to understand their behavior).
 
-strrchr
-strncmp
-memchr
-memcmp
-strnstr
-atoi
+* **Memory management:** `memset`, `bzero`, `memcpy`, `memmove`, `memchr`, `memcmp`, `calloc`
+* **String manipulation:** `strlen`, `strlcpy`, `strlcat`, `strchr`, `strrchr`, `strncmp`, `strnstr`, `strdup`
+* **Character checks & conversions:** `isalpha`, `isdigit`, `isalnum`, `isascii`, `isprint`, `toupper`, `tolower`
+* **Type conversion:** `atoi`
 
-calloc
-strdup
+### 2. Additional Functions
+A set of custom functions to simplify string manipulation, memory management, and file descriptor operations:
 
-2. A set of additional functions:
+* `char *ft_substr(char const *s, unsigned int start, size_t len);`
+  * Returns a substring from string `s` that starts at index `start` and has a maximum length of `len`.
+* `char *ft_strjoin(char const *s1, char const *s2);`
+  * Returns a new string resulting from the concatenation of `s1` and `s2`.
+* `char *ft_strtrim(char const *s1, char const *set);`
+  * Returns a copy of `s1` with the characters specified in `set` removed from the beginning and the end.
+* `char **ft_split(char const *s, char c);`
+  * Returns an array of strings obtained by splitting `s` using the character `c` as a delimiter.
+* `char *ft_itoa(int n);`
+  * Returns a string representing the integer `n`.
+* `char *ft_strmapi(char const *s, char (*f)(unsigned int, char));`
+  * Applies the function `f` to each character of the string `s` to create a new string.
+* `void ft_striteri(char *s, void (*f)(unsigned int, char *));`
+  * Applies the function `f` to each character of the string `s`, modifying it in place.
+* `void ft_putchar_fd(char c, int fd);`
+  * Outputs the character `c` to the given file descriptor.
+* `void ft_putstr_fd(char *s, int fd);`
+  * Outputs the string `s` to the given file descriptor.
+* `void ft_putendl_fd(char *s, int fd);`
+  * Outputs the string `s` to the given file descriptor followed by a newline.
+* `void ft_putnbr_fd(int n, int fd);`
+  * Outputs the integer `n` to the given file descriptor.
 
-char *ft_substr(char const *s, unsigned int start, size_t len);
-Returns a sub string of s that starts in ‘start’ and has a max long of ‘len’.
+### 3. Bonus Functions (List Manipulation)
+A set of functions for working with singly linked lists based on the following node structure:
 
-char *ft_strjoin(char const *s1, char const *s2);
-Returns a new strig joining s1 and s2.
-
-char *ft_strtrim(char const *s1, char const *set);
-Returns a copy of s1, erasing the characters of set a the beginning and the end of s1.
-
-char **ft_split(char const *s, char c);
-Returns and array of strings as a result of splitting the string ‘s’ using the char ‘c’ as a delimiter.
-
-char *ft_itoa(int n);
-Returns an string that represents de integer n.
-
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
-Returns an string a a result of apply the function ‘f’ to each char of ‘s’, passing to ‘f’ de char positions and the char itself.
-
-void ft_striteri(char *s, void (*f)(unsigned int, char*));
-Modifies the string s applying the function ‘f’ to each char of ‘s’.
-
-void ft_putchar_fd(char c, int fd);
-Sends the char ‘c’ to the file descriptor ‘fd’.
-
-void ft_putstr_fd(char *s, int fd);
-Sends the string ‘s’ to the file descriptor ‘fd’.
-
-void ft_putendl_fd(char *s, int fd);
-Sends the string ‘s’ to the file descriptor ‘fd’ followed by a new line.
-
-void ft_putnbr_fd(int n, int fd);
-Writes the integer ‘n’ to the file descriptor ‘fd’.
-
-3. A set of functions for working with list based on the following node:
-
+```c
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+    void            *content;
+    struct s_list   *next;
+}   t_list;
+```
 
-t_list *ft_lstnew(void *content);
-Returns a pointer to a new created node.
+* `t_list *ft_lstnew(void *content);`
+  * Allocates and returns a new node.
+* `void ft_lstadd_front(t_list **lst, t_list *new);`
+  * Adds the node `new` at the beginning of the list.
+* `int ft_lstsize(t_list *lst);`
+  * Counts the number of nodes in a list.
+* `t_list *ft_lstlast(t_list *lst);`
+  * Returns the last node of the list.
+* `void ft_lstadd_back(t_list **lst, t_list *new);`
+  * Adds the node `new` at the end of the list.
+* `void ft_lstdelone(t_list *lst, void (*del)(void *));`
+  * Deletes a single node and frees its content using the `del` function.
+* `void ft_lstclear(t_list **lst, void (*del)(void *));`
+  * Deletes and frees the given node and all its successors.
+* `void ft_lstiter(t_list *lst, void (*f)(void *));`
+  * Iterates over the list and applies the function `f` to the content of each node.
+* `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));`
+  * Iterates over a list and applies `f` to create a new list. Deletes the new list using `del` if an allocation fails.
 
-void ft_lstadd_front(t_list **lst, t_list *new);
-Adds the node ‘new’ at the begging of the list ‘lst’.
+## Instructions
 
-int ft_lstsize(t_list *lst);
-Returns the number of nodes in the list ‘lst’.
+### Compilation
+You can compile the library using the provided `Makefile`:
 
-t_list *ft_lstlast(t_list *lst);
-Returns the last node in the list ‘lst’.
+```bash
+# To compile the mandatory functions
+make
 
-void ft_lstadd_back(t_list **lst, t_list *new);
-Adds the node ‘new’ at the end of the list ‘lst’.
+# To compile the bonus list functions
+make bonus
+```
 
-void ft_lstdelone(t_list *lst, void (*del)(void *));
-Releases the content and the node ‘lst’ itself.
+### Usage
+To use this library in your code, include the header file:
 
-void ft_lstclear(t_list **lst, void (*del)(void *));
-Releases the content and the nodes themselves of the list ‘lst’.
+```c
+#include "libft.h"
+```
 
-void ft_lstiter(t_list *lst, void (*f)(void *));
-Iterates over all the nodes of the list ‘lst’ and applies the function ‘f’ to the content of each node.
+When compiling your project, link it with the compiled library file (`libft.a`):
 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-Iterates over all the nodes of the list ‘lst’ and creates a new list applying the function ‘f’ to the content of each node in ‘lst’ to create the new node. If there is any error, releases the new list applying the function ‘del’ to the content of each node.
+```bash
+gcc main.c -L. -lft -o my_program
+```
 
-INSTRUCCIONS
+## Resources
 
-You can compile the library using de utility make with de provided ‘Makefile’.
-To use this library, you must include the file ‘libft.h’ in your code and when compiling, link your code with this library.
+During the development of this project, AI was utilized to better understand the behavior of the original C library functions in Part 1.
 
-RESOUCES
+## Additional Projects Integrated into Libft
 
-During the developing of this project, the IA has been used to better understand the behavior of the original C functions in part 1.
+### 4. ft_printf
+This project is a custom implementation of the standard `printf` function from the C library (`stdio.h`). The goal is to master variadic arguments in C (`va_start`, `va_arg`, `va_copy`, `va_end`) and structured output formatting.
+
+The function handles the following conversion specifiers:
+* `%c` - Prints a single character.
+* `%s` - Prints a string of characters.
+* `%p` - Prints the memory address of a pointer in hexadecimal format.
+* `%d` / `%i` - Prints a signed base 10 integer.
+* `%u` - Prints an unsigned base 10 integer.
+* `%x` - Prints a hexadecimal number in lowercase.
+* `%X` - Prints a hexadecimal number in uppercase.
+* `%%` - Prints a single percent sign.
+
+#### Flag Compatibility Matrix
+To better understand how the different flags interact with each conversion specifier, refer to the matrix below:
+
+| Flag | `%c` | `%s` | `%p` | `%d` / `%i` | `%u` | `%x` / `%X` |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`-`** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **`0`** | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| **`.`** | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ |
+| **`#`** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **`+`** | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| **`(space)`** | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+
+#### Prototype
+```c
+int ft_printf(char const *format, ...);
+```
+
+---
+
+### 5. get_next_line
+This project is an implementation of a function that reads a line from a file descriptor (`fd`), ending with a newline character (`\n`) or EOF (End Of File). The main objective is to master static variables, dynamic memory allocation, and efficient file buffer management.
+
+#### Key Features
+* **Buffer Management:** Reads data in chunks using a configurable `BUFFER_SIZE` macro defined at compilation time.
+* **Static Memory:** Utilizes a static variable to retain remaining data between consecutive function calls.
+* **Multi-fd Support:** Capable of managing multiple file descriptors simultaneously without losing the reading thread of any of them.
+
+#### Prototype
+```c
+char *get_next_line(int fd);
+```
+
+---
+
+## Instructions
+
+### Compilation
+You can compile the entire extended library using the provided `Makefile`:
+
+```bash
+# To compile mandatory, bonus, ft_printf, and get_next_line functions
+make
+```
+
+### Usage
+Since both projects have been integrated into `libft`, you only need to include a single header file in your code:
+
+```c
+#include "libft.h"
+```
+
+When compiling your project, link it with your unified library file (`libft.a`):
+
+```bash
+gcc main.c -L. -lft -o my_program
+```
+
+You can also specify the buffer size for `get_next_line` during compilation if needed:
+
+```bash
+gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c -L. -lft -o my_program
+```
