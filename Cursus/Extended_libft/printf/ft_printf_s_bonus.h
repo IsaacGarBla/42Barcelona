@@ -1,0 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_s_bonus.h                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: igarcia- <igarcia-@student.42barcelona.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/22 01:31:13 by igarcia-          #+#    #+#             */
+/*   Updated: 2026/05/20 14:40:26 by igarcia-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_PRINTF_S_BONUS_H
+# define FT_PRINTF_S_BONUS_H
+
+# include "libft.h"
+# include "ft_putnchar_bonus.h"
+# include "ft_flags_bonus.h"
+
+unsigned int	ft_printf_s(char *s, t_flags flags);
+
+#endif
