@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/python3
 
 class Plant:
     _name:      str
@@ -11,12 +11,12 @@ class Plant:
         _age_count:  int
         _show_count: int
 
-        def __init__(self):
+        def __init__(self) -> None:
             self._grow_count = 0
             self._age_count = 0
             self._show_count = 0
 
-        def show(self):
+        def show(self) -> None:
             print("Stats: ", self._grow_count, "grow,",
                   self._age_count, "age,",
                   self._show_count, "show")
@@ -26,7 +26,7 @@ class Plant:
             return self._grow_count
 
         @grow_count.setter
-        def grow_count(self, count: int):
+        def grow_count(self, count: int) -> None:
             self._grow_count = count
 
         @property
@@ -34,7 +34,7 @@ class Plant:
             return self._age_count
 
         @age_count.setter
-        def age_count(self, count: int):
+        def age_count(self, count: int) -> None:
             self._age_count = count
 
         @property
@@ -42,7 +42,7 @@ class Plant:
             return self._show_count
 
         @show_count.setter
-        def show_count(self, count: int):
+        def show_count(self, count: int) -> None:
             self._show_count = count
 
     def __init__(self, name: str, height: float, age: int) -> None:
@@ -157,16 +157,16 @@ class Flower(Plant):
 
 class Tree(Plant):
     _trunk_diameter: float = 0
-    _tree_statistics: "TreeStats"
+    _statistics: "TreeStats"
 
     class TreeStats(Plant.PlantStats):
         _shade_count: int
 
-        def __init__(self):
+        def __init__(self) -> None:
             super().__init__()
             self._shade_count = 0
 
-        def show(self):
+        def show(self) -> None:
             super().show()
             print(self._shade_count, "shade"),
 
@@ -175,13 +175,13 @@ class Tree(Plant):
             return self._shade_count
 
         @shade_count.setter
-        def shade_count(self, count: int):
+        def shade_count(self, count: int) -> None:
             self._shade_count = count
 
     def __init__(self, name: str, height: float, age: int,
                  diameter: float) -> None:
         super().__init__(name, height, age)
-        self._tree_statistics = self.TreeStats()
+        self._statistics = self.TreeStats()
         if diameter < 0:
             print(name.capitalize(), "Error, diameter can't be negative")
             print("Diameter create rejected, set to 0")
@@ -206,10 +206,10 @@ class Tree(Plant):
 
     @property
     def statistics(self) -> "TreeStats":
-        return self._tree_statistics
+        return self._statistics
 
     def produce_shade(self) -> None:
-        self._tree_statistics.shade_count += 1
+        self._statistics.shade_count += 1
         print("Tree ", self._name.capitalize(),
               " now produces a shade of ", round(self._height, 2),
               "cm long and ", round(self._trunk_diameter),
@@ -277,6 +277,10 @@ class Seed(Flower):
         print("Seeds:", self._seeds)
 
 
+def show_statistics(plant: "Plant") -> None:
+    plant.statistics.show()
+
+
 def main() -> None:
     print("=== Garden Statistics ===")
     print("=== Check year old")
@@ -302,7 +306,23 @@ def main() -> None:
     tree.produce_shade()
     print("[Statistics for ", tree.name.capitalize(), "]", sep="")
     tree.statistics.show()
-
+    show_statistics(tree)
+    print("\n=== Seed")
+    seed = Seed("Sunflower", 80, 45, "yellow")
+    seed.show()
+    print("[make", seed.name.capitalize(), "grow, age and bloom]")
+    seed.grow(30)
+    seed.age(20)
+    seed.bloom()
+    seed.show()
+    print("[Statistics for ", tree.name.capitalize(), "]", sep="")
+    seed.statistics.show()
+    show_statistics(seed)
+    print("\n=== Anonimous")
+    anonimous = Plant.anonymous()
+    anonimous.show()
+    print("[Statistics for ", anonimous.name.capitalize(), "]", sep="")
+    anonimous.statistics.show()
 
 # This line means: "If someone runs this file directly, call main()"
 # You don't need to understand this yet, just know it makes the program start
