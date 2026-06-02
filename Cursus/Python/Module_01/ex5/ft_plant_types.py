@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_plant_types.py                                 :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/05/27 16:20:25 by igarciab        #+#    #+#               #
-#  Updated: 2026/05/28 10:22:42 by igarcia-        ###   ########.fr        #
+#  Updated: 2026/06/03 00:17:30 by igarciab        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -175,7 +175,6 @@ class Vegetable(Plant):
 
     def grow(self, centimeters: float) -> None:
         super().grow(centimeters)
-        self._nutritional_value += int(centimeters / 10)
 
     def show(self) -> None:
         super().show()
@@ -199,14 +198,10 @@ def main() -> None:
     print("\n=== Vegetable")
     vegetable = Vegetable("Tomato", 5, 10, "April")
     vegetable.show()
-    print("[Make tomato grow 20cm and age for 20 days]")
-    vegetable.grow(20)
+    print("[Make tomato grow and age for 20 days]")
+    vegetable.grow(42)
     vegetable.age(20)
     vegetable.show()
-
-
-# This line means: "If someone runs this file directly, call main()"
-# You don't need to understand this yet, just know it makes the program start
 
 
 if __name__ == "__main__":

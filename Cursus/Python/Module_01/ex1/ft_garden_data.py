@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_garden_data.py                                 :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/05/27 10:38:38 by igarciab        #+#    #+#               #
-#  Updated: 2026/05/28 10:23:01 by igarcia-        ###   ########.fr        #
+#  Updated: 2026/06/02 17:59:41 by igarciab        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -20,9 +20,6 @@ class Plant:
     def show(self) -> None:
         print(self.name.capitalize(), ": ", self.height, "cm, ",
               self.age, " days old", sep="")
-
-# This line means: "If someone runs this file directly, call main()"
-# You don't need to understand this yet, just know it makes the program start
 
 
 def main() -> None:

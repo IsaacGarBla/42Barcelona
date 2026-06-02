@@ -4,10 +4,10 @@
 #                                                      :::      ::::::::    #
 #  ft_first_exception.py                             :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/05/28 10:54:10 by igarcia-        #+#    #+#               #
-#  Updated: 2026/05/28 14:11:00 by igarcia-        ###   ########.fr        #
+#  Updated: 2026/06/03 00:17:55 by igarciab        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,6 +17,7 @@ def input_temperature(temp_str: str) -> int:
 
 def test_temperature(temp_str: str) -> None:
     temp: int
+
     print("Input data is '", temp_str, "'", sep="")
     try:
         temp = input_temperature(temp_str)

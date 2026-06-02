@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_plant_growth.py                                :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/05/27 11:03:14 by igarciab        #+#    #+#               #
-#  Updated: 2026/05/28 10:22:58 by igarcia-        ###   ########.fr        #
+#  Updated: 2026/06/01 10:39:18 by igarciab        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -26,10 +26,6 @@ class Plant:
 
     def grow(self, centimeters: float) -> None:
         self.height = self.height + centimeters
-
-
-# This line means: "If someone runs this file directly, call main()"
-# You don't need to understand this yet, just know it makes the program start
 
 
 def main() -> None:

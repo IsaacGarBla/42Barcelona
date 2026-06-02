@@ -22,9 +22,6 @@ def main() -> None:
     print("Age:", age)
     print("\n=== End of Program ===")
 
-# This line means: "If someone runs this file directly, call main()"
-# You don't need to understand this yet, just know it makes the program start
-
 
 if __name__ == "__main__":
     main()
