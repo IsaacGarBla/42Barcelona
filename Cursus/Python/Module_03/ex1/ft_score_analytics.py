@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_score_analytics.py                             :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/01 10:28:28 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/01 18:14:21 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/03 12:50:52 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -32,11 +32,10 @@ def ft_string_to_int(str_num: str) -> int:
             raise NoNumber(f"El carácter {char} no es un dígito")
     return numero
 
+
 # Processes arguments and returns two list:
 # First list: scores introduced.
 # Second list: error arguments.
-
-
 def ft_process_arguments() -> tuple[list[int], list[str]]:
     score_list: list[int] = []
     error_list: list[str] = []

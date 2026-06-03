@@ -5,14 +5,14 @@
 #                                                      :::      ::::::::    #
 #  ft_different_errors.py                            :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/05/28 17:38:02 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/01 10:39:31 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/03 17:41:40 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
-def garden_operations(operation_number) -> None:
+def garden_operations(operation_number: int) -> None:
     if operation_number == 0:
         # ValueError: Attempting to convert invalid string into an integer
         int("five_trees")

@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_inventory_system.py                            :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/02 09:38:42 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/02 11:05:39 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/03 12:56:18 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
