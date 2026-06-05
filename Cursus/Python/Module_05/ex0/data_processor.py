@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  data_processor.py                                 :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/04 11:30:41 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/04 16:43:33 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/05 13:12:24 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -18,6 +18,7 @@ from typing import Any
 
 class DataProcessor(ABC):
     _data: list[tuple[int, str]]
+    _index: int = 0
 
     def __init__(self) -> None:
         self._data = []
@@ -40,6 +41,7 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
+    index: int = 0
 
     def validate(self, data: Any) -> bool:
         if isinstance(data, (int, float)):
@@ -51,10 +53,12 @@ class NumericProcessor(DataProcessor):
     def ingest(self, data: int | float | list[int | float]) -> None:
         if self.validate(data):
             if not isinstance(data, list):
-                self._data += [(len(self._data), str(data))]
+                self._data += [(self._index, str(data))]
+                self._index += 1
             else:
                 for item in data:
-                    self._data += [(len(self._data), str(item))]
+                    self._data += [(self._index, str(item))]
+                    self._index += 1
                 return
         raise ValueError("Got exception: Improper numeric data")
 
@@ -71,10 +75,12 @@ class TextProcessor(DataProcessor):
     def ingest(self, data: str | list[str]) -> None:
         if self.validate(data):
             if not isinstance(data, list):
-                self._data += [(len(self._data), data)]
+                self._data += [(self._index, str(data))]
+                self._index += 1
             else:
                 for item in data:
-                    self._data += [(len(self._data), item)]
+                    self._data += [(self._index, item)]
+                    self._index += 1
             return
         raise ValueError("Got exception: Improper string data")
 
@@ -97,14 +103,16 @@ class LogProcessor(DataProcessor):
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if self.validate(data):
             if not isinstance(data, list):
-                self._data += [(len(self._data),
+                self._data += [(self._index,
                                 f"{data[self._VALID_KEYS[0]]}: "
                                 f"{data[self._VALID_KEYS[1]]}")]
+                self._index += 1
             else:
                 for d in data:
-                    self._data += [(len(self._data),
+                    self._data += [(self._index,
                                     f"{d[self._VALID_KEYS[0]]}: "
                                     f"{d[self._VALID_KEYS[1]]}")]
+                    self._index += 1
             return
         raise ValueError("Got exception: Improper log data")
 
