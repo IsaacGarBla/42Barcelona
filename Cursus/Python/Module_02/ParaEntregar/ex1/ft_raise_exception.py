@@ -7,7 +7,7 @@
 #  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/05/28 11:50:13 by igarcia-        #+#    #+#               #
-#  Updated: 2026/06/08 02:32:00 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/08 17:56:22 by igarciab        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -24,6 +24,7 @@ def input_temperature(temp_str: str) -> int:
 
 def test_temperature(temp_str: str) -> None:
     temp: int
+
     print("Input data is '", temp_str, "'", sep="")
     try:
         temp = input_temperature(temp_str)

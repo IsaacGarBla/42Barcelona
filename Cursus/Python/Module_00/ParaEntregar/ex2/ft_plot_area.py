@@ -1,17 +1,16 @@
 # *************************************************************************** #
 #                                                                             #
 #                                                        :::      ::::::::    #
-#    ft_count_harvest_iterative.py                     :+:      :+:    :+:    #
+#    ft_plot_area.py                                   :+:      :+:    :+:    #
 #                                                    +:+ +:+         +:+      #
 #    By: igarcia- <igarcia-@student.42barcelona.   +#+  +:+       +#+         #
 #                                                +#+#+#+#+#+   +#+            #
-#    Created: 2026/05/26 19:31:46 by igarcia-         #+#    #+#              #
-#    Updated: 2026/05/26 20:24:39 by igarcia-        ###   ########.fr        #
+#    Created: 2026/05/26 18:58:38 by igarcia-         #+#    #+#              #
+#    Updated: 2026/05/26 19:01:47 by igarcia-        ###   ########.fr        #
 #                                                                             #
 # *************************************************************************** #
 
-def ft_count_harvest_iterative() -> None:
-    days = input("Days until harvest: ")
-    for i in range(1, int(days) + 1):
-        print("Day ", i)
-    print("Harvest time!")
+def ft_plot_area() -> None:
+    lenght = input("Enter length: ")
+    width = input("Enter widht: ")
+    print("Plot area:", int(lenght) * int(width))

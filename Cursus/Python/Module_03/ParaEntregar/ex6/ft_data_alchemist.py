@@ -8,7 +8,7 @@
 #  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/04 09:32:25 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/08 17:56:34 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/08 17:56:12 by igarciab        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -20,7 +20,7 @@ PLAYERS = ["Alice", "bob", "Charlie", "dylan", "Emma", "Gregory", "jhon",
 
 def main() -> None:
     players = ["Alice", "bob", "Charlie", "dylan", "Emma", "Gregory", "jhon",
-               "kevin", "Liam"]
+           "kevin", "Liam"]
     capitalize_list: list[str] = []
     only_upper_list: list[str] = []
     score_dict: dict[str, int] = {}
