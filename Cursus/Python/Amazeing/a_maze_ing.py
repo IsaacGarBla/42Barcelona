@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  a_maze_ing.py                                     :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/08 11:27:45 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/09 01:11:51 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/09 15:03:16 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -46,6 +46,7 @@ class Board:
     _entry: Coordinate
     _exit: Coordinate
     _dimension: Dimension
+    _perfect: bool
     _squares: list[list[Box]]
     _solution: list[Step]
 
@@ -217,17 +218,59 @@ class Board:
             for sq in fila:
                 sq.set_as_unvisited()
 
+    def __chose_random_wall(self) -> int:
+        return random.choice([Direction.NORTH, Direction.EAST,
+                              Direction.SOUTH, Direction.WEST])
+
+    def __wall_valid_to_dwon(self, step: Step) -> bool:
+        # Check limits of the board.
+        if (step.movement == Direction.NORTH and step.coord.y == 0) or \
+           (step.movement == Direction.SOUTH
+           and step.coord.y == self._dimension.height - 1) or \
+           (step.movement == Direction.EAST
+           and step.coord.x == self._dimension.width - 1) or \
+           (step.movement == Direction.WEST and step.coord.x == 0):
+            return False
+        # Check if next box belongs to a solution.
+        # If yes, is not a valid movement.
+        match step.movement:
+            case Direction.NORTH:
+                y = step.coord.y - 1
+                x = step.coord.x
+            case Direction.SOUTH:
+                y = step.coord.y + 1
+                x = step.coord.x
+            case Direction.EAST:
+                y = step.coord.y
+                x = step.coord.x + 1
+            case Direction.WEST:
+                y = step.coord.y
+                x = step.coord.x - 1
+        return not self._squares[y][x].is_path()
+
     def __create_rest_board(self) -> None:
-        for fila in self._squares:
-            for sq in fila:
-                sq.set_as_unvisited()
+        step: Step
+
+        for y, fila in enumerate(self._squares):
+            for x, box in enumerate(fila):
+                if not self._perfect or (self._perfect
+                                         and not box.is_path()):
+                    # Chose a random movement to down wall
+                    step = Step(Coordinate(y, x), self.__chose_random_wall())
+                    # Check if it possible to down de wall
+                    if self.__wall_valid_to_dwon(step):
+                        # Down the wall if possible
+                        self.__down_walls(step)
 
     def __init__(self, dim: Dimension, entry: Coordinate,
-                 exit: Coordinate, algorithm: int = 0) -> None:
+                 exit: Coordinate, perfect: bool = True,
+                 algorithm: int = 0) -> None:
         self._dimension = dim
         self._entry = entry
         self._exit = exit
+        self._perfect = perfect
         self._solution = []
+        self._squares = []
 
         self.__init_board(AreaLogo())
         self.__create_solution()
@@ -277,11 +320,11 @@ class Maze:
     _game_board: Board
 
     def __init__(self, dim: Dimension, entry: Coordinate,
-                 exit: Coordinate, seed: int = 0,
+                 exit: Coordinate, perfect: bool = True, seed: int = 0,
                  algorithm: int = 0, display_mode: int = 0) -> None:
         # Generate board
         self._seed = seed
-        self._game_board = Board(dim, entry, exit, algorithm)
+        self._game_board = Board(dim, entry, exit, perfect)
         self._algorithm = algorithm
         self._display_mode = display_mode
         return
@@ -296,7 +339,7 @@ class Maze:
 def main() -> None:
     maze: Maze
     print("Generating board...")
-    maze = Maze(Dimension(20, 20), Coordinate(1, 4), Coordinate(18, 17))
+    maze = Maze(Dimension(20, 20), Coordinate(1, 4), Coordinate(18, 17), False)
     print("Board generated.\n\nSolution:")
     maze.print_solution()
     print("\nBoard\n")
