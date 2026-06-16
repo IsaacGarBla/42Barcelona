@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_command_quest.py                               :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/01 10:09:13 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/01 10:39:39 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/16 10:43:21 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -17,10 +17,11 @@ import sys
 
 def main() -> None:
     print("=== Command Quest ===")
-    print("Program name:", sys.argv[0])
-    print("Arguments received:", len(sys.argv) - 1)
-    for i in range(1, len(sys.argv)):
-        print("Argument: ", i, ": ", sys.argv[i], sep="")
+    program_name, *args = sys.argv
+    print("Program name:", program_name)
+    print("Arguments received:", len(args))
+    for i in range(len(args)):
+        print("Argument: ", i + 1, ": ", args[i], sep="")
     print("Total arguments:", len(sys.argv))
 
 

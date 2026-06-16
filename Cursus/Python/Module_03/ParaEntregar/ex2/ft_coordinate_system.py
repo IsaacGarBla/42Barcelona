@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_coordinate_system.py                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/01 12:41:16 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/08 11:03:34 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/16 11:09:52 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -114,8 +114,7 @@ def ft_split_input(input: str, sep: str) -> list[str]:
             word = ""
         else:
             word += c
-    if word != "":
-        word_list.append(word)
+    word_list.append(word)
     return word_list
 
 

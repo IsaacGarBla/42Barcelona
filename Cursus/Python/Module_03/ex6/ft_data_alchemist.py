@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_data_alchemist.py                              :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: igarciab <igarciab@student.42.fr>         +#+  +:+       +#+         #
+#  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/04 09:32:25 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/08 17:56:34 by igarciab        ###   ########.fr        #
+#  Updated: 2026/06/16 11:22:26 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 

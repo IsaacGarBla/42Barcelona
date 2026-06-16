@@ -8,7 +8,7 @@
 #  By: igarcia- <igarcia-@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/06/02 09:38:42 by igarciab        #+#    #+#               #
-#  Updated: 2026/06/03 12:56:18 by igarcia-        ###   ########.fr        #
+#  Updated: 2026/06/16 14:14:26 by igarcia-        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -35,8 +35,7 @@ def ft_split_input(input: str, sep: str) -> list[str]:
             word = ""
         else:
             word += c
-    if word != "":
-        word_list.append(word)
+    word_list.append(word)
     return word_list
 
 
@@ -120,15 +119,18 @@ def parse_input() -> dict[str, int]:
             print(f"Error - invalid parameter '{sys.argv[i]}'")
             continue
         try:
-            value = ft_to_integer(ft_trim(entry[1]))
             key = ft_trim(entry[0])
-            if key in inventory:
+            if key == "":
+                print(f"Key item '{key}' invalid - discarding")
+            elif key in inventory:
                 print(f"Redundant item '{key}' - discarding")
-            elif value < 0:
-                print(f"Warning: Negative quantity for item '{key}'"
-                      f": {value} - discarding")
             else:
-                inventory[key] = value
+                value = ft_to_integer(ft_trim(entry[1]))
+                if value < 0:
+                    print(f"Warning: Negative quantity for item '{key}'"
+                          f": {value} - discarding")
+                else:
+                    inventory[key] = value
         except FormatError:
             print(f"Quantity error for '{entry[0]}':"
                   f" Invalid literal for int() with base 10: '{entry[1]}'")
@@ -140,31 +142,27 @@ def parse_input() -> dict[str, int]:
 # most and least abundant items.
 # @param inventory: A dictionary where keys are item names and values are
 # quantities of those items.
-def print_inventory(inventory: dict[str, int]) -> None:
+def print_inventory(invent: dict[str, int]) -> None:
     max_item_name: str = ""
-    max_item_quantity: int = -99999999999999999999999
     min_item_name: str = ""
-    min_item_quantity: int = 99999999999999999999999
+    total_items: int = 0
 
-    print("Item list:", list(dict.keys(inventory)))
-    print("Total quantity of the", len(inventory), "items:",
-          sum(dict.values(inventory)))
-    if len(inventory) == 0:
+    print("Item list:", list(invent.keys()))
+    print("Total quantity of the", len(invent), "items:",
+          sum(invent.values()))
+
+    if len(invent) == 0:
         return
-    for each_item in inventory:
-        print(f"Item {each_item} represents "
-              f"{round(inventory[each_item]/sum(dict.values(inventory)) * 100,
-                       1)}%")
-        if inventory[each_item] > max_item_quantity:
-            max_item_name = each_item
-            max_item_quantity = inventory[each_item]
-        if inventory[each_item] < min_item_quantity:
-            min_item_name = each_item
-            min_item_quantity = inventory[each_item]
+    max_item_name = max(invent, key=lambda k: invent[k])
+    min_item_name = min(invent, key=lambda k: invent[k])
+    total_items = sum(invent.values())
+    for item in invent:
+        print(f"Item {item} represents "
+              f"{round(invent[item]/total_items * 100, 1)}%")
     print(f"Item most abundant: '{max_item_name}' "
-          f"with quantity {max_item_quantity}")
+          f"with quantity {invent.get(max_item_name)}")
     print(f"Item least abundant: '{min_item_name}' "
-          f"with quantity {min_item_quantity}")
+          f"with quantity {invent.get(min_item_name)}")
 
 
 def main() -> None:
