@@ -16,6 +16,14 @@ class Creature(ABC):
     def describe(self) -> str:
         return f"{self._name} is a {self._type}."
 
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @property
+    def c_type(self) -> str:
+        return self._type
+
 
 class Flameling(Creature):
     def __init__(self) -> None:
@@ -62,6 +70,10 @@ class CreatureFactory(ABC):
 
 class FlameFactory(CreatureFactory):
 
+    def __init__(sefl) -> None:
+        super().__init__()
+        FlameFactory.__name__ = "Flameling"
+
     def create_base(self) -> Creature:
         return Flameling()
 
@@ -70,6 +82,10 @@ class FlameFactory(CreatureFactory):
 
 
 class AquaFactory(CreatureFactory):
+
+    def __init__(sefl) -> None:
+        super().__init__()
+        AquaFactory.__name__ = "Aquabub"
 
     def create_base(self) -> Creature:
         return Aquabub()

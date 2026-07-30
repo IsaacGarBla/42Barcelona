@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-from ex0 import CreatureFactory, FlameFactory, AquaFactory
+from ex0 import FlameFactory, AquaFactory
 
 
-def test(factory: CreatureFactory) -> None:
+def test(factory: FlameFactory | AquaFactory) -> None:
     print("Testing factory")
     creature = factory.create_base()
     print(creature.describe())
@@ -13,7 +13,8 @@ def test(factory: CreatureFactory) -> None:
     print(creature.attack())
 
 
-def fight(factory1: CreatureFactory, factory2: CreatureFactory) -> None:
+def fight(factory1: FlameFactory | AquaFactory,
+          factory2: FlameFactory | AquaFactory) -> None:
     print("Testing battle")
     creature1 = factory1.create_base()
     print(creature1.describe())
