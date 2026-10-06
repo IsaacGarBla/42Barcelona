@@ -1,17 +1,5 @@
 #!/usr/bin/env python3
 
-# ************************************************************************* #
-#                                                                           #
-#                                                      :::      ::::::::    #
-#  data_processor.py                                 :+:      :+:    :+:    #
-#                                                  +:+ +:+         +:+      #
-#  By: isaac <isaac@student.42.fr>               +#+  +:+       +#+         #
-#                                              +#+#+#+#+#+   +#+            #
-#  Created: 2026/06/04 11:30:41 by igarciab        #+#    #+#               #
-#  Updated: 2026/07/27 17:45:49 by isaac           ###   ########.fr        #
-#                                                                           #
-# ************************************************************************* #
-
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -56,6 +44,7 @@ class NumericProcessor(DataProcessor):
             raise ValueError("Got exception: Improper numeric data")
         items = data if isinstance(data, list) else [data]
         for item in items:
+            # Adds the item at the end of the list
             self._data += [(self._index, str(item))]
             self._index += 1
 
@@ -77,6 +66,7 @@ class TextProcessor(DataProcessor):
 
         items = data if isinstance(data, list) else [data]
         for item in items:
+            # Adds the item at the end of the list
             self._data += [(self._index, item)]
             self._index += 1
 
@@ -104,6 +94,7 @@ class LogProcessor(DataProcessor):
 
         items = data if isinstance(data, list) else [data]
         for d in items:
+            # Adds the item at the end of the list
             self._data += [(self._index,
                             f"{d[self._VALID_KEYS[0]]}: "
                             f"{d[self._VALID_KEYS[1]]}")]
@@ -120,14 +111,14 @@ def main() -> None:
     print(" Trying validate input '42': ", p_number.validate(42))
     print(" Trying validate input 'Hello': ", p_number.validate('Hello'))
     try:
-        print(" Test invalid ingestion of string 'foo' "
+        print(" \nTest invalid ingestion of string 'foo' "
               "without prior validation:")
         p_number.ingest('foo')
     except Exception as e:
         print(f" {e}")
-    print(" Processing data: [1, 2, 3, 4, 5]")
+    print(" \nProcessing data: [1, 2, 3, 4, 5]")
     p_number.ingest([1, 2, 3, 4, 5])
-    print(" Extracting 3 values...")
+    print(" \nExtracting 3 values...")
     for i in range(1, 4):
         value = p_number.output()
         print(f" Numeric value {value[0]}: {value[1]}")
@@ -136,12 +127,12 @@ def main() -> None:
     print(" Trying validate input '42': ", p_text.validate(42))
     print(" Trying validate input 'Hello': ", p_text.validate('Hello'))
     try:
-        print(" Test invalid ingestion of not string '42' "
+        print("\n Test invalid ingestion of not string '42' "
               "without prior validation:")
         p_text.ingest(42)
     except Exception as e:
         print(f" {e}")
-    print(" Processing data: ['Hello', 'Nexus', 'World']")
+    print(" \nProcessing data: ['Hello', 'Nexus', 'World']")
     p_text.ingest(['Hello', 'Nexus', 'World'])
     print(" Extracting 1 values...")
     for i in range(1, 2):
@@ -153,14 +144,14 @@ def main() -> None:
     print(" Trying validate input '{'log_level': 'NOTICE'}': ",
           p_log.validate({'log_level': 'NOTICE',
                           'log_message': 'Connection to server'}))
-    print(" Processing data: [{'log_level': 'NOTICE', 'log_message': "
+    print(" \nProcessing data: [{'log_level': 'NOTICE', 'log_message': "
           "'Connection to server'}, {'log_level': 'ERROR', "
           "'log_message': 'Unauthorized access!!'}]")
     p_log.ingest([{'log_level': 'NOTICE', 'log_message':
                    'Connection to server'},
                   {'log_level': 'ERROR', 'log_message':
                    'Unauthorized access!!'}])
-    print(" Extracting 2 values...")
+    print(" \nExtracting 2 values...")
     for i in range(1, 3):
         value = p_log.output()
         print(f" Log entry {value[0]}: {value[1]}")

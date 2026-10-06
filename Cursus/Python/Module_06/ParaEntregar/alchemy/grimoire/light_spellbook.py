@@ -1,3 +1,6 @@
+import alchemy.grimoire
+
+
 def light_spell_allowed_ingredients() -> list[str]:
     """
     Return a list of allowed ingredients for the light spell.
@@ -6,7 +9,6 @@ def light_spell_allowed_ingredients() -> list[str]:
 
 
 def light_spell_record(spell_name: str, ingredients: str) -> str:
-    from alchemy.grimoire import validate_ingredients
 
     return f"Spell recorded: {spell_name} ({ingredients} - " +\
-           validate_ingredients(ingredients) + ")"
+           alchemy.grimoire.validate_ingredients(ingredients) + ")"

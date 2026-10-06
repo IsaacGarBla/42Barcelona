@@ -1,13 +1,14 @@
 # Absolute import
-import alchemy.elements as elem1
-import elements as elem2
+from alchemy.elements import create_air
+from elements import create_fire
+
 
 # Relative import
-from .. import potions as pot
+from ..potions import strength_potion
 
 
 def lead_to_gold() -> str:
     return "Recipe transmuting Lead to Gold: brew ’" +\
-           elem1.create_air() + "’ and '" +\
-           pot.strength_potion() + "’ " +\
-           "mixed with ’" + elem2.create_fire() + "’"
+           create_air() + "’ and '" +\
+           strength_potion() + "’ " +\
+           "mixed with ’" + create_fire() + "’"

@@ -1,12 +1,12 @@
-import alchemy.elements as elem1
-import elements as elem2
+from alchemy.elements import create_air, create_earth
+from elements import create_fire, create_water
 
 
 def healing_potion() -> str:
-    return "Healing potion brewed with ’" + elem1.create_earth() + \
-           "' and ’" + elem1.create_air() + "’"
+    return "Healing potion brewed with ’" + create_earth() + \
+           "' and ’" + create_air() + "’"
 
 
 def strength_potion() -> str:
-    return "Strength potion brewed with ’" + elem2.create_fire() + \
-           "' and ’" + elem2.create_water() + "’"
+    return "Strength potion brewed with ’" + create_fire() + \
+           "' and ’" + create_water() + "’"

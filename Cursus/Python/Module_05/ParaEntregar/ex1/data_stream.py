@@ -1,17 +1,5 @@
 #!/usr/bin/env python3
 
-# ************************************************************************* #
-#                                                                           #
-#                                                      :::      ::::::::    #
-#  data_stream.py                                    :+:      :+:    :+:    #
-#                                                  +:+ +:+         +:+      #
-#  By: isaac <isaac@student.42.fr>               +#+  +:+       +#+         #
-#                                              +#+#+#+#+#+   +#+            #
-#  Created: 2026/06/04 23:55:50 by igarciab        #+#    #+#               #
-#  Updated: 2026/07/02 17:55:08 by isaac           ###   ########.fr        #
-#                                                                           #
-# ************************************************************************* #
-
 import abc
 import typing
 
@@ -90,6 +78,7 @@ class NumericProcessor(DataProcessor):
             raise ValueError("Got exception: Improper numeric data")
         items = data if isinstance(data, list) else [data]
         for item in items:
+            # Adds the item at the end of the list
             self._data += [(self.statistics.items_processed, str(item))]
             self.statistics.items_remaining += 1
             self.statistics.items_processed += 1
@@ -116,6 +105,7 @@ class TextProcessor(DataProcessor):
 
         items = data if isinstance(data, list) else [data]
         for item in items:
+            # Adds the item at the end of the list
             self._data += [(self.statistics.items_processed, item)]
             self.statistics.items_remaining += 1
             self.statistics.items_processed += 1
@@ -148,6 +138,7 @@ class LogProcessor(DataProcessor):
 
         items = data if isinstance(data, list) else [data]
         for d in items:
+            # Adds the item at the end of the list
             self._data += [(self.statistics.items_processed,
                             f"{d[self._VALID_KEYS[0]]}: "
                             f"{d[self._VALID_KEYS[1]]}")]
