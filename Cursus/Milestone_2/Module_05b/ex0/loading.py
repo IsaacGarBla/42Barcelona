@@ -15,7 +15,7 @@ def check_reagent(name: str) -> tuple[str | None, bool]:
         return None, False
 
 
-def main():
+def main() -> None:
     reagents:   dict[str, str] = {"pandas": "Data manipulation ready",
                                   "numpy": "Numerical computation ready"}
     missing_reagents: list[str] = []

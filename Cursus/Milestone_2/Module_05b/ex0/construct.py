@@ -5,7 +5,7 @@ import os
 import site
 
 
-def virtual_enviroment() -> None:
+def virtual_enviroment() -> bool:
     return sys.prefix != sys.base_prefix
 
 

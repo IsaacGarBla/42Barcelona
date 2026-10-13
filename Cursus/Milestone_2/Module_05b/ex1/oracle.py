@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 try:
-    import dotenv
+    import dotenv   # type: ignore
 except Exception as e:
     print(f'Missing module dotenv: {e}.')
     print('Install using "python3 -m pip install python-dotenv"')
@@ -26,29 +26,28 @@ if __name__ == "__main__":
     missing_vars: list[str] = []
 
     # Load environment variables from .env file
-    dotenv.load_dotenv()
-    if dotenv.find_dotenv() == "":
+    if not dotenv.load_dotenv(dotenv_path=".env"):
         # Print instruccions.
         print("WARNING. There is not a .env file to set the configuration"
               "environment variables.\n"
-              "Please, create de .env file with:\n"
-              "  MATRIX_MODE - \"development\" or \"production\""
+              "You can create the .env file with:\n"
+              "  MATRIX_MODE - \"development\" or \"production\"\n"
               "  DATABASE_URL - Connection string for data storage\n"
               "  API_KEY - Secret key for external services\n"
               "  LOG_LEVEL - Logging verbosity\n"
               "  ZION_ENDPOINT - URL of the remote network\n")
-        exit(1)
 
     print("ORACLE STATUS: Consulting the configuration...\n")
     print("Configuration loaded:\n")
+
     # Store the environment variables in a dict.
-    env_values = {var: os.getenv(var) for var in env_values}
+    env_values = {var: os.getenv(var, "") for var in env_values}
 
     # Check if there are all the variables needed.
-    if any(value is None for _, value in env_values.items()):
+    if any(value == "" for _, value in env_values.items()):
         # Print missing variables.
         missing_vars = [var for var, value in env_values.items()
-                        if value is None]
+                        if value == ""]
         print(f"❌ ERROR: Missing configuration variables: "
               f"{missing_vars}\n")
         exit(1)
