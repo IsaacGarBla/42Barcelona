@@ -90,18 +90,17 @@ class Morphagon(Creature, TransformCapability):
 class CreatureFactory(ABC):
 
     @abstractmethod
-    def create_base(self) -> Creature | TransformCapability:
+    def create_base(self) -> Creature:
         pass
 
     @abstractmethod
-    def create_evolved(self) -> Creature | TransformCapability:
+    def create_evolved(self) -> Creature:
         pass
 
 
 class FlameFactory(CreatureFactory):
 
     def __init__(self) -> None:
-        super().__init__()
         FlameFactory.__name__ = "FlameFactory"
 
     def create_base(self) -> Creature:
@@ -114,7 +113,6 @@ class FlameFactory(CreatureFactory):
 class TransformCreatureFactory(CreatureFactory):
 
     def __init__(self) -> None:
-        super().__init__()
         TransformCreatureFactory.__name__ = "TransformCreatureFactory"
 
     def create_base(self) -> Shiftling:

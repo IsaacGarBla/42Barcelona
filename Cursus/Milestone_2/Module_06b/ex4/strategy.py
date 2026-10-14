@@ -22,11 +22,10 @@ class BattleStrategy(ABC):
 class NormalStrategy(BattleStrategy):
 
     def __init__(self) -> None:
-        super().__init__()
         NormalStrategy.__name__ = "Normal"
 
     def is_valid(self, card: Creature) -> bool:
-        return True
+        return isinstance(card, Creature)
 
     def act(self, card: Creature) -> None:
         if self.is_valid(card):
@@ -37,14 +36,13 @@ class NormalStrategy(BattleStrategy):
 class AggressiveStrategy(BattleStrategy):
 
     def __init__(self) -> None:
-        super().__init__()
         AggressiveStrategy.__name__ = "Aggressive"
 
-    def is_valid(self, card: Creature | TransformCapability) -> bool:
+    def is_valid(self, card: Creature) -> bool:
         return isinstance(card, TransformCapability)
 
-    def act(self, card: Creature | TransformCapability) -> None:
-        if self.is_valid(card):
+    def act(self, card: Creature) -> None:
+        if isinstance(card, TransformCapability):
             print(card.transform())
             print(card.attack())
             print(card.revert())
@@ -53,5 +51,3 @@ class AggressiveStrategy(BattleStrategy):
                               "Invalid creature '" + card.name +
                               "' for this aggressive strategy")
         return
-
-

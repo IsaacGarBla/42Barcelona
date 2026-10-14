@@ -1,9 +1,8 @@
-from .strategy import (BattleStrategy, NormalStrategy, DefensiveStrategy,
+from .strategy import (BattleStrategy, NormalStrategy,
                        AggressiveStrategy, BattleError)
 
 __all__ = ["BattleStrategy",
            "NormalStrategy",
-           "DefensiveStrategy",
            "AggressiveStrategy",
            "BattleError"
            ]

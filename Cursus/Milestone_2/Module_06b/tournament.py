@@ -1,30 +1,34 @@
 #!/usr/bin/env python3
 
-from ex0 import FlameFactory, AquaFactory
-from ex0.creature import CreatureFactory
-from ex1 import HealingCreatureFactory, TransformCreatureFactory
-from ex2 import (BattleStrategy, NormalStrategy,
-                 AggressiveStrategy, DefensiveStrategy, BattleError)
+from ex3.creature import (CreatureFactory,
+                          FlameFactory, TransformCreatureFactory)
+
+from ex4 import (BattleStrategy,
+                 NormalStrategy, AggressiveStrategy,
+                 BattleError)
 
 
 def battle(lst_opp: list[tuple[CreatureFactory,
                                BattleStrategy]]) -> None:
+    strategy1: BattleStrategy
+    strategy2: BattleStrategy
 
     if len(lst_opp) < 2:
         return
-    elems_format = [f"({factory.__class__.__name__}+"
-                    f"{strategy.__class__.__name__})"
-                    for factory, strategy in lst_opp]
 
-    print(f" [ {", ".join(elems_format)}]")
+    list_opponents = [(factory.create_base(), strategy)
+                      for factory, strategy in lst_opp]
+
+    desc_opponents = [f"({creature.__class__.__name__}+"
+                      f"{strategy.__class__.__name__})"
+                      for creature, strategy in list_opponents]
+
+    print(f" [{', '.join(desc_opponents)}]")
     print("*** Tournament ***")
-    print(f"{len(lst_opp)} opponents involved\n")
-    while len(lst_opp) > 1:
-        factory1, strategy1 = lst_opp.pop(0)
-        creature1 = factory1.create_base()
-        for factory2, strategy2 in lst_opp:
-            creature2 = factory2.create_base()
-            print("* Battle *")
+    print(f"{len(list_opponents)} opponents involved\n")
+    while len(list_opponents) > 1:
+        creature1, strategy1 = list_opponents.pop(0)
+        for creature2, strategy2 in list_opponents:
             print(creature1.describe())
             print(" vs")
             print(creature2.describe())
@@ -38,21 +42,15 @@ def battle(lst_opp: list[tuple[CreatureFactory,
 
 
 if __name__ == "__main__":
-    flame = FlameFactory()
-    aqua = AquaFactory()
-    heal = HealingCreatureFactory()
-    trans = TransformCreatureFactory()
+    list_opponents:    list[tuple[CreatureFactory, BattleStrategy]]
 
-    normal = NormalStrategy()
-    defen = DefensiveStrategy()
-    aggress = AggressiveStrategy()
-
-    list_opponents = [(flame, normal), (heal, defen)]
+    list_opponents = [(FlameFactory(), NormalStrategy()),
+                      (TransformCreatureFactory(),
+                       AggressiveStrategy())]
     print("Tournament 0 (basic)")
     battle(list_opponents)
-    list_opponents = [(flame, aggress), (heal, defen)]
+    list_opponents = [(TransformCreatureFactory(),
+                      AggressiveStrategy()),
+                      (FlameFactory(), AggressiveStrategy())]
     print("Tournament 1 (error)")
-    battle(list_opponents)
-    list_opponents = [(aqua, normal), (heal, defen), (trans, aggress)]
-    print("Tournament 2 (multiple)")
     battle(list_opponents)

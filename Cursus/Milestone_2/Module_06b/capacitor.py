@@ -4,9 +4,9 @@ from ex3 import TransformCreatureFactory
 
 
 if __name__ == "__main__":
-    transform_factory = TransformCreatureFactory()
-    base = transform_factory.create_base()
-    evolved = transform_factory.create_evolved()
+    
+    base = TransformCreatureFactory().create_base()
+    evolved = TransformCreatureFactory().create_evolved()
 
     print("Testing creatura with transform capability")
     print(" base:")

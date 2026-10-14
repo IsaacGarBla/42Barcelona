@@ -1,4 +1,4 @@
-from .creature import FlameFactory, TransformCreatureFactory
+from .creature import (FlameFactory, TransformCreatureFactory)
 
 __all__ = ["FlameFactory",
            "TransformCreatureFactory"
