@@ -9,7 +9,8 @@ def main() -> None:
           "Testing create_air:", alchemy.create_air())
     print("Now show that not all functions can be reached\n"
           "This will raise an exception!\n"
-          "Testing the hidden create_earth:", alchemy.create_earth())
+          "Testing the hidden create_earth:")
+    print(alchemy.create_earth())
 
 
 if __name__ == "__main__":
