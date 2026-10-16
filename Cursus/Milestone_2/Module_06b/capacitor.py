@@ -4,7 +4,7 @@ from ex3 import TransformCreatureFactory
 
 
 if __name__ == "__main__":
-    
+
     base = TransformCreatureFactory().create_base()
     evolved = TransformCreatureFactory().create_evolved()
 

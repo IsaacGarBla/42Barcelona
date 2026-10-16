@@ -26,7 +26,8 @@ if __name__ == "__main__":
     missing_vars: list[str] = []
 
     # Load environment variables from .env file
-    if not dotenv.load_dotenv(dotenv_path=".env"):
+    ruta_env = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+    if not dotenv.load_dotenv(ruta_env):
         # Print instruccions.
         print("WARNING. There is not a .env file to set the configuration"
               "environment variables.\n"

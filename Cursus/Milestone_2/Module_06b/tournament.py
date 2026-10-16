@@ -25,7 +25,8 @@ def battle(lst_opp: list[tuple[CreatureFactory,
 
     print(f" [{', '.join(desc_opponents)}]")
     print("*** Tournament ***")
-    print(f"{len(list_opponents)} opponents involved\n")
+    print(f"{len(list_opponents)} opponents involved\n\n"
+          " * Battle *")
     while len(list_opponents) > 1:
         creature1, strategy1 = list_opponents.pop(0)
         for creature2, strategy2 in list_opponents:
