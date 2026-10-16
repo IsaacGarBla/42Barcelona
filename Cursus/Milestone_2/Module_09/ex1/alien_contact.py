@@ -31,11 +31,11 @@ class AlienContact(BaseModel):
     witness_count:      int = Field(ge=1, le=100,
                                     description="Number of witness")
     message_received:  str | None = Field(default=None, max_length=500,
-                                           description="Message received")
+                                          description="Message received")
     is_verified:        bool = Field(default=False, description="Verified")
 
     @model_validator(mode='after')
-    def verificar_coherencia_sistema(self) -> 'AlienContact':
+    def validate_alien_contact(self) -> 'AlienContact':
         # Check rules
 
         # contact_id must starts with AC
@@ -50,12 +50,13 @@ class AlienContact(BaseModel):
         if self.contact_type == ContactType.TELEPATHIC and \
            self.witness_count < 3:
             raise ValueError("Telepathic contacts "
-                                  "needs at least 3 witnesses")
+                             "needs at least 3 witnesses")
 
         # Strong signals (> 7.0) should include received messages
         if self.signal_strength > 7 and \
            self.message_received is None:
-            raise ValueError("Strong signals (> 7.0) should include received messages")
+            raise ValueError("Strong signals (> 7.0) "
+                             "should include received messages")
 
         return self
 
