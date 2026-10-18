@@ -3,6 +3,8 @@
 from enum import Enum
 from pydantic import BaseModel, Field, model_validator, ValidationError
 from datetime import datetime
+import json
+from pathlib import Path
 
 
 # Define ContactType enum with contact types.
@@ -63,57 +65,32 @@ class AlienContact(BaseModel):
 
 if __name__ == "__main__":
     # Example usage
-    contact_data = {
-        "contact_id": "AC_2024_001",
-        "timestamp": datetime.now(),
-        "contact_type": "radio",
-        "location": "Area 51, Nevada",
-        "signal_strength": 8.5,
-        "duration_minutes": 45,
-        "witness_count": 5,
-        "message_received": "Greetings from Zeta Reticuli"
-    }
 
-    alien_contact = AlienContact(**contact_data)
-    print("Alien Contact Log Validation\n"
-          "========================================")
-    print("Valid contact report:")
-    print(f"ID: {alien_contact.contact_id}")
-    print(f"Type: {alien_contact.contact_type}")
-    print(f"Location: {alien_contact.location}")
-    print(f"Signal: {alien_contact.signal_strength}//10")
-    print(f"Duration: {alien_contact.duration_minutes}")
-    print(f"Witness: {alien_contact.witness_count}")
-    print(f"Message: {alien_contact.message_received}")
-    print("========================================")
+    # Obtain folder sript
+    folder = Path(__file__).parent.resolve()
+    # Create de file
+    file = folder / "../generated_data/alien_contacts.json"
 
-    contact_data["message_received"] = None
-    try:
-        print("Expected validation error:")
-        alien_contact = AlienContact(**contact_data)
-    except ValidationError as e:
-        print(e)
-
-    contact_data["message_received"] = "Greetings from Zeta Reticuli"
-    contact_data["contact_id"] = "XX" + contact_data["contact_id"]
-    try:
-        print("Expected validation error:")
-        alien_contact = AlienContact(**contact_data)
-    except ValidationError as e:
-        print(e)
-
-    contact_data["contact_id"] = "AC_2024_001"
-    contact_data["contact_type"] = ContactType.PHYSICAL
-    try:
-        print("Expected validation error:")
-        alien_contact = AlienContact(**contact_data)
-    except ValidationError as e:
-        print(e)
-
-    contact_data["contact_type"] = ContactType.TELEPATHIC
-    contact_data["witness_count"] = 1
-    try:
-        print("Expected validation error:")
-        alien_contact = AlienContact(**contact_data)
-    except ValidationError as e:
-        print(e)
+    # Read alien contacts
+    alien_contacts = json.loads(file.read_text(encoding="utf-8"))
+    # Validate each alien contact.
+    for contact_data in alien_contacts:
+        try:
+            alien_contact = AlienContact(**contact_data)
+            print("Alien Contact Log Validation\n"
+                  "========================================")
+            print("Valid contact report:")
+            print(f"ID: {alien_contact.contact_id}")
+            print(f"Type: {alien_contact.contact_type}")
+            print(f"Location: {alien_contact.location}")
+            print(f"Signal: {alien_contact.signal_strength}//10")
+            print(f"Duration: {alien_contact.duration_minutes}")
+            print(f"Witness: {alien_contact.witness_count}")
+            print(f"Message: {alien_contact.message_received}")
+            print("========================================\n")
+        except ValidationError as e:
+            print("========================================")
+            print("VALIDATION Error:")
+            print(f"{e}")
+            print("========================================\n")
+            break

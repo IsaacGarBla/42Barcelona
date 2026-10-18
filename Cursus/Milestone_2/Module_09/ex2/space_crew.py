@@ -3,6 +3,8 @@
 from enum import Enum
 from pydantic import BaseModel, Field, model_validator, ValidationError
 from datetime import datetime
+import json
+from pathlib import Path
 
 
 # Define ContactType enum with contact types.
@@ -70,67 +72,34 @@ class SpaceMission(BaseModel):
         return self
 
 
-def show_space_mission(space_mission: SpaceMission) -> None:
-    print("Space Mission Crew Validation\n"
-          "========================================")
-    print("Valid mission created:")
-    print(f"Mission: {space_mission.mission_name}")
-    print(f"ID: {space_mission.mission_id}")
-    print(f"Destination: {space_mission.destination}")
-    print(f"Duration: {space_mission.duration_days} days")
-    print(f"Budget: ${space_mission.budget_millions:.1f}M")
-    print(f"Crew size: {len(space_mission.crew)}")
-    for crew in space_mission.crew:
-        print(f" - {crew.name} ({crew.rank}) - {crew.specialization}")
-    print("========================================")
-
-
 if __name__ == "__main__":
-    # Example usage
-    mission_data = {
-        "mission_id": "M2024_MARS",
-        "mission_name": "Mars Colony Establishment",
-        "destination": "Mars",
-        "launch_date": datetime(2025, 12, 10),
-        "duration_days": 900,
-        "crew": [{
-            "member_id": "Member_01",
-            "name": "Sarah Connor",
-            "rank": Rank.COMMANDER,
-            "age": 45,
-            "specialization": "Mission Command",
-            "years_experience": 7,
-            "is_active": True,
-            },
-            {
-            "member_id": "Member_02",
-            "name": "John Smith",
-            "rank": Rank.LIEUTENANT,
-            "age": 35,
-            "specialization": "Navigation",
-            "years_experience": 5,
-            "is_active": True
-            },
-            {
-            "member_id": "Member_03",
-            "name": "Alice Johnson",
-            "rank": Rank.OFFICER,
-            "age": 35,
-            "specialization": "Engineering",
-            "years_experience": 10,
-            "is_active": True
-            }],
-        "budget_millions": 2500
-    }
 
-    space_mission = SpaceMission(**mission_data)
-    show_space_mission(space_mission)
+    # Obtain folder sript
+    folder = Path(__file__).parent.resolve()
+    # Create de file
+    file = folder / "../generated_data/space_missions.json"
 
-    # mission_data["crew"][0]["years_experience"] = 1
-    # mission_data["crew"][1]["years_experience"] = 1
-    mission_data["crew"][0]["rank"] = Rank.OFFICER
-    print("Expected validation error:")
-    try:
-        space_mission = SpaceMission(**mission_data)
-    except ValidationError as e:
-        print(f"{e}")
+    # Read space missions
+    space_missions = json.loads(file.read_text(encoding="utf-8"))
+    # Validate each space mission.
+    for mission_data in space_missions:
+        try:
+            space_mission = SpaceMission(**mission_data)
+            print("Space Mission Crew Validation\n"
+                  "========================================")
+            print("Valid mission created:")
+            print(f"Mission: {space_mission.mission_name}")
+            print(f"ID: {space_mission.mission_id}")
+            print(f"Destination: {space_mission.destination}")
+            print(f"Duration: {space_mission.duration_days} days")
+            print(f"Budget: ${space_mission.budget_millions:.1f}M")
+            print(f"Crew size: {len(space_mission.crew)}")
+            for crew in space_mission.crew:
+                print(f" - {crew.name} ({crew.rank}) - {crew.specialization}")
+            print("========================================\n")
+        except ValidationError as e:
+            print("========================================")
+            print("VALIDATION Error:")
+            print(f"{e}")
+            print("========================================\n")
+            break

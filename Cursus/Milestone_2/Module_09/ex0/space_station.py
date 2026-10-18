@@ -2,6 +2,8 @@
 
 from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
+import json
+from pathlib import Path
 
 
 class SpaceStation(BaseModel):
@@ -27,34 +29,33 @@ class SpaceStation(BaseModel):
 
 if __name__ == "__main__":
     # Example usage
-    station_data = {
-        "station_id": "SS-001",
-        "name": "International Space Station",
-        "crew_size": 6,
-        "power_level": 85.5,
-        "oxygen_level": 92.3,
-        "last_maintenance": datetime.now(),
-        "is_operational": True,
-        "notes": "All systems are functioning within normal parameters."
-    }
 
-    space_station = SpaceStation(**station_data)
-    print("Space Station Data Validation"
-          "========================================")
-    print("Valid station created:")
-    print(f"ID: {space_station.station_id}")
-    print(f"Name: {space_station.name}")
-    print(f"Crew: {space_station.crew_size}")
-    print(f"Power: {space_station.power_level}")
-    print(f"Oxygen: {space_station.oxygen_level}")
-    status = 'Operational' if space_station.is_operational \
-             else 'No Operational'
-    print(f"Status: {status}")
-    print("========================================")
+    # Obtain folder sript
+    folder = Path(__file__).parent.resolve()
+    # Create de file
+    file = folder / "../generated_data/space_stations.json"
 
-    station_data["crew_size"] = 25
-    try:
-        print("Expected validation error:")
-        space_station = SpaceStation(**station_data)
-    except ValidationError as e:
-        print(e)
+    # Read space stations
+    space_stations = json.loads(file.read_text(encoding="utf-8"))
+    # Validate each space station.
+    for station_data in space_stations:
+        try:
+            space_station = SpaceStation(**station_data)
+            print("Space Station Data Validation\n"
+                  "========================================")
+            print("Valid station created:")
+            print(f"ID: {space_station.station_id}")
+            print(f"Name: {space_station.name}")
+            print(f"Crew: {space_station.crew_size}")
+            print(f"Power: {space_station.power_level}")
+            print(f"Oxygen: {space_station.oxygen_level}")
+            status = 'Operational' if space_station.is_operational \
+                     else 'No Operational'
+            print(f"Status: {status}")
+            print("========================================\n")
+        except ValidationError as e:
+            print("========================================")
+            print("VALIDATION Error:")
+            print(f"{e}")
+            print("========================================\n")
+            break
