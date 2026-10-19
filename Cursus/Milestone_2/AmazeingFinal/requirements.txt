@@ -1,6 +1,0 @@
-flake8
-mypy
-build
-setuptools
-wheel
-pytest
