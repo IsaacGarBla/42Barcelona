@@ -12,7 +12,7 @@
   {
     "station_id": "QCH189",
     "name": "Deep Space Observatory",
-    "crew_size": 25,
+    "crew_size": 3,
     "power_level": 70.8,
     "oxygen_level": 88.1,
     "last_maintenance": "2023-08-24T00:00:00",

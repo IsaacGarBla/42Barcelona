@@ -4,39 +4,47 @@
 
 # Índice
 
+# Índice
+
 - [1. Descripción](#1-descripción)
   - [1.1 Principales decisiones de diseño](#11-principales-decisiones-de-diseño)
     - [1.1.1 Entorno de virtualización](#111-entorno-de-virtualización)
     - [1.1.2 Sistema operativo elegido](#112-sistema-operativo-elegido)
     - [1.1.3 Particionado](#113-particionado)
-    - [1.1.4 Elección del FW](#114-elección-del-fw)
+    - [1.1.4 Elección del firewall](#114-elección-del-firewall)
 
 - [2. Implementación](#2-implementación)
-  - [2.1 Creación de la Máquina Virtual](#21-creación-de-la-maquina-virtual)
+  - [2.1 Creación de la Maquina Virtual](#21-creación-de-la-maquina-virtual)
   - [2.2 Instalación de Debian](#22-instalación-de-debian)
     - [2.2.1 Particionado](#221-particionado)
     - [2.2.2 Gestor de paquetes](#222-gestor-de-paquetes)
     - [2.2.3 GRUB Boot Loader](#223-grub-boot-loader)
     - [2.2.4 Instalación del resto de servicios](#224-instalación-del-resto-de-servicios)
-    - [2.2.4 SUDO y grupos de usuarios](#224-sudo-y-grupos-de-usuarios)
-    - [2.2.5 SSH](#225-ssh)
-    - [2.2.6 Instalación de UFW](#226-instalación-de-ufw)
-    - [2.2.7 Aplicación políticas de seguridad](#227-aplicación-políticas-de-seguridad)
-    - [2.2.8 Monitoring.sh y Crontab](#228-monitoringsh-y-crontab)
+    - [2.2.5 SUDO y grupos de usuarios](#225-sudo-y-grupos-de-usuarios)
+    - [2.2.6 SSH](#226-ssh)
+    - [2.2.7 Instalación de UFW](#227-instalación-de-ufw)
+    - [2.2.8 Aplicación de políticas de seguridad](#228-aplicación-de-políticas-de-seguridad)
+    - [2.2.9 Monitoring.sh y Crontab](#229-monitoringsh-y-crontab)
 
-- [3. Comparativas Técnicas](#3comparativas-técnicas)
-  - [3.1 Debian vs Rocky Linux](#31-debian-vs-rocky-linux)
-  - [3.2 AppArmor vs SELinux](#32-apparmor-vs-selinux)
-  - [3.3 UFW vs firewalld](#33-ufw-vs-firewalld)
-  - [3.4 VirtualBox vs UTM](#34-virtualbox-vs-utm)
+- [3. Bonus part](#3-bonus-part)
+  - [3.1 Instalación de Lighttpd](#31-instalación-de-lighttpd)
+  - [3.2 Instalación de WordPress](#32-instalación-de-wordpress)
+  - [3.3 Instalación de MariaDB](#33-instalación-de-mariadb)
+  - [3.4 Instalación de PHP](#34-instalación-de-php)
+  - [3.5 Configuración de WordPress](#35-configuración-de-wordpress)
 
-- [4. Recursos](#4-recursos)
-  - [4.1 Documentación oficial](#41-documentación-oficial)
-  - [4.2 Tutoriales utilizados](#42-tutoriales-utilizados)
-  - [4.3 Uso de Inteligencia Artificial](#43-uso-de-inteligencia-artificial)
+- [4. Comparativas Técnicas](#4-comparativas-técnicas)
+  - [4.1 Debian vs Rocky Linux](#41-debian-vs-rocky-linux)
+  - [4.2 AppArmor vs SELinux](#42-apparmor-vs-selinux)
+  - [4.3 UFW vs firewalld](#43-ufw-vs-firewalld)
+  - [4.4 VirtualBox vs UTM](#44-virtualbox-vs-utm)
 
+- [5. Recursos](#5-recursos)
+  - [5.1 Documentación oficial](#51-documentación-oficial)
+  - [5.2 Tutoriales utilizados](#52-tutoriales-utilizados)
+  - [5.3 Uso de Inteligencia Artificial](#53-uso-de-inteligencia-artificial)
 
-## 1. Descripción
+# 1. Descripción
 
 Born2beRoot es un proyecto de Administración de Sistemas que forma parte del itinerario de 42 cuyo objetivo es introducir los conceptos fundamentales de virtualización, gestión de servidores Linux y securización de sistemas.
 
@@ -44,15 +52,13 @@ El proyecto consiste en instalar y configurar una máquina virtual utilizando Vi
 
 A través de este proyecto se adquieren conocimientos prácticos sobre la administración de sistemas Linux, una habilidad esencial en entornos profesionales de infraestructura y ciberseguridad.
 
----
+## 1.1 Principales decisiones de diseño
 
-### 1.1 Principales decisiones de diseño
+### 1.1.1 Entorno de virtualización 
 
-#### 1.1.1 Entorno de virtualización 
+Tal y como se indica en el *subject*, el entorno de virtualización utilizado para desarrollar el proyecto es VirtualBox.
 
-Tal y como se indica en el *subject*, el entorno de virtualización es en el que se desarrolla el proyecto es VirtualBox
-
-#### 1.1.2 Sistema operativo elegido
+### 1.1.2 Sistema operativo elegido
 
 Para este proyecto se ha elegido **Debian** como sistema operativo principal.
 
@@ -73,7 +79,7 @@ Su elección se justifica por:
 | Compatibilidad | Integración sencilla de AppArmor, UFW y SSH |
 | Recomendación del proyecto | Recomendado explícitamente para principiantes |
 
-#### 1.1.3 Particionado
+### 1.1.3 Particionado
 
 El disco se ha configurado, con la previsión de implementar el BONUS, utilizando:
 
@@ -87,7 +93,7 @@ Esta configuración permite:
 - Mejor organización del almacenamiento.
 - Mayor seguridad gracias al cifrado.
 
-#### 1.1.4 Elección del FW
+### 1.1.4 Elección del firewall
 
 Se ha elegido Uncomplicated FireWall por ser, de las opciones propuestas, la de menor complejidad para alguien que se inicia en la configuración de este tipo de tecnología.
 
@@ -97,11 +103,11 @@ Se ha elegido Uncomplicated FireWall por ser, de las opciones propuestas, la de 
 | Gestión de reglas | Simple gestión de reglas | 
 | Curva de aprendizaje | Baja, ideal para iniciarse |
 
-## 2. Implementación
+# 2. Implementación
 
-### 2.1 Creación de la Maquina Virtual
+## 2.1 Creación de la Maquina Virtual
 
-Se crea ha creado una máquina desde el entorno gráfico de Virtual Box con las siguientes características:
+Se crea ha creado una máquina desde el entorno gráfico de VirtualBox con las siguientes características:
 
 - Nombre: **Born2beroot**
 - Carpeta: **/home/igarcia-/sgoinfre/igarcia-/VirtualBox VMs**
@@ -114,9 +120,9 @@ Se crea ha creado una máquina desde el entorno gráfico de Virtual Box con las 
 
 En un paso posterior, se asocia la imagen ISO de Debian mínima necesaria para la instalación (descargable desde https://www.debian.org/distrib/netinst).
 
-### 2.2 Instalación de Debian
+## 2.2 Instalación de Debian
 
-Arrancando la máquina virtual previamente creada, procedemos a la instalación de Debian desde el menú inicial con la opción **Install** seleccionando las siguientes carácterísticas:
+Una vex creada la máquina virtual, procedemos a la instalación de Debian, seleccionando **Install**, con las siguientes  carácterísticas:
 
 - Idioma: **English**
 - País: **España**
@@ -130,7 +136,7 @@ Arrancando la máquina virtual previamente creada, procedemos a la instalación 
 - Contraseña usuario: **<*user_pass*>**
 - Zona temporal: **Madrid**
 
-#### 2.2.1 Particionado
+### 2.2.1 Particionado
 
 Crearemos las siguientes particiones para obtener la estructura siguiente:
 
@@ -155,7 +161,7 @@ Crearemos las siguientes particiones para obtener la estructura siguiente:
         ├── LVMGroup-tmp       → /tmp     (3 Gb)
         └── LVMGroup-var--log  → /var/log (4 Gb)
 ```
-#### 2.2.2 Gestor de paquetes
+### 2.2.2 Gestor de paquetes
 
 Se configura el gestor de paquetes (Package Manager) con:
 
@@ -164,15 +170,15 @@ Se configura el gestor de paquetes (Package Manager) con:
 - HTTP Proxy: **Ninguno**
 - Selección de software: **Instalación mínima, desmarcamos todas las opciones**
 
-#### 2.2.3 GRUB Boot Loader
+### 2.2.3 GRUB Boot Loader
 
 Necesario para el arranque, en este último paso indicaremos **Sí**, seleccionando el único disco disponible (la partición primaria que creamos en pasos anteriores) y el sistema estará listo para reiniciarse y arrancar Debian.
 
-#### 2.2.4 Instalación del resto de servicios
+### 2.2.4 Instalación del resto de servicios
 
 Arrancamos Debian en la máquina virtual (MV) y nos identificamos con el usuario/pass que hemos introducido durante la instalación inicial (igarcia-/<*passw*>).
 
-#### 2.2.4. SUDO y grupos de usuarios
+### 2.2.5 SUDO y grupos de usuarios
 
 Procedemos a la instalación de SUDO con el siguiente comando:
 ```bash
@@ -182,7 +188,7 @@ Tras la instalación, reiniciamos la máquina virtual.
 ```text
 sudo reboot
 ```
-Verificamos la intalación, adquiriendo rol de root (nos solicitará la pass de root creada durante la instalación inicial) y consultando la versión instalada.
+Verificamos la intalación, adquiriendo rol de root (nos solicitará la contraseña de root creada durante la instalación inicial) y consultando la versión instalada.
 ```bash
 su (pas)
 sudo -V
@@ -205,12 +211,12 @@ Podemos verificar que las acciones se han realizado correctamente consultando lo
 sudo getent group sudo user42
 ```
 
-#### 2.2.5 SSH
+### 2.2.6 SSH
 
 Instalamos el servicio SSH con el siguiente comando:
 
 ```bash
-sudo apt updata 
+sudo apt update 
 sudo apt install openssh-server
 ```
 
@@ -244,14 +250,14 @@ Verificamos cambios.
 ```bash
 sudo service ssh status
 ```
-#### 2.2.6 Instalación de UFW
+### 2.2.7 Instalación de UFW
 
 Instalamos el paquete UFW:
 
 ```bash
 sudo apt install ufw
 ```
-Activamos el FW:
+Activamos el firewall:
 
 ```bash
 sudo ufw enable
@@ -264,7 +270,7 @@ sudo ufw allow 4242
 sudo ufw status
 ```
 
-#### 2.2.7 Aplicación políticas de seguridad
+### 2.2.8 Aplicación de políticas de seguridad
 
 Políticas SUDO:
 
@@ -318,7 +324,7 @@ Localizamos la línea que contiene "retry=3" y añadimos a continuación:
 minlen=10 ucredit=-1 dcredit=-1 lcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
 ```
 
-#### 2.2.8 Monitorig.sh y Crontab
+### 2.2.9 Monitoring.sh y Crontab
 
 De acuerdo con lo descrito en el subjet, se implementa un scrip que se ejecutará regularmente (cada 10') mostrando información del estado del sistema. Concretamente:
 
@@ -358,11 +364,166 @@ Y añadimos la línea que ejecutará nuestro script:
 
 Consultar esta guía https://www.hostinger.com/es/tutoriales/sintaxis-crontab/ o la documentación oficial de Debian (https://manpages.debian.org/testing/cron/crontab.5.en.html) para entender como hay que crear las líneas en el fichero.
 
-## 3. Comparativas Técnicas
+# 3. Bonus part
 
-### 3.1 Debian vs Rocky Linux
+Para el bonus, instalaremos WordPress y un WebServer addiciona, en este caso NGINX.
+También, necesitaremos:
 
-La principal ventaja de Debian, frente a Rocky Linus, y el motivo de su elección es su universalidad, su gran cantidad de software disponible, su sencillez (comparad con Rocky Linux) y la gran cantidad de documentación disponible.
+- Lighttpd: servidor Web básico
+- MariaDB: base de datos de soporte, con una configuración mínima.
+- PHP: lenguaje de programación para poder implementar páginas Web dinámicas.
+
+## 3.1 Instalación de Lighttpd
+
+Instalamos el paquete:
+
+```bash
+sudo apt install lighttpd
+```
+
+Abrimos el puerto 80 y verificamos.
+
+```bash
+sudo ufw allow 80
+sudo ufw status
+```
+
+## 3.2 Instalación de WordPress
+
+Necesitaremos la herramienta wget para poder descargar el codigo de WordPress y la herramienta zip para poder descomprimirlo.
+
+```bash
+sudo apt install wget zip
+```
+
+Nos desplazamos al directorio */var/www*
+
+```bash
+cd /var/www
+```
+
+Descargamos el archivo de la página oficial de WordPress.
+
+```bash
+sudo wget https://wordpress.org/latest.zip
+```
+
+Lo descomprimimos. Esto creará una carpeta llamada *wordpress*.
+
+```bash
+sudo unzip latest.zip
+```
+
+Cambiamos el nombre a la carpeta *html* existente (para no perder el contenido), renombramos la carpeta *wordpress* como *html* (para mantener la configuración por defecto el servidor Web) y ajustamos los permisos:
+
+```bash
+sudo mv html/ html_old/
+sudo mv wordpress/ html
+sudo chmod -R 755 html
+```
+
+## 3.3 Instalación de MariaDB
+
+Instalamos el paquete correspondiente a la base de datos MariaDB.
+
+```bash
+sudo apt install mariadb-server
+```
+
+Ejecutamos un script que incluye el propio paquete para dotar de mayor seguridad a la base de datos (BBDD):
+
+```bash
+sudo mariadb_secure_installation
+```
+
+Nos hará varias preguntas:
+
+- Switch to unix_socket autentication? → N
+- Change the root password? → N
+- Remove anonymous users? → Y
+- Disallow root login remotely? → Y 
+- Remove test database and access to it? → Y 
+- Reload privilege tables now? → Y
+
+Una vez instalada, crearemos la BBDD que usará WP, un usuario y le daremos todos los privilegios sobre la BBDD
+
+```bash
+sudo mariadb
+CREATE DATABASE wp_database;
+SHOW DATABASES;
+CREATE USER 'igarcia''@'localhost' IDENTIFIED BY '12345';
+GRANT ALL PRIVILEGES ON wp_database.* TO 'igarcia-'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+## 3.4 Instalación de PHP
+
+Instalamos los paquetes de PHP necesarios:
+
+```bash
+sudo sudo apt install php-cgi php-mysql
+```
+
+## 3.5 Configuración de WordPress
+
+En el directorio donde hemos dejado WordPress (/var/www/html) creamos un duplicado del archivo de configuración de ejemplo y lo editamos:
+
+```bash
+cd /var/www/html
+cp wp-config-sample.php wp-config.php
+nano wp-config.php
+```
+
+Tenemos que cambiar los valores DB_NAME, DB_USER y DB_PASSWORD por los que hemos creado durante la creación de la BBDD:
+
+- DB_NAME=*wp_database*
+- DB_USER=*igarcia-*
+- DB_PASSWORD=*12345* 
+
+Activamos los módulos *fastcgi* y *fastcgi-php* en Lighttpd para mejorar el rendimiento de las aplicaciones web en general y de las desarrolladas en PHP en particular:
+
+```bash
+sudo lighty-enable-mod fastcgi
+sudo lighty-enable-mod fastcgi-php
+sudo service lighttpd force-reload
+```
+
+Por último, accedemos a la página de administración de WordPress para terminar la configuración:
+
+
+```text
+http://localhost:puerto/wp-admin/
+```
+
+> [!NOTA]
+> El valor de *puerto* dependerá de la configuración de Port Forwarding que se haya realizado en la VirtualBox para esta máquina virtual. En este caso, se ha elegido el *8080() para derivarlo al puerto 80 donde está escuchando el servidor. 
+
+## 3.6 Instalación de un servidor Web adicional: NGINX
+
+### 3.6.1 ¿Qué servidor instalar?
+
+Para elegir qué servidor Web instalar, se revisan las principales características de Apache, NGINX y LiteSpeed.
+
+
+| Servidor Web | Ventajas principales | Desventajas principales | Consumo de recursos |
+|--------------|---------------------|-------------------------|---------------------|
+| **NGINX** | • Arquitectura asíncrona ultra eficiente frente a tráfico masivo.<br>• Excelente rendimiento como proxy inverso y balanceador de carga.<br>• Consumo de RAM muy optimizado y constante. | • Configuración de reglas dinámicas más compleja.<br>• No soporta archivos de configuración por carpeta como `.htaccess`.<br>• Curva de aprendizaje inicial ligeramente más alta. | **Bajo** |
+| **Apache2** | • Máxima flexibilidad y compatibilidad gracias a sus módulos.<br>• Soporte nativo para archivos `.htaccess` (configuración por carpeta).<br>• Enorme comunidad y abundante documentación en Internet. | • Su arquitectura basada en procesos consume más memoria RAM.<br>• El rendimiento puede degradarse ante picos elevados de tráfico o ataques DDoS. | **Alto** |
+| **LiteSpeed** | • Velocidad muy elevada y optimización nativa para WordPress mediante LSCache.<br>• Reemplazo directo de Apache, compatible con archivos `.htaccess`.<br>• Gestión moderna de recursos basada en eventos. | • Software comercial que requiere licencia para aprovechar todas sus funcionalidades.<br>• La versión gratuita (OpenLiteSpeed) presenta limitaciones de configuración automática. | **Bajo** |
+
+
+Se ha elegido NGINX por dos razones fundamentales:
+
+1. Arquitectura de Proxy Inverso: Al configurar NGINX en el puerto público (80/443) actuando como escudo, este puede recibir las peticiones web y redirigirlas internamente a tu instalación actual de Lighttpd (reubicada en un puerto interno como el 8080). Es lo más parecido a un entorno real y profesiona.
+2. Rendimiento y consumo de recursos, aspecto que cobra especial relevancia al tratarse de una máquina virtual. 
+
+### 3.6.2 Instalación de NGINX
+
+# 4. Comparativas Técnicas
+
+## 4.1 Debian vs Rocky Linux
+
+La principal ventaja de Debian frente a Rocky Linus, y el motivo de su elección es su universalidad, su gran cantidad de software disponible, su sencillez (comparado con Rocky Linux) y la gran cantidad de documentación disponible.
 En contra, es un sistema más conservador y si se requiere compatibilidad con hardware muy moderno puede ser difícil su implementación. En este punto, Rocky Linux cuenta con la ventaja del desarrollo empresarial del ciclo de Red Hat Enterprise Linux.
 
 | Característica | Debian (Stable) | Rocky Linux |
@@ -378,7 +539,7 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
 | Ventaja principal | Sencillez y comunidad | Compatibilidad empresarial |
 | Desventaja principal | Software algo más conservador | Mayor complejidad inicial |
 
-### 3.2 AppArmor vs SELinux
+## 4.2 AppArmor vs SELinux
 
 | Característica | AppArmor | SELinux |
 |----------------|-----------|----------|
@@ -391,7 +552,7 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
 | Ventaja principal | Fácil administración | Máximo nivel de control |
 | Desventaja principal | Menor capacidad de personalización | Configuración más difícil |
 
-### 3.3 UFW vs firewalld
+## 4.3 UFW vs firewalld
 
 | Característica | UFW | firewalld |
 |----------------|-----|-----------|
@@ -403,7 +564,7 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
 | Ventaja principal | Sencillez | Flexibilidad |
 | Desventaja principal | Menos funcionalidades avanzadas, no es un servicio| Mayor complejidad |
 
-### 3.4 VirtualBox vs UTM
+## 4.4 VirtualBox vs UTM
 
 | Característica | VirtualBox | UTM |
 |----------------|------------|-----|
@@ -416,9 +577,9 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
 | Ventaja principal | Universal y ampliamente utilizado | Optimizado para Apple Silicon |
 | Desventaja principal | Menor rendimiento en ARM | Menor adopción general |
 
-## 4. Recursos
+# 5. Recursos
 
-### 4.1 Documentación oficial
+## 5.1 Documentación oficial
 
 - Debian Documentation:
   https://www.debian.org/doc/
@@ -437,7 +598,7 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
 
 
 
-### 4.2 Tutoriales utilizados
+## 5.2 Tutoriales utilizados
 
 - Guía Born2beroot
   https://noreply.gitbook.io/born2beroot
@@ -445,14 +606,14 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
 - Documentación Crontab
   https://www.hostinger.com/es/tutoriales/sintaxis-crontab/
 
-### 4.3 Uso de Inteligencia Artificial
+## 5.3 Uso de Inteligencia Artificial
 
 La IA se utilizó como herramienta de apoyo para:
 
 - Comprender conceptos de administración de sistemas.
 - Aprender la configuración de SSH y UFW.
 - Resolver dudas sobre qué comandos utilizar para la construcción del script.
-- Contruir la base sobre la que realizar la documentación técnica y ayudar a dar formato Markdown al fichero README.md.
+- Contruir la base sobre la que realizar la documentación técnica, ayudar a dar formato Markdown al fichero README.md y correcciones ortográficas.
 
 Las siguientes tareas fueron realizadas manualmente:
 
@@ -464,7 +625,4 @@ Las siguientes tareas fueron realizadas manualmente:
 - Configuración de sudo.
 - Creación y prueba del script monitoring.sh.
 - Validación completa del proyecto.
-
-
-
 
