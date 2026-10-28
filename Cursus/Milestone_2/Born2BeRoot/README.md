@@ -4,8 +4,6 @@
 
 # Índice
 
-# Índice
-
 - [1. Descripción](#1-descripción)
   - [1.1 Principales decisiones de diseño](#11-principales-decisiones-de-diseño)
     - [1.1.1 Entorno de virtualización](#111-entorno-de-virtualización)
@@ -14,7 +12,7 @@
     - [1.1.4 Elección del firewall](#114-elección-del-firewall)
 
 - [2. Implementación](#2-implementación)
-  - [2.1 Creación de la Maquina Virtual](#21-creación-de-la-maquina-virtual)
+  - [2.1 Creación de la Máquina Virtual](#21-creación-de-la-máquina-virtual)
   - [2.2 Instalación de Debian](#22-instalación-de-debian)
     - [2.2.1 Particionado](#221-particionado)
     - [2.2.2 Gestor de paquetes](#222-gestor-de-paquetes)
@@ -32,6 +30,9 @@
   - [3.3 Instalación de MariaDB](#33-instalación-de-mariadb)
   - [3.4 Instalación de PHP](#34-instalación-de-php)
   - [3.5 Configuración de WordPress](#35-configuración-de-wordpress)
+  - [3.6 Instalación de un servidor Web adicional: NGINX](#36-instalación-de-un-servidor-web-adicional-nginx)
+    - [3.6.1 ¿Qué servidor instalar?](#361-qué-servidor-instalar)
+    - [3.6.2 Instalación de NGINX](#362-instalación-de-nginx)
 
 - [4. Comparativas Técnicas](#4-comparativas-técnicas)
   - [4.1 Debian vs Rocky Linux](#41-debian-vs-rocky-linux)
@@ -66,7 +67,7 @@ Debian es una distribución GNU/Linux reconocida por su estabilidad, seguridad y
 
 | Ventajas | Desventajas |
 |----------------|---------|
-| Gran estabilidad<BR>Amplia documentacion<BR>Comunidad muy activa<BR>Fácil aprendizaje para principiantes<BR>Excelente gestión de paquetes mediante APT|Algunos paquetes pueden no estar tan actualizados como en otras distribuciones<BR>Menor orientación al entorno empresarial que Rocky Linux
+| Gran estabilidad<BR>Amplia documentación<BR>Comunidad muy activa<BR>Fácil aprendizaje para principiantes<BR>Excelente gestión de paquetes mediante APT|Algunos paquetes pueden no estar tan actualizados como en otras distribuciones<BR>Menor orientación al entorno empresarial que Rocky Linux
 
 Su elección se justifica por:
 
@@ -105,9 +106,9 @@ Se ha elegido Uncomplicated FireWall por ser, de las opciones propuestas, la de 
 
 # 2. Implementación
 
-## 2.1 Creación de la Maquina Virtual
+## 2.1 Creación de la Máquina Virtual
 
-Se crea ha creado una máquina desde el entorno gráfico de VirtualBox con las siguientes características:
+Se crea una máquina desde el entorno gráfico de VirtualBox con las siguientes características:
 
 - Nombre: **Born2beroot**
 - Carpeta: **/home/igarcia-/sgoinfre/igarcia-/VirtualBox VMs**
@@ -115,23 +116,23 @@ Se crea ha creado una máquina desde el entorno gráfico de VirtualBox con las s
 - Tipo: **Linux**
 - Versión: **Debian (64 bit)**
 - Memoria base: **2048 Mb**
-- Processors: **2**
+- Procesadores: **2**
 - Disco Virtual: **30Gb**
 
 En un paso posterior, se asocia la imagen ISO de Debian mínima necesaria para la instalación (descargable desde https://www.debian.org/distrib/netinst).
 
 ## 2.2 Instalación de Debian
 
-Una vex creada la máquina virtual, procedemos a la instalación de Debian, seleccionando **Install**, con las siguientes  carácterísticas:
+Una vez creada la máquina virtual, procedemos a la instalación de Debian, seleccionando **Install**, con las siguientes  características:
 
 - Idioma: **English**
 - País: **España**
 - Configuración local: **EE. UU. (no existe la opción de seleccionar España)**
 - Distribución de teclado: **America English**
 - Hostname: **igarcia-**
-- Domain name: **vacío**
+- Nombre de dominio: **vacío**
 - Contraseña de root: **<*root_pass*>**
-- Nonmbre cuenta de usuario: **igarcia-**
+- Nombre de la cuenta de usuario: **igarcia-**
 - Usuario cuenta: **igarcia-**
 - Contraseña usuario: **<*user_pass*>**
 - Zona temporal: **Madrid**
@@ -140,11 +141,11 @@ Una vex creada la máquina virtual, procedemos a la instalación de Debian, sele
 
 Crearemos las siguientes particiones para obtener la estructura siguiente:
 
-- Parcición primaria.
-- Partición logica.
+- Partición primaria.
+- Partición lógica.
   - Volumen encriptado
   - Configuración del LVM.
-  - Creación grupo de volúmenes
+  - Creación del grupo de volúmenes
   - Creación de 7 volúmenes lógicos.
 
 ```text
@@ -181,32 +182,44 @@ Arrancamos Debian en la máquina virtual (MV) y nos identificamos con el usuario
 ### 2.2.5 SUDO y grupos de usuarios
 
 Procedemos a la instalación de SUDO con el siguiente comando:
+
 ```bash
 apt install sudo
 ```
+
 Tras la instalación, reiniciamos la máquina virtual.
+
 ```text
 sudo reboot
 ```
-Verificamos la intalación, adquiriendo rol de root (nos solicitará la contraseña de root creada durante la instalación inicial) y consultando la versión instalada.
+
+Verificamos la instalación, adquiriendo rol de root (nos solicitará la contraseña de root creada durante la instalación inicial) y consultando la versión instalada.
+
 ```bash
 su (pas)
 sudo -V
 ```
+
 Creamos un grupo de usuarios
+
 ```bash
 sudo addgroup user42
 ```
+
 Podemos verificar si se ha creado correctamente con el comando:
 ```bash
 sudo getent group user42
 ```
+
 Añadimos el usuario creado durante la instalación (**igarcia-** en este caso al grupo creado y al grupo sudo)
+
 ```bash
 sudo adduser igarcia- user42
 sudo adduser igarcia- sudo
 ```
+
 Podemos verificar que las acciones se han realizado correctamente consultando los grupos a los que pertenece el usuario:
+
 ```bash
 sudo getent group sudo user42
 ```
@@ -225,13 +238,16 @@ Verificamos la instalación:
 ```bash
 sudo service ssh status
 ```
+
 Configuramos SSH de acuerdo a lo solicitado:
 
 - Cambiar el puerto al 4242 y desactivar root
+
   ```bash
   su 
   nano /etc/ssh/sshd_config
   ```
+
   **#Port 22** -> cambiamos por **Port 4242**
   
   **#PermitRootLogin prohibit-password** -> cambiamos por **PermitRootLogin no**
@@ -240,16 +256,32 @@ Configuramos SSH de acuerdo a lo solicitado:
   su 
   nano /etc/ssh/ssh_config
   ```
+
   **#Port 22** -> cambiamos por **Port 4242**
 
 Reiniciamos el servicio:
+
 ```bash
 sudo service ssh status
 ```
+
 Verificamos cambios.
+
 ```bash
 sudo service ssh status
 ```
+
+Podemos realizar una prueba, conectando desde el host al anfitrión:
+
+```bash
+sudo service ssh status
+
+```bash
+ssh igarcia-@localhost -p **puerto**
+```
+
+Donde **puerto** será el que tengamos definido en la tabla port forwarding de la máquina virtual.
+
 ### 2.2.7 Instalación de UFW
 
 Instalamos el paquete UFW:
@@ -257,6 +289,7 @@ Instalamos el paquete UFW:
 ```bash
 sudo apt install ufw
 ```
+
 Activamos el firewall:
 
 ```bash
@@ -274,7 +307,8 @@ sudo ufw status
 
 Políticas SUDO:
 
-Creamos el fichero de configuración y el directorio para almacenar los log tal y como se solicita en el subjetc:
+Creamos el fichero de configuración y el directorio para almacenar los log tal y como se solicita en el subject:
+
 ```bash
 touch /etc/sudoers.d/sudo_config
 mkdir /var/log/sudo
@@ -286,6 +320,7 @@ nano /etc/sudoers.d/sudo_config
 ```
 
 Para añadir los siguientes comandos:
+
 ```text
 Defaults  passwd_tries=3
 Defaults  badpass_message="Mensaje de error personalizado"
@@ -302,6 +337,7 @@ Editamos el fichero *login.defs* para definir las comprobaciones básicas:
 ```bash
 nano /etc/login.defs
 ```
+
 **PASS_MAX_DAYS 99999** -> cambiamos por **PASS_MAX_DAYS 30**
   
 **PASS_MIN_DAYS 0** -> cambiamos por **PASS_MIN_DAYS 2**
@@ -315,18 +351,20 @@ sudo apt install libpam-pwquality
 ```
 
 Editamos la configuración:
+
 ```bash
 nano /etc/pam.d/common-password
 ```
 
 Localizamos la línea que contiene "retry=3" y añadimos a continuación:
+
 ```text
 minlen=10 ucredit=-1 dcredit=-1 lcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
 ```
 
 ### 2.2.9 Monitoring.sh y Crontab
 
-De acuerdo con lo descrito en el subjet, se implementa un scrip que se ejecutará regularmente (cada 10') mostrando información del estado del sistema. Concretamente:
+De acuerdo con lo descrito en el subject, se implementa un script que se ejecutará regularmente (cada 10') mostrando información del estado del sistema. Concretamente:
 
 - Arquitectura del sistema.
 - Número de CPU físicas.
@@ -356,22 +394,23 @@ sudo crontab -u root -e
 o
 sudo crontab -e
 ```
+
 Y añadimos la línea que ejecutará nuestro script:
 
 ```text
 */10 * * * * sh /path_to_file.sh
 ```
 
-Consultar esta guía https://www.hostinger.com/es/tutoriales/sintaxis-crontab/ o la documentación oficial de Debian (https://manpages.debian.org/testing/cron/crontab.5.en.html) para entender como hay que crear las líneas en el fichero.
+Consultar esta guía https://www.hostinger.com/es/tutoriales/sintaxis-crontab/ o la documentación oficial de Debian (https://manpages.debian.org/testing/cron/crontab.5.en.html) para entender cómo hay que crear las líneas en el fichero.
 
 # 3. Bonus part
 
-Para el bonus, instalaremos WordPress y un WebServer addiciona, en este caso NGINX.
-También, necesitaremos:
+Para el bonus, instalaremos WordPress y un servidor web adicional, en este caso NGINX.
+Además, necesitaremos:
 
-- Lighttpd: servidor Web básico
+- Lighttpd: servidor web básico
 - MariaDB: base de datos de soporte, con una configuración mínima.
-- PHP: lenguaje de programación para poder implementar páginas Web dinámicas.
+- PHP: lenguaje de programación para poder implementar páginas web dinámicas.
 
 ## 3.1 Instalación de Lighttpd
 
@@ -390,7 +429,7 @@ sudo ufw status
 
 ## 3.2 Instalación de WordPress
 
-Necesitaremos la herramienta wget para poder descargar el codigo de WordPress y la herramienta zip para poder descomprimirlo.
+Necesitaremos la herramienta wget para poder descargar el paquete de WordPress y la herramienta zip para poder descomprimirlo.
 
 ```bash
 sudo apt install wget zip
@@ -438,7 +477,7 @@ sudo mariadb_secure_installation
 
 Nos hará varias preguntas:
 
-- Switch to unix_socket autentication? → N
+- Switch to unix_socket authentication? → N
 - Change the root password? → N
 - Remove anonymous users? → Y
 - Disallow root login remotely? → Y 
@@ -451,7 +490,7 @@ Una vez instalada, crearemos la BBDD que usará WP, un usuario y le daremos todo
 sudo mariadb
 CREATE DATABASE wp_database;
 SHOW DATABASES;
-CREATE USER 'igarcia''@'localhost' IDENTIFIED BY '12345';
+CREATE USER 'igarcia-'@'localhost' IDENTIFIED BY '12345';
 GRANT ALL PRIVILEGES ON wp_database.* TO 'igarcia-'@'localhost';
 FLUSH PRIVILEGES;
 ```
@@ -461,7 +500,7 @@ FLUSH PRIVILEGES;
 Instalamos los paquetes de PHP necesarios:
 
 ```bash
-sudo sudo apt install php-cgi php-mysql
+sudo apt install php-cgi php-mysql
 ```
 
 ## 3.5 Configuración de WordPress
@@ -514,16 +553,99 @@ Para elegir qué servidor Web instalar, se revisan las principales característi
 
 Se ha elegido NGINX por dos razones fundamentales:
 
-1. Arquitectura de Proxy Inverso: Al configurar NGINX en el puerto público (80/443) actuando como escudo, este puede recibir las peticiones web y redirigirlas internamente a tu instalación actual de Lighttpd (reubicada en un puerto interno como el 8080). Es lo más parecido a un entorno real y profesiona.
+1. Arquitectura de Proxy Inverso: Al configurar NGINX en el puerto público (80/443) actuando como escudo, este puede recibir las peticiones web y redirigirlas internamente a tu instalación actual de Lighttpd (reubicada en un puerto interno como el 8080). Es lo más parecido a un entorno real y profesional.
 2. Rendimiento y consumo de recursos, aspecto que cobra especial relevancia al tratarse de una máquina virtual. 
 
 ### 3.6.2 Instalación de NGINX
+
+Primero de todo, modificamos el servidor existente (lighttpd) para que pase a escuchar en el puerto 8080 en lugar del 80, que será el que configuraremos para NGINX.
+
+Lo haremos editando el fichero de configuración y reiniciando el servicio:
+
+```bash
+sudo nano /etc/lighttpd/lighttpd.conf
+...
+Cambiamos server.port = 80 por server.port = 8080
+...
+sudo systemctl restart lighttpd
+```
+
+Comprobamos que ufw tiene permitido el puerto 8080 y, en caso contrario, lo permitimos.
+
+```bash
+sudo ufw status verbose 
+```
+
+A continuación, instalamos el paquete que contiene el servidor NGINX y comprobamos que está activo:
+
+```bash
+sudo apt update 
+sudo apt install nginx -y
+sudo systemctl status nginx
+```
+
+Configuramos NGINX como proxy inverso hacia el servidor lighttpd sobre el que está instalado nuestro WordPress.
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+Configuramos NGINX para que actúe como proxy y envíe al servidor los parámetros necesarios:
+
+```text
+location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded-for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_set_header X-Forwarded-Host $http_host;
+
+```
+
+- **proxy_pass** -> envía todo a la dirección indicada.
+- **proxy_set_header Host $host** -> pasa al servidor lighttpd el dominio solicitado.
+- **proxy_set_header X-Real-IP $remote_addr** -> pasa la dirección IP origen de la petición; 
+- **proxy_set_header X-Forwarded-For $proxy_add_x_forwarded-for** -> incluye la IP en una lista de direcciones por las que ha pasado esta petición, para mejorar la seguridad.
+- **proxy_set_header X-Forwarded-Proto $scheme** -> indica a lighttpd si se trata de una petición HTTP o HTTPS.
+- **proxy_set_header X-Forwarded-Port $server_port** -> indica a lighttpd el puerto desde el que se ha realizado la petición.
+- **proxy_set_header X-Forwarded-Host $http_host** -> indica a lighttpd el host *completo* desde el que se ha realizado la petición, incluyendo el puerto.
+
+> [!NOTA]
+> Se puede utilizar el comando **sudo nginx -t** para validar que el fichero de configuración es correcto.
+
+Por último, incluimos en la configuración de WordPress las líneas necesarias para que toda redirección se haga al puerto correcto:
+
+
+```bash
+sudo nano /etc/www/html/wp-config.php
+```
+
+Al inicio del archivo:
+
+```php
+if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+    $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+} 
+
+define('WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
+define('WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST']);
+```
+
+Y verificamos que podemos acceder al servicio de WordPress:
+
+```text
+http://localhost:puerto/wp-admin/
+```
+
+Donde puerto será el que tengamos configurado en el port forwarding de la máquina virtual.
 
 # 4. Comparativas Técnicas
 
 ## 4.1 Debian vs Rocky Linux
 
-La principal ventaja de Debian frente a Rocky Linus, y el motivo de su elección es su universalidad, su gran cantidad de software disponible, su sencillez (comparado con Rocky Linux) y la gran cantidad de documentación disponible.
+La principal ventaja de Debian frente a Rocky Linux, y el motivo de su elección es su universalidad, su gran cantidad de software disponible, su sencillez (comparado con Rocky Linux) y la gran cantidad de documentación disponible.
 En contra, es un sistema más conservador y si se requiere compatibilidad con hardware muy moderno puede ser difícil su implementación. En este punto, Rocky Linux cuenta con la ventaja del desarrollo empresarial del ciclo de Red Hat Enterprise Linux.
 
 | Característica | Debian (Stable) | Rocky Linux |
@@ -597,7 +719,6 @@ En contra, es un sistema más conservador y si se requiere compatibilidad con ha
   https://sourceware.org/lvm2/
 
 
-
 ## 5.2 Tutoriales utilizados
 
 - Guía Born2beroot
@@ -613,7 +734,7 @@ La IA se utilizó como herramienta de apoyo para:
 - Comprender conceptos de administración de sistemas.
 - Aprender la configuración de SSH y UFW.
 - Resolver dudas sobre qué comandos utilizar para la construcción del script.
-- Contruir la base sobre la que realizar la documentación técnica, ayudar a dar formato Markdown al fichero README.md y correcciones ortográficas.
+- Construir la base sobre la que realizar la documentación técnica, ayudar a dar formato Markdown al fichero README.md y correcciones ortográficas.
 
 Las siguientes tareas fueron realizadas manualmente:
 
@@ -625,4 +746,3 @@ Las siguientes tareas fueron realizadas manualmente:
 - Configuración de sudo.
 - Creación y prueba del script monitoring.sh.
 - Validación completa del proyecto.
-
