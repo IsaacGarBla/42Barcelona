@@ -55,11 +55,11 @@ if __name__ == "__main__":
 
     print("Testing artifact sorter...")
     for artifact in artifact_sorter(artifacts):
-        print(f"  {artifact["name"]} ({artifact["power"]} power)")
+        print(f"  {artifact['name']} ({artifact['power']} power)")
 
     print("\nTesting power filter (power >= 75)...")
     for mage in power_filter(mages, 75):
-        print(f"  {mage["name"]} ({mage["power"]} power)")
+        print(f"  {mage['name']} ({mage['power']} power)")
 
     print("\nTesting spell transformer...")
     for spell in spell_transformer(spells):
@@ -67,6 +67,6 @@ if __name__ == "__main__":
 
     print("\nTesting mage stats...")
     m_stats = mage_stats(mages)
-    print(f"Max power: {m_stats["max_power"]}\n"
-          f"Min power: {m_stats["min_power"]}\n"
-          f"Avg power: {m_stats["avg_power"]}\n")
+    print(f"Max power: {m_stats['max_power']}\n"
+          f"Min power: {m_stats['min_power']}\n"
+          f"Avg power: {m_stats['avg_power']}\n")

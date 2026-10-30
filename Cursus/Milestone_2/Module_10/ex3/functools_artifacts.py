@@ -24,7 +24,15 @@ def spell_reducer(spells: list[int], operation: str) -> int:
             raise ValueError(f"Unknown operation {operation}")
 
 
-# def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
+def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
+    return {"fire": functools.partial(base_enchantment, power=50,
+                                      element='fire'),
+            "light": functools.partial(base_enchantment, power=50,
+                                       element='light'),
+            "water": functools.partial(base_enchantment, power=50,
+                                       element='water')
+            }
+
 
 @functools.lru_cache(maxsize=128)
 def memoized_fibonacci(n: int) -> int:
@@ -59,14 +67,14 @@ if __name__ == "__main__":
     print("Testing 'spell_reducer'.....\n"
           "===========================")
     print("   Spells power: 1, 2, 3, 4, 5, 6, 7, 8")
-    print(f"   add: {spell_reducer([1, 2, 3, 4, 5, 6, 7, 8],
-                                   "add")}")
-    print(f"   multiply: {spell_reducer([1, 2, 3, 4, 5, 6, 7, 8],
-                                        "multiply")}")
-    print(f"   max: {spell_reducer([1, 2, 3, 4, 5, 6, 7, 8],
-                                   "max")}")
-    print(f"   min: {spell_reducer([1, 2, 3, 4, 5, 6, 7, 8],
-                                   "min")}")
+    print("   add: "
+          f"{spell_reducer([1, 2, 3, 4, 5, 6, 7, 8], 'add')}")
+    print("   multiply: "
+          f"{spell_reducer([1, 2, 3, 4, 5, 6, 7, 8], 'multiply')}")
+    print("   max: "
+          f"{spell_reducer([1, 2, 3, 4, 5, 6, 7, 8], 'max')}")
+    print("   min: "
+          f"{spell_reducer([1, 2, 3, 4, 5, 6, 7, 8], 'min')}")
     print()
 
     print("Testing 'memoized_fibonacci'.....\n"
@@ -81,7 +89,7 @@ if __name__ == "__main__":
           "===========================")
     dispatcher = spell_dispatcher()
     print(f"{dispatcher(42)}")
-    print(f"{dispatcher("fireball")}")
+    print(f"{dispatcher('fireball')}")
     print(f"{dispatcher([1, 2, 3])}")
     print(f"{dispatcher(3.14)}")
     print()
