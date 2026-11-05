@@ -1,12 +1,24 @@
 #!/usr/bin/env python3
 
+
+def lower(string: str) -> str:
+    result: str = ""
+
+    for char in string:
+        if ord(char) >= 65 and ord(char) <= 90:
+            result += chr(ord(char) + 32)
+        else:
+            result += char
+    return result
+
+
 # Compares two strings and returns True
 # if str1 is greater than str2, False otherwise.
 def count_vowels(string: str) -> int:
     num_vowels: int = 0
 
     for char in string:
-        if char.lower() in "aeiou":
+        if lower(char) in "aeiou":
             num_vowels += 1
 
     return num_vowels
@@ -18,9 +30,9 @@ def is_bigger(str1: str, str2: str) -> bool:
         return True
     elif len(str1) < len(str2):
         return False
-    elif str1.lower() > str2.lower():
+    elif lower(str1) > lower(str2):
         return True
-    elif str1.lower() < str2.lower():
+    elif lower(str1) < lower(str2):
         return False
     elif count_vowels(str1) > count_vowels(str2):
         return True

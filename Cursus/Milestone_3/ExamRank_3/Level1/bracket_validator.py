@@ -48,17 +48,20 @@ def bracket_validator1(s: str) -> bool:
 
 
 def bracket_validator(s: str) -> bool:
-    mapping:    dict = {")": "()", "}": "{", "]": "["}
+    mapping:    dict = {")": "(", "}": "{", "]": "["}
     top:        str
     stack:      list = []
 
     for char in s:
         if char in mapping:
-            top = stack.pop() if len(stack) > 0 else '*'
+#            top = stack.pop() if len(stack) > 0 else '*'
+            top, stack = (stack[-1:][0], stack[0:-1]) \
+                if len(stack) > 0 else ('*', stack)
             if mapping[char] != top:
                 return False
         elif char in mapping.values():
-            stack.append(char)
+            stack += [char]
+#            stack.append(char)
     return len(stack) == 0
 
 
