@@ -1,4 +1,5 @@
 from common import Coordinate, Colour, ZoneType
+from errors import GraphException
 
 
 class Connection:
@@ -32,8 +33,9 @@ class Node:
     _occupacy:      int
 
     def __init__(self, name: str, position: Coordinate,
-                 zone: ZoneType = ZoneType.NORMAL,
-                 colour: Colour = Colour._NONE, capacity: int = 1) -> None:
+                 zone: ZoneType = ZoneType.NORMAL.value,
+                 colour: Colour = Colour.BLUE.value,
+                 capacity: int = 1) -> None:
         self._name = name
         self._position = position
         self._zone_type = zone
@@ -95,6 +97,22 @@ class Graph:
         self._start_hub = ""
         self._end_hub = ""
         self._hubs = {}
+
+    @property
+    def start_hub(self) -> str:
+        return self._start_hub
+
+    @start_hub.setter
+    def start_hub(self, start_hub: str) -> None:
+        if self._exists_node(start_hub):
+            self._start_hub = start_hub
+            self._hubs[start_hub].zone_type = (
+                ZoneType.INI.value
+            )
+        else:
+            raise GraphException(f"[ERROR Start-hub] Node {start_hub} "
+                                 f"can't be added as start hub because "
+                                 f"it doesn't exist in the graph.")
 
     def _exists_connection(self, node1_name: str, node2_name: str) -> bool:
         """ Checks if there is already a connections beetwen two nodes.

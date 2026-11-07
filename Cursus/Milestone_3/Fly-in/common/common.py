@@ -2,10 +2,12 @@ from enum import Enum
 
 
 class ZoneType(Enum):
+    INI = 0
     NORMAL = 1
     BLOCKED = 2
     RESTRICTED = 3
     PRIORITY = 4
+    END = 6
 
     @staticmethod
     def get_zone_type(zone: str) -> int:
