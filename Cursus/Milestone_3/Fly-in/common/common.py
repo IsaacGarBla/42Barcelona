@@ -24,11 +24,13 @@ class ZoneType(Enum):
 
 
 class Colour(Enum):
+    NONE = 0
     RED = 1
     GREEN = 2
     YELLOW = 3
     BLUE = 4
     GRAY = 5
+    ORANGE = 6
 
     @staticmethod
     def get_colour(colour: str) -> int:

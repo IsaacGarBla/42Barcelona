@@ -33,7 +33,8 @@ if __name__ == "__main__":
         case 0:
             print("Parámetros correctos.")
             new_graph = Parser.parse(sys.argv[1])
-            new_graph.start_hub = "pepe"
+            new_graph._print()
+            print(new_graph._capacities_for_work())
         case 1:
             print("Número parámetros erróneos.")
         case 2:
