@@ -1,0 +1,14 @@
+# Easy Level 2: Simple fork with two paths
+nb_drones: 5
+
+start_hub: a 0 0 [color=green]
+hub: b 1 0 [color=yellow max_drones=3]
+hub: c 2 1 [color=blue max_drones=2]
+hub: d 2 -1 [color=blue max_drones=0]
+end_hub: e 3 0 [color=red]
+
+connection: a-b [max_link_capacity=5]
+connection: a-c [max_link_capacity=3]
+connection: b-d [max_link_capacity=2]
+connection: c-d [max_link_capacity=2]
+connection: d-e [max_link_capacity=5]

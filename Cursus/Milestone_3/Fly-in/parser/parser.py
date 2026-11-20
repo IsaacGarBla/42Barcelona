@@ -50,14 +50,13 @@ class Parser:
                                         int(tokens.group("y")))
         color:      Colour = Colour.NONE
         zone:       ZoneType = ZoneType.INI
-        max_drones: int = 100
 
         try:
             if tokens.group("color"):
                 color = Colour[tokens.group("color").upper()]
 
             g.add_hub(Hub(tokens.group("hub_name"),
-                          coord, zone, max_drones, color))
+                          coord, zone, g.nb_drones, color))
             g.start_hub = tokens.group("hub_name")
         except GraphException as e:
             raise ParseException(str(e), n_line)
@@ -101,14 +100,13 @@ class Parser:
                                         int(tokens.group("y")))
         color:      Colour = Colour.NONE
         zone:       ZoneType = ZoneType.INI
-        max_drones: int = 100
 
         try:
             if tokens.group("color"):
                 color = Colour[tokens.group("color").upper()]
 
             g.add_hub(Hub(tokens.group("hub_name"),
-                          coord, zone, max_drones, color))
+                          coord, zone, g.nb_drones, color))
             g.end_hub = tokens.group("hub_name")
         except GraphException as e:
             raise ParseException(str(e), n_line)

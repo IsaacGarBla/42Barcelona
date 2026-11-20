@@ -29,12 +29,14 @@ def parameters_ok(param: list[str]) -> int:
 
 if __name__ == "__main__":
     new_graph:  Graph
+
     match parameters_ok(sys.argv):
         case 0:
             print("Parámetros correctos.")
             new_graph = Parser.parse(sys.argv[1])
-            new_graph._print()
-            print(new_graph._capacities_for_work())
+            # new_graph.dump()
+            print(new_graph.find_solution())
+            # print(new_graph.has_solution())
         case 1:
             print("Número parámetros erróneos.")
         case 2:

@@ -1,5 +1,7 @@
 from enum import Enum
 
+MAX_TRAVEL_TIME: int = 2
+
 
 class ZoneType(Enum):
     INI = 0
@@ -31,6 +33,12 @@ class Colour(Enum):
     BLUE = 4
     GRAY = 5
     ORANGE = 6
+    CYAN = 7
+    PURPLE = 8
+    BROWN = 9
+    LIME = 10
+    MAGENTA = 11
+    GOLD = 12
 
     @staticmethod
     def get_colour(colour: str) -> int:
